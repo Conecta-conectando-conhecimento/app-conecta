@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Actor&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+@media only screen and (max-width:992vh) {
+    /* General settings */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+.Corpo {
+    background-color: #348888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9vh;
+}
+
+    .DivImgTelaCadastro{
+    width: 128.7vh;
+    height: 87.4vh;
+    border-radius: 5.6vh;
+    background-color: white;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.imgTelaCadastro {
+    width: 50vh;
+    height: 100%;
+    border-radius: 5.6vh 0vh 0vh 5.6vh;
+    object-fit: cover;
+}
+
+.Titulo {
+    width: 65.1vh;
+    color: #38535F;
+    font-family: Inter;
+    font-size: 5.6vh;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.FormProject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;    
+    gap: 5vh;
+}
+
+.ImputGroup {
+    margin-top: 5vh;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 1.1vh;
+    width: 90%;
+}
+
+.ImputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7vh;
+}
+
+.ImputBox label {
+    font-family: "Inter", sans-serif;
+    font-size: 2.2vh;
+    font-weight: bold;
+    color: #38535F;
+
+}
+
+.ImputBox input {
+    background-color: #d9d9d9;
+    border-radius: 11.3vh;
+    border: none;
+    height: 4.5vh;
+    padding: 1.1vh;
+}
+
+.ImputBox:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+} 
+
+.ImputBox:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+} 
+
+.ImputBox:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+} 
+
+.ImputBox:nth-child(4) {
+    grid-row: 3;
+    grid-column: 1 /span 2;
+} 
+
+.ImputBox textarea {
+    resize: none;
+
+    background-color: #d9d9d9;
+    border-radius: 2.2vh;
+    border: none;
+    height: 25vh;
+    padding: 1.1vh;
+}
+
+.btnCadastrar1 {
+    margin-top: 5vh;
+    
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1rem;
+    width: 9.063rem;
+    height: 2.813rem;
+    border-radius: 1rem;
+    background: linear-gradient(rgba(242, 86, 30, 1), rgba(250, 130, 16, 1));
+    border: 0.2rem solid rgba(242, 86, 30, 1);
+    cursor: pointer;
+    text-align: center;
+    transition: 1 s all;
+}
+}
+

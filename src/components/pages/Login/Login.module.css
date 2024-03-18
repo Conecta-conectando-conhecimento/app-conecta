@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@800&family=Actor&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
+
+/* Reset de estilos */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo do corpo da página */
+.bodyLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: rgb(52, 136, 136);
+  background: linear-gradient(
+    90deg,
+    rgba(52, 136, 136, 1) 15%,
+    rgba(158, 248, 238, 1) 39%,
+    rgba(151, 240, 231, 1) 62%,
+    rgba(52, 136, 136, 1) 87%
+  );
+}
+
+.DivImgTelaLogin {
+  width: 1090px;
+  height: 650px;
+  border-radius: 50px;
+  background-color: white;
+  margin-top: 1.5vh;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 5px 5px 5px 1px #38535f;
+}
+
+/* Imagem à esquerda */
+.imgTelaLogin {
+  width: 560px;
+  height: 100%;
+  border-radius: 50px 0px 0px 50px;
+  object-fit: cover;
+}
+
+/* Título */
+.Titulo {
+  width: 575px;
+  height: 50px;
+  color: #38535f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-left: 15px;
+  margin-bottom: 40px;
+}
+
+/* Formulário e campos de entrada */
+.FormProject {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5vh;
+}
+
+.ImputGroup {
+  margin-top: 5vh;
+  display: flex;
+  margin-right: 10vh;
+  flex-direction: column;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  width: 80%;
+  align-items: center;
+}
+
+.ImputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 450px;
+}
+
+.ImputBox label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #38535f;
+}
+
+.ImputBox input {
+  background-color: #d9d9d9;
+  border-radius: 100px;
+  border: none;
+  height: 48px;
+  padding: 10px;
+}
+
+/* Link 'Esqueceu a senha?' */
+.senha {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  align-self: flex-end;
+}
+
+.link {
+  color: #38535f;
+}
+
+/* Botões */
+.buttons {
+  height: 150px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  align-items: center;
+  margin-right: 80px;
+}
+
+.btnCadastrar1 {
+  margin-top: 5vh;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  color: #fff;
+  font-size: 1rem;
+  width: 9.063rem;
+  height: 2.813rem;
+  border-radius: 1rem;
+  background: linear-gradient(rgba(242, 86, 30, 1), rgba(250, 130, 16, 1));
+  border: 0.2rem solid rgba(242, 86, 30, 1);
+  cursor: pointer;
+  text-align: center;
+  transition: 1 s all;
+  margin-bottom: 10px;
+}
+
+.btnCadastrar1:hover {
+  cursor: pointer;
+  background: linear-gradient(
+    rgba(242, 87, 30, 0.772),
+    rgba(250, 130, 16, 0.772)
+  );
+}
+
+.btnCadastrar2 {
+  width: 9.063rem;
+  height: 2.813rem;
+  bottom: 5rem;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 24px;
+  text-align: center;
+  color: #38535f;
+  border-radius: 1rem;
+  transition: 1 s all;
+}
