@@ -1,15 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import style from "./Feed.module.css";
+import style from "./FeedUsuario.module.css";
+import { VscMortarBoard } from "react-icons/vsc";
 import Navbar from '../../Navbar';
 
-function Feed() {
+function FeedUsuario() {
     const { signout } = useAuth();
     const navigate = useNavigate();
     const carouselRef = useRef(null);
 
     let scrollInterval = null;
+    let userNome = "Genival Ramos de Oliveira";
+    let texto = "Dedicado estudante de Medicina. Minha paixão pela área da saúde me impulsiona a buscar constantemente conhecimento e aprimorar minhas habilidades. Com uma postura atenciosa e empática, sou admirado por meus colegas de classe. Minha determinação e comprometimento são evidentes em minha rotina de estudos e participação ativa em estágios.";
+    let userfaculdade = "Asa Norte";
+    let atividadeOnline = "Online";
 
     useEffect(() => {
         const prevBtn = document.getElementById('prevBtn');
@@ -89,12 +94,26 @@ function Feed() {
                     </div>
                     <button id="nextBtn"> <img src={"assets/Feed/botaoDireita.svg"} alt="" /> </button>
                 </div>
-                <div className={style.secaoProjeto}>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non ad adipisci aliquid pariatur? Commodi expedita debitis consequuntur eligendi quisquam est veniam iste ipsa culpa voluptates eius, velit vero optio explicabo.</p>
+                <div className={style.bodyCardsFeed}>
+                    {/*espacamento entre cards */}
+                    <div className={style.card}>
+                        <div className={style.colunaImagemPerfilBotaoVerMais}>
+                            <img className={style.imagemPerfil} src="../../../public/assets/maos.jpg" alt="foto-perfil" />
+                            <button id="verMais" className={style.botaoVerMais}>Ver mais +</button>
+                        </div>
+                        <div className={style.informacoesTexto}>
+                            <p className={style.userNome}>{userNome}</p>
+                            <p className={style.texto}>{texto}</p>
+                            <div className={style.faculdade}>
+                                <p className={style.nomeFaculdade}><VscMortarBoard className={style.iconFaculdade}/>Ceub - {userfaculdade}</p>
+                                <p>Atividade: {atividadeOnline}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Feed;
+export default FeedUsuario;

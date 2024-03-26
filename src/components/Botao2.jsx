@@ -25,4 +25,4 @@ const Botao2 = ({ name, ...props }) => {
   return <StyledButton {...props}>{name}</StyledButton>;
 };
 
-export default Botao2
+export default Botao2;

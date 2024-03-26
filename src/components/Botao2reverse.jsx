@@ -25,4 +25,4 @@ const Botao2reverse = ({ name, ...props }) => {
   return <StyledButton {...props}>{name}</StyledButton>;
 };
 
-export default Botao2reverse
+export default Botao2reverse;
