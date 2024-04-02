@@ -21,17 +21,15 @@ function FeedProjetos() {
 
     useEffect(() => {
         const fetchData = async() => {
-            const result = await fetch('https://jsonplaceholder.typicode.com/posts')
+            const result = await fetch('https://localhost:8000/project/all')
             .then(response => response.json())
             .then(data => data)
 
             setProjects(result)
         }
-
         fetchData()
     }, []);
 
-    const dadosParaExibir = projects.slice(0, 10);
 
     return (
         <div className={style.bodyFeed}>
@@ -72,8 +70,8 @@ function FeedProjetos() {
                 </div>
                 <div className={style.bodyCardsFeed}>
                     <div>
-                        {dadosParaExibir.map(item => (
-                            <Card key={item.id} projetoNome={item.title} texto={item.body} />
+                        {projects.map(item => (
+                            <Card key={item.id} projetoNome={item.title} texto={item.about} />
                         ))}
                     </div>
                 </div>
