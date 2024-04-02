@@ -1,5 +1,6 @@
 import React from 'react';
 import style from "./pages/FeedProjetos/FeedProjetos.module.css";
+import { Link } from 'react-router-dom';
 
 const Card = ({ projetoNome, texto }) => {
   return (
@@ -9,7 +10,7 @@ const Card = ({ projetoNome, texto }) => {
         <p className={style.texto}>{texto}</p>
       </div>
       <div className={style.colunaImagemPerfilBotaoVerMais}>
-        <button id="verMais" className={style.botaoVerMais}>Ver mais +</button>
+        <Link to="/visualizacaoprojeto" className={style.linkNaoSublinhado}><button id="verMais" className={style.botaoVerMais}>Ver mais +</button></Link>
       </div>
     </div>
   );
