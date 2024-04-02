@@ -5,6 +5,7 @@ import style from "./FeedProjetos.module.css";
 import { VscMortarBoard } from "react-icons/vsc";
 import Navbar from '../../Navbar';
 import Card from '../../CardProject';
+import axios from 'axios';
 
 function FeedProjetos() {
     const { signout } = useAuth();
@@ -19,17 +20,24 @@ function FeedProjetos() {
     let userfaculdade = "Asa Norte";
     let atividadeOnline = "Online";
 
+
     useEffect(() => {
-        const fetchData = async() => {
-            const result = await fetch('https://localhost:8000/project/all')
-            .then(response => response.json())
-            .then(data => data)
-
-            setProjects(result)
-        }
-        fetchData()
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/project/all', {
+                    headers: {
+                        Authorization: `Bearer rx2MCEpi0tHffGn`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+                setProjects(response.data.data);
+            } catch (error) {
+                console.error('Erro ao buscar os dados:', error);
+            }
+        };
+        fetchData();
     }, []);
-
+    
 
     return (
         <div className={style.bodyFeed}>
