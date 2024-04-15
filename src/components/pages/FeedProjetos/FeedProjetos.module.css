@@ -59,9 +59,9 @@
     border: 2px solid #0A05F2;
     background: transparent;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin: 2em;
-    padding: 2em 7em;
+    padding: 1rem 2rem;
     max-height: fit-content;
 }
 
@@ -82,10 +82,9 @@
 
 .colunaImagemPerfilBotaoVerMais {
     display: flex;
-    padding: 1rem 0rem 1rem 2rem;
     flex-direction: center;
     align-items: center;
-    width: 30%;
+    width: auto;
 }
 
 .botaoVerMais {
@@ -177,3 +176,28 @@ git checkout master
 git merge(sobrescreve as alyteracoes automaticamente)
 
 */
+
+/* Paginação */
+.pagination {
+    display: flex;
+    align-items: center;
+    margin: 2rem;
+}
+
+.pagination button {
+    background-color: #ffffff;
+    cursor: pointer;
+    padding: 0.5rem;
+    border: 1px solid #0A05F2;
+    font-weight: bold;
+}
+
+.pagination button:hover {
+    opacity: 0.6;
+}
+
+.pagination .activePage {
+    color: white;
+    background-color: #0A05F2;
+}
+
