@@ -52,8 +52,8 @@ function FeedUsuario() {
         });
 
         // Limpar o intervalo se o mouse for solto fora do botão
+        clearInterval(scrollInterval);
         window.addEventListener('mouseup', () => {
-            clearInterval(scrollInterval);
         });
     }, []);
 

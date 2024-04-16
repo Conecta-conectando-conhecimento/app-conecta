@@ -1,0 +1,41 @@
+function BotaoCircular () {
+
+return (
+
+<div className={style.sectionMain}>
+                    <button id="prevBtn"><img src={"assets/Feed/botaoEsquerda.svg"} alt="" /></button>
+                    <div className={style.circlesCarrousel} ref={carouselRef}>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                        <div className={style.carousel_slide}>
+                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
+                        </div>
+                    </div>
+                    <button id="nextBtn"> <img src={"assets/Feed/botaoDireita.svg"} alt="" /> </button>
+                </div>
+
+)}
+
+export default BotaoCircular;

@@ -70,6 +70,7 @@ const RegisterProject = () => {
 
             </form>
         </div>
+       < ModalSolicitacao/>
         </div>
         </>
     );
