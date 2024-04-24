@@ -1,6 +1,7 @@
 import Navbar from "../../Navbar";
-import ModalSolicitacao from "../ModalSolicitacao/ModalSolicitacao";
+import ModalSolicitacao from "./components/ModalSolicitacao/ModalSolicitacao";
 import styles from "../VisualizacaoProjeto/VisualizacaoProjeto.module.css";
+import AcaoParticipacaoProjeto from "./components/AcaoParticipacaoProjeto/index.jsx";
 
 const VisualizacaoProjeto = () => {
     return (
@@ -19,6 +20,7 @@ const VisualizacaoProjeto = () => {
                         <div className={styles.row}>
                             <ModalSolicitacao />
                         </div>
+                        <AcaoParticipacaoProjeto isOwner={true} />
                     </div>
                     <div className={styles.column}>
                         <div className={styles.row}>
