@@ -6,44 +6,36 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
 
     useEffect(() => {
-        const userToken = localStorage.getItem("user_token");
-        const usersStorage = localStorage.getItem("users_db");
+        const userToken = localStorage.getItem("token");
+        const userEmail = localStorage.getItem("email");
+        const userName = localStorage.getItem("userName");
 
-        if (userToken && usersStorage) {
-            const hasUser = JSON.parse(usersStorage)?.filter(
-                (user) => user.email === JSON.parse(userToken).email
-            );
-
-            if (hasUser) setUser(hasUser[0]);
+        if (userToken && userEmail && userName) {
+            setUser({ email: userEmail, userName });
         }
     }, []);
 
-    const signin = (email, password) => {
-        const userStorage = JSON.parse(localStorage.getItem("users_db"));
-
-        const hasUser = userStorage?.filter((user) => user.email === email);
-
-        if (hasUser?.length) {
-            if (hasUser[0].email === email && hasUser[0].password === password) {
-                const token = Math.random().toString(36).substring(2);
-                localStorage.setItem("user_token", JSON.stringify({ email, token }));
-                setUser({ email, password });
-                return;
-            } else {
-                return "E-mail ou senha incorretos";
-            }
-        } else {
-            return "Usuário não cadastrado"
-        }
+    const signin = (email, token, userName) => {
+        localStorage.setItem("token", token);
+        localStorage.setItem("email", email);
+        localStorage.setItem("userName", userName);
+        setUser({ email, userName });
     };
 
-
     const signout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("email");
+        localStorage.removeItem("userName");
         setUser(null);
-        localStorage.removeItem("user_token");
-    }
+    };
 
-    return <AuthContext.Provider value={{ user, signed: !!user, signin, signout }}>
-        {children}
-    </AuthContext.Provider>
+    const checkIsLogged = () => {
+        return !!user;
+    };
+
+    return (
+        <AuthContext.Provider value={{ user, signed: !!user, signin, signout, checkIsLogged }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };

@@ -31,7 +31,7 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        navigate("/feed");
+        navigate("/feedprojetos");
         alert("Bem vindo!");
       }
     } catch (error) {

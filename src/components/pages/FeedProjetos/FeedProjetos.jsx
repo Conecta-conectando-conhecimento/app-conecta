@@ -94,7 +94,7 @@ function FeedProjetos() {
                     </div>
                     <div>
                         {projects.map((item) => (
-                            <Card key={item.id} projetoNome={item.title} texto={item.about} />
+                            <Card key={item.id} projetoId={item.id} projetoNome={item.title} texto={item.about} />
                         ))}
                     </div>
                 </div>
