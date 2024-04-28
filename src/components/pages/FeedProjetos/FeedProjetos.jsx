@@ -57,14 +57,6 @@ function FeedProjetos() {
             setCurrentPage((prevPage) => prevPage + 1);
         }
     };
-
-    const handleLastPage = () => {
-        setCurrentPage(totalPages);
-        const lastPageButton = document.querySelector('.activeLastPage');
-        if (lastPageButton) {
-            lastPageButton.classList.remove('activeLastPage');
-        }
-    };
     
 
     const renderPagination = () => {
