@@ -16,13 +16,22 @@ const Login = () => {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:8800/login", {
-        email: email,
-        senha: senha,
-      });
+        const response = await axios.post(
+        "http://localhost:8000/auth/login",
+        {
+          email: email,
+          password: senha,
+        },
+        {
+          headers: {
+            Authorization: 'Bearer rx2MCEpi0tHffGn',
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (response.status === 200) {
-        navigate("/feed");
+        navigate("/feedprojetos");
         alert("Bem vindo!");
       }
     } catch (error) {

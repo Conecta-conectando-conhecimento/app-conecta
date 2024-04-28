@@ -1,8 +1,31 @@
 import Navbar from "../../Navbar";
-import ModalSolicitacao from "../ModalSolicitacao/ModalSolicitacao";
+import ModalSolicitacao from "./components/ModalSolicitacao/ModalSolicitacao";
 import styles from "../VisualizacaoProjeto/VisualizacaoProjeto.module.css";
+import AcaoParticipacaoProjeto from "./components/AcaoParticipacaoProjeto/index.jsx";
+import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useState } from "react";
+import axios from "axios";
 
 const VisualizacaoProjeto = () => {
+    const { projectId } = useParams(); 
+    const [project, setProject] = useState(null); 
+
+    useEffect(() => {
+       console.log(projectId)
+       requestDataProject();
+      }, [projectId]); 
+
+      const requestDataProject = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/project/${projectId}`);
+            console.log('Dados do projeto:', response.data);
+            setProject(response.data); // Use a função setProject para atualizar o estado
+        } catch (error) {
+            console.error('Erro ao obter dados do projeto:', error.message);
+        }
+    };
+
     return (
         <div>
             <Navbar />
@@ -19,6 +42,7 @@ const VisualizacaoProjeto = () => {
                         <div className={styles.row}>
                             <ModalSolicitacao />
                         </div>
+                        <AcaoParticipacaoProjeto isOwner={true} />
                     </div>
                     <div className={styles.column}>
                         <div className={styles.row}>
