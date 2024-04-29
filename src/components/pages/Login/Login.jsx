@@ -9,14 +9,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
+  const { signin } = useAuth(); // Obtenha a função de login do contexto de autenticação
+
 
   const handleLogin = async () => {
     if (!email || !senha) {
       setError("Preencha todos os campos");
       return;
     }
+
     try {
-        const response = await axios.post(
+      const response = await axios.post(
         "http://localhost:8000/auth/login",
         {
           email: email,
@@ -31,6 +34,7 @@ const Login = () => {
       );
 
       if (response.status === 200) {
+        signin(email, response.data.data.accessToken, response.data.data.user.name, response.data.data.user.id); 
         navigate("/feedprojetos");
         alert("Bem vindo!");
       }

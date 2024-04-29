@@ -1,3 +1,12 @@
+.projectExist {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  color: #0A05F2;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 /* Navbar */
 .navbar {
     background-color: #333;
@@ -101,4 +110,6 @@
   .modal {
     /* Estilo do modal aqui */
   }
+
+
   
