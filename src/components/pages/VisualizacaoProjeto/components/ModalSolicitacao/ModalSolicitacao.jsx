@@ -5,6 +5,7 @@ import Modal from "react-modal";
 Modal.setAppElement("#root");
 
 function ModalSolicitacao() {
+  //funções relacionadas ao modal
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -13,7 +14,27 @@ function ModalSolicitacao() {
 
   function closeModal() {
     setIsOpen(false);
+    setEmails(['']);
   }
+
+
+  //funções relacionadas ao email
+  const [emails, setEmails] = useState(['']);
+
+  const addEmailField = () => {
+    setEmails([...emails, '']);
+  };
+
+  const handleEmailChange = (index, event) => {
+    const newEmails = [...emails];
+    newEmails[index] = event.target.value;
+    setEmails(newEmails);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(emails); //logica de email no email
+  };
 
   return (
     <div className={style.Container}>
@@ -25,16 +46,28 @@ function ModalSolicitacao() {
         overlayClassName={style["modal-overlay"]}
         className={style["modal-content"]}
       >
-        <h2 className={style["modal-title"]}>Convide o seu colaborador!</h2>
-        <hr />
-        <p className={style["modal-text"]}>
-          We maintain that accessibility is a key component of any modern web
-          application. As such, we have created this modal in such a way that it
-          fulfills the accessibility requirements of the modern web. We seek to
-          keep the focus on accessibility while providing a functional, capable
-          modal component for general use.
-        </p>
-        <button className={style["modal-button"]} onClick={closeModal}>Close</button>
+        <h2 className={style["modal-title"]}>Solicitação</h2>
+        <h3 className={style["modal-subtitle"]}>Convide pessoas para participar do seu projeto</h3>
+        <div>
+      <form className={style.formulario} onSubmit={handleSubmit}>
+        {emails.map((email, index) => (
+          <div key={index}>
+            <input className= {style["input"]}
+              type="email"
+              placeholder="Informe o email para solicitar participação"
+              value={email}
+              onChange={(e) => handleEmailChange(index, e)}
+            />
+          </div>
+        ))}
+        <button type="button" className= {style.mais}onClick={addEmailField}>+</button>
+        <br />
+      </form>
+    </div>
+        <div className={style.buttons}>
+        <button className={style["modal-button"]} onClick={closeModal}>Fechar</button>
+        <button className= {style.botaoEnviar} type="submit" onClick={closeModal}>Enviar</button>
+        </div>
       </Modal>
     </div>
   );

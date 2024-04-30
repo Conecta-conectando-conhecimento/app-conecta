@@ -1,98 +1,124 @@
 /* ModalSolicitacao.module.css */
 
+/* Layout */
 .Container {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .Button {
-    background-color: #0A05F2; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transição para a cor de fundo */
-  }
-  
-  .Button:hover {
-    background-color: #007bff; /* Cor ao passar o mouse */
-  }
-  
-  .modal-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background-color: white;
-    border-radius: 8px;
-    padding: 24px;
-    max-width: 600px;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-title {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-  
-  .modal-text {
-    color: #666;
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 24px;
-  }
-  
-  .modal-button {
-    background-color: #0A05F2; /* Green */
-    border: none;
-    color: white;
-    padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 4px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transição para a cor de fundo */
-  }
-  
-  .modal-button:hover {
-    background-color: #007bff; /* Cor ao passar o mouse */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
 }
 
-  .modal-overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background-color: white;
-    border-radius: 8px;
-    padding: 24px;
-    max-width: 600px;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  
+/* Botões */
+.Button {
+  background-color: #0A05F2; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.Button:hover {
+  background-color: #007bff; /* Cor ao passar o mouse */
+}
+
+/* Modal */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.modal-text {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.modal-button {
+  background-color: transparent;
+  border: none;
+  color: blue;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+/* Formulário */
+.botaoEnviar {
+  background-color: #13F000;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.input {
+  background-color: #D9D9D9;
+  width: 300px;
+  height: 25px;
+  padding-left: 10px;
+  margin: 1px;
+  border-radius: 50px;
+  display: flex;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mais {
+  background-color: #0A05F2;
+  color: #D9D9D9;
+  font-size: larger;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: #0A05F2;
+  align-self: center;
+  cursor: pointer;
+}
+
+.formulario {
+  display: flex;
+  align-items: flex-start;
+}
