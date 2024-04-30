@@ -28,7 +28,7 @@ const RoutesApp = () => {
         <Route path="/registerproject" element={<Private item={RegisterProject} />}/>
         <Route path="/feedProjetos" element={<FeedProjetos/>}/>
         <Route path="/editprofile" element={<EditProfile />} />
-        <Route path="/visualizacaoprojeto" element={<VisualizacaoProjeto />} />
+        <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
       </Routes>
     </Router>
   );

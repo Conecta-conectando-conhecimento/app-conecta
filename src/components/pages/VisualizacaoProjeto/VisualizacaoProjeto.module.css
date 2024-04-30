@@ -1,104 +1,115 @@
+.projectExist {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  color: #0A05F2;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 /* Navbar */
 .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-  }
-  
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    font-family: "poppins", sans-serif;
-    font-weight: 400;
-  }
-  
- /* Project Title */
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "poppins", sans-serif;
+  font-weight: 400;
+}
+
+/* Project Title */
 .projectTitle {
-    text-align: center;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #0A05F2; /* Adicionando uma linha de borda na cor #0A05F2 */
-    padding-bottom: 1rem; /* Espaçamento abaixo da linha de borda */
-  }
-  
-  .projectTitle h2 {
-    font-size: 2.5rem;
-    color: #333;
-    color: #0A05F2;
-  }
-  
-  
-  /* Grid Layout */
-  .gridLayout {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-  
-  /* Columns */
-  .column {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Rows */
-  .row {
-    margin-bottom: 2rem;
-  }
-  
-  /* Headings */
-  h3 {
-    color: #333;
-    margin-bottom: 1rem;
-  }
-  
-  /* Descrição do Projeto */
-  .row p {
-    color: #666;
-  }
-  
-  /* Participantes */
-  .participantList {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #EEEDED;
-    border-radius: 8px;
-    min-height: 22vh;
-  }
-  
-  /* Arquivos */
-  .fileList {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #EEEDED;
-    border-radius: 8px;
-    min-height: 22vh;
-  }
-  
-  /* Atividades */
-  .activityText {
-    margin-top: 1rem;
-    padding: 1rem;
-    background-color: #EEEDED;
-    border-radius: 8px;
-    min-height: 55vh;
-  }
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #0A05F2;
+  /* Adicionando uma linha de borda na cor #0A05F2 */
+  padding-bottom: 1rem;
+  /* Espaçamento abaixo da linha de borda */
+  grid-column: 1 / -1;
+}
 
-  .activityText p {
+.projectTitle h2 {
+  font-size: 2.5rem;
+  color: #333;
+  color: #0A05F2;
+}
 
-    font-size: smaller;
-    display: flex;
-  }
 
-  .fileList p {
+/* Grid Layout */
+.gridLayout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
 
-    font-size: smaller;
-    display: flex;
-  }
-  
-  /* Modal Solicitação */
-  .modal {
-    /* Estilo do modal aqui */
-  }
-  
+/* Columns */
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rows */
+.row {
+  margin-bottom: 2rem;
+}
+
+/* Headings */
+h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Descrição do Projeto */
+.row p {
+  color: #666;
+}
+
+/* Participantes */
+.participantList {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 22vh;
+}
+
+/* Arquivos */
+.fileList {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 22vh;
+}
+
+/* Atividades */
+.activityText {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 55vh;
+}
+
+.activityText p {
+
+  font-size: smaller;
+  display: flex;
+}
+
+.fileList p {
+
+  font-size: smaller;
+  display: flex;
+}
+
+/* Modal Solicitação */
+.modal {
+  /* Estilo do modal aqui */
+}

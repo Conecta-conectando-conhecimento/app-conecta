@@ -65,7 +65,7 @@ function ModalSolicitacao() {
       </form>
     </div>
         <div className={style.buttons}>
-        <button className={style["modal-button"]} onClick={closeModal}>Close</button>
+        <button className={style["modal-button"]} onClick={closeModal}>Fechar</button>
         <button className= {style.botaoEnviar} type="submit" onClick={closeModal}>Enviar</button>
         </div>
       </Modal>

@@ -1,0 +1,50 @@
+/* styles.module.css */
+
+.acaoParticipacaoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: stretch;
+}
+
+.ownerActions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.requestParticipation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.requestTextarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: .5rem;
+    color: black;
+    font-size: 1rem;
+}
+
+.actionButton,
+.requestButton {
+    background-color: #0A05F2;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição para a cor de fundo */
+}
+
+.actionButton:hover,
+.requestButton:hover {
+    background-color: #007bff; /* Cor ao passar o mouse */
+}

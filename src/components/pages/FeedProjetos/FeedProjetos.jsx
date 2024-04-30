@@ -57,14 +57,6 @@ function FeedProjetos() {
             setCurrentPage((prevPage) => prevPage + 1);
         }
     };
-
-    const handleLastPage = () => {
-        setCurrentPage(totalPages);
-        const lastPageButton = document.querySelector('.activeLastPage');
-        if (lastPageButton) {
-            lastPageButton.classList.remove('activeLastPage');
-        }
-    };
     
 
     const renderPagination = () => {
@@ -102,7 +94,7 @@ function FeedProjetos() {
                     </div>
                     <div>
                         {projects.map((item) => (
-                            <Card key={item.id} projetoNome={item.title} texto={item.about} />
+                            <Card key={item.id} projetoId={item.id} projetoNome={item.title} texto={item.about} />
                         ))}
                     </div>
                 </div>

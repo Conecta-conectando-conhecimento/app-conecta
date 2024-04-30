@@ -9,20 +9,33 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
+  const { signin } = useAuth(); // Obtenha a função de login do contexto de autenticação
+
 
   const handleLogin = async () => {
     if (!email || !senha) {
       setError("Preencha todos os campos");
       return;
     }
+
     try {
-      const response = await axios.post("http://localhost:8800/login", {
-        email: email,
-        senha: senha,
-      });
+      const response = await axios.post(
+        "http://localhost:8000/auth/login",
+        {
+          email: email,
+          password: senha,
+        },
+        {
+          headers: {
+            Authorization: 'Bearer rx2MCEpi0tHffGn',
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (response.status === 200) {
-        navigate("/feed");
+        signin(email, response.data.data.accessToken, response.data.data.user.name, response.data.data.user.id); 
+        navigate("/feedprojetos");
         alert("Bem vindo!");
       }
     } catch (error) {
