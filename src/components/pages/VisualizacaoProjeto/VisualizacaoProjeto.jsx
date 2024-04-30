@@ -25,7 +25,7 @@ const VisualizacaoProjeto = () => {
                         <h3>Participantes</h3>
                             <div className={styles.participantList}>
                                 {/* Lista de participantes */}
-                                {/*<img src={'/assets/Feed/FotoPerfilTelaTeste.png'} alt="FotoPerfil" />*/}
+                                {/*<img src={'./assets/Feed/FotoPerfilTelaTeste.png'} alt="FotoPerfil" />*/}
                             </div>
                             <h3>Arquivos</h3>
                             <div className={styles.fileList}>

@@ -40,25 +40,26 @@
   
   .modal-title {
     color: #333;
-    font-size: 24px;
+    font-family: poppins, arial;
+    font-size: 40px;
     margin-bottom: 16px;
   }
   
-  .modal-text {
-    color: #666;
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 24px;
+  .modal-subtitle {
+    color: #333;
+    font-family: poppins, arial;
+    font-size: 15px;
+    margin-bottom: 16px;
   }
-  
+
   .modal-button {
-    background-color: #0A05F2; /* Green */
+    background-color: #0A05F2; 
     border: none;
     color: white;
     padding: 12px 24px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: flex;
     font-size: 16px;
     border-radius: 4px;
     transition-duration: 0.4s;
@@ -66,7 +67,7 @@
   }
   
   .modal-button:hover {
-    background-color: #0A05F2; /* Darker Green */
+    background-color: #0A05F2; 
   }
 
   .modal-overlay {
@@ -90,4 +91,54 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
+
+.botaoEnviar {
+  background-color: #13F000;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 16px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
   
+  .modal-button:hover {
+    background-color: #0A05F2; /* Darker Green */
+  }
+
+  .input {
+    background-color: #D9D9D9;
+    width: 300px;
+    height: 25px;
+    padding-left: 10px;
+    margin: 1px;
+    border-radius: 50px;
+    display: flex;
+  }
+
+
+  .buttons {
+    display: flex;
+    align-items: space-between;
+  }
+
+  .mais {
+    background-color: #0A05F2;
+    color: #D9D9D9;
+    font-size: larger;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: #0A05F2;
+    align-self: center;
+    cursor: pointer;
+  }
+
+  .formulario {
+    display: flex;
+    align-items: flex-start;
+  }
