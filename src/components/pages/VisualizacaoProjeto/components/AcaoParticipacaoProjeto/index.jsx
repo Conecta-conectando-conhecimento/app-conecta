@@ -16,6 +16,7 @@ function AcaoParticipacaoProjeto({ isOwner }) {
                 </div>
             ) : (
                 <div className={styles.requestParticipation}>
+                    <h3>Deseja participar do projeto?</h3>
                     <textarea className={styles.requestTextarea} placeholder="Digite seu pedido de participação..."></textarea>
                     <button className={styles.requestButton} onClick={sendRequest}>Enviar Pedido</button>
                 </div>

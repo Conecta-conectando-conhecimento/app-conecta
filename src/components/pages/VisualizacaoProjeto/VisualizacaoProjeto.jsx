@@ -25,7 +25,7 @@ const VisualizacaoProjeto = () => {
     const requestDataProject = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/project/${projectId} `);
-            setProject(response.data); // Use a função setProject para atualizar o estado
+            setProject(response.data.data); // Use a função setProject para atualizar o estado
         } catch (error) {
             console.error('Erro ao obter dados do projeto:', error.message);
             if (error.response && error.response.status === 404) {
@@ -34,19 +34,22 @@ const VisualizacaoProjeto = () => {
         }
     };
 
+
     const checkUserProjectRelation = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/participants/user/${user.userId}`);
             response.data.data.forEach(item => {
                 if (item.project_id == projectId) {
                     isUserParticipant(true);
-                } 
+                }
             });
         } catch (error) {
             console.error("Erro ao verificar a relação do usuário com o projeto:", error.message);
         }
     };
-    
+
+
+
 
     return (
         <div>
@@ -54,14 +57,22 @@ const VisualizacaoProjeto = () => {
             {projectExists ? (
                 <div className={styles.container}>
                     <div className={styles.projectTitle}>
-                        <h2>Título do Projeto</h2>
+                        <h2>
+                            {project && project.title ? project.title : 'Carregando...'}
+                        </h2>
+                    </div>
+
+                    <div className={styles.column}>
+                        <div className={styles.row}>
+                            <h3>Sobre o projeto</h3>
+                            <p>
+                                {project && project.about ? project.about : 'Carregando...'}
+                            </p>
+                        </div>
+
                     </div>
                     <div className={styles.gridLayout}>
                         <div className={styles.column}>
-                            <div className={styles.row}>
-                                <h3>Sobre o projeto</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum fugit obcaecati ipsam cum minima, quam ut ullam sint natus, possimus facilis harum voluptatibus dolorum maiores veniam quis excepturi! Rem, beatae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nobis neque suscipit dolore. Eum, necessitatibus? Asperiores consequuntur laudantium tenetur excepturi eos nobis ex, iste accusantium velit in similique recusandae. Doloremque!</p>
-                            </div>
                             <AcaoParticipacaoProjeto isOwner={userParticipant} />
                         </div>
                         <div className={styles.column}>

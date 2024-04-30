@@ -31,6 +31,7 @@
   /* Adicionando uma linha de borda na cor #0A05F2 */
   padding-bottom: 1rem;
   /* Espaçamento abaixo da linha de borda */
+  grid-column: 1 / -1;
 }
 
 .projectTitle h2 {
