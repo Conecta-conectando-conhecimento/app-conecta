@@ -16,10 +16,11 @@
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição para a cor de fundo */
   }
   
   .Button:hover {
-    background-color: #0A05F2; /* Darker Green */
+    background-color: #007bff; /* Cor ao passar o mouse */
   }
   
   .modal-overlay {
@@ -63,11 +64,12 @@
     border-radius: 4px;
     transition-duration: 0.4s;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição para a cor de fundo */
   }
   
   .modal-button:hover {
-    background-color: #0A05F2; /* Darker Green */
-  }
+    background-color: #007bff; /* Cor ao passar o mouse */
+}
 
   .modal-overlay {
     background-color: rgba(0, 0, 0, 0.5);

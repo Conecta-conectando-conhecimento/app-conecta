@@ -62,9 +62,6 @@ const VisualizacaoProjeto = () => {
                                 <h3>Sobre o projeto</h3>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum fugit obcaecati ipsam cum minima, quam ut ullam sint natus, possimus facilis harum voluptatibus dolorum maiores veniam quis excepturi! Rem, beatae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde nobis neque suscipit dolore. Eum, necessitatibus? Asperiores consequuntur laudantium tenetur excepturi eos nobis ex, iste accusantium velit in similique recusandae. Doloremque!</p>
                             </div>
-                            <div className={styles.row}>
-                                <ModalSolicitacao />
-                            </div>
                             <AcaoParticipacaoProjeto isOwner={userParticipant} />
                         </div>
                         <div className={styles.column}>
