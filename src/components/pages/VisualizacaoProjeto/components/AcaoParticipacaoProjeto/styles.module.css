@@ -1,35 +1,48 @@
-.acao-participacao-container {
+/* styles.module.css */
+
+.acaoParticipacaoContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-items: stretch;
 }
 
-.owner-actions {
+.ownerActions {
     display: flex;
     gap: 10px;
 }
 
-.request-participation {
+.requestParticipation {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.request-textarea {
-    width: 300px;
+.requestTextarea {
+    width: 100%;
     height: 100px;
     margin-bottom: 10px;
+    padding: .5rem;
+    color: black;
+    font-size: 1rem;
 }
 
-.request-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+.actionButton,
+.requestButton {
+    background-color: #0A05F2;
     border: none;
-    border-radius: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição para a cor de fundo */
 }
 
-.request-button:hover {
-    background-color: #0056b3;
+.actionButton:hover,
+.requestButton:hover {
+    background-color: #007bff; /* Cor ao passar o mouse */
 }

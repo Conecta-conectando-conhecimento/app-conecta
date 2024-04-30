@@ -1,5 +1,6 @@
 import React from 'react';
-import './styles.module.css'; 
+import styles from './styles.module.css'; // Importando estilos
+import ModalSolicitacao from '../ModalSolicitacao/ModalSolicitacao';
 
 function AcaoParticipacaoProjeto({ isOwner }) {
     function sendRequest() {
@@ -7,16 +8,16 @@ function AcaoParticipacaoProjeto({ isOwner }) {
     }
 
     return (
-        <div className="acao-participacao-container">
+        <div className={styles.acaoParticipacaoContainer}>
             {isOwner ? (
-                <div className="owner-actions">
-                    <button className="action-button">Formar Equipes</button>
-                    <button className="action-button">Convidar Participantes</button>
+                <div className={styles.ownerActions}>
+                    <button className={styles.actionButton}>Formação de equipe</button>
+                    <ModalSolicitacao />
                 </div>
             ) : (
-                <div className="request-participation">
-                    <textarea className="request-textarea" placeholder="Digite seu pedido de participação..."></textarea>
-                    <button className="request-button" onClick={sendRequest}>Enviar Pedido</button>
+                <div className={styles.requestParticipation}>
+                    <textarea className={styles.requestTextarea} placeholder="Digite seu pedido de participação..."></textarea>
+                    <button className={styles.requestButton} onClick={sendRequest}>Enviar Pedido</button>
                 </div>
             )}
         </div>

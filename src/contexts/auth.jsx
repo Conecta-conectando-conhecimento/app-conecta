@@ -3,29 +3,32 @@ import { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({ email: "", userName: "", userId: "" });
 
     useEffect(() => {
         const userToken = localStorage.getItem("token");
         const userEmail = localStorage.getItem("email");
         const userName = localStorage.getItem("userName");
+        const userId = localStorage.getItem("userId");
 
-        if (userToken && userEmail && userName) {
-            setUser({ email: userEmail, userName });
+        if (userToken && userEmail && userName && userId) {
+            setUser({ email: userEmail, userName, userId });
         }
     }, []);
 
-    const signin = (email, token, userName) => {
+    const signin = (email, token, userName, userId) => {
         localStorage.setItem("token", token);
         localStorage.setItem("email", email);
         localStorage.setItem("userName", userName);
-        setUser({ email, userName });
+        localStorage.setItem("userId", userId);
+        setUser({ email, userName, userId });
     };
 
     const signout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("email");
         localStorage.removeItem("userName");
+        localStorage.removeItem("userId");
         setUser(null);
     };
 
