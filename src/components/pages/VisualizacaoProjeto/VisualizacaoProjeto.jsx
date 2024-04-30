@@ -16,15 +16,15 @@ const VisualizacaoProjeto = () => {
     const [userParticipant, isUserParticipant] = useState(false);
 
     useEffect(() => {
-        console.log(projectId)
         requestDataProject();
-        checkUserProjectRelation();
-    }, [projectId]);
+        if (user && user.userId) {
+            checkUserProjectRelation();
+        }
+    }, [projectId, user]);
 
     const requestDataProject = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/project/${projectId} `);
-            console.log('Dados do projeto:', response.data);
             setProject(response.data); // Use a função setProject para atualizar o estado
         } catch (error) {
             console.error('Erro ao obter dados do projeto:', error.message);
@@ -35,23 +35,18 @@ const VisualizacaoProjeto = () => {
     };
 
     const checkUserProjectRelation = async () => {
-        if (!user || !user.userId) {
-            console.error("ID do usuário não encontrado.");
-            return;
-        }
-
         try {
             const response = await axios.get(`http://localhost:8000/participants/user/${user.userId}`);
-            console.log(response.data.data.project_id);
-            if (response.data.data.project_id === projectId) {
-                isUserParticipant(true);
-            } else {
-                isUserParticipant(false);
-            }
+            response.data.data.forEach(item => {
+                if (item.project_id == projectId) {
+                    isUserParticipant(true);
+                } 
+            });
         } catch (error) {
             console.error("Erro ao verificar a relação do usuário com o projeto:", error.message);
         }
     };
+    
 
     return (
         <div>
