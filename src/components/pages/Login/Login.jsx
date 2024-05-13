@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
+import UserController from "../../../controllers/userController";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,35 +15,24 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (!email || !senha) {
-      setError("Preencha todos os campos");
+      setError('Preencha todos os campos');
       return;
     }
-
+  
     try {
-      const response = await axios.post(
-        "http://localhost:8000/auth/login",
-        {
-          email: email,
-          password: senha,
-        },
-        {
-          headers: {
-            Authorization: 'Bearer rx2MCEpi0tHffGn',
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        signin(email, response.data.data.accessToken, response.data.data.user.name, response.data.data.user.id); 
-        navigate("/feedprojetos");
-        alert("Bem vindo!");
+      const { data } = await UserController.loginUser({ email, password: senha, signin });
+    
+      if (data.accessToken) {
+        const { name, id } = data.user;
+        signin(email, data.accessToken, name, id);
+        navigate('/feedprojetos');
+        alert('Bem vindo!');
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        setError("Credenciais inválidas");
+        setError('Credenciais inválidas');
       } else {
-        console.error("Erro ao fazer login:", error.message);
+        console.error('Erro ao fazer login:', error.message);
       }
     }
   };
