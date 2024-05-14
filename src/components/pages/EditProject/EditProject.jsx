@@ -1,19 +1,18 @@
-import Navbar from "../../Navbar";
-import ModalSolicitacao from "./components/ModalSolicitacao/ModalSolicitacao";
-import styles from "../VisualizacaoProjeto/VisualizacaoProjeto.module.css";
-import AcaoParticipacaoProjeto from "./components/AcaoParticipacaoProjeto/index.jsx";
+import Navbar from "../../Navbar.jsx";
+import styles from "../EditProject/EditProject.module.css";
 import { useParams } from 'react-router-dom';
-import React, { useEffect } from 'react';
-import { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth.jsx";
+import { useNavigate } from "react-router-dom";
 
-const VisualizacaoProjeto = () => {
+const EditProject = () => {
     const { projectId } = useParams();
     const [project, setProject] = useState(null);
     const [projectExists, setProjectExists] = useState(true);
     const { user } = useAuth();
     const [userParticipant, isUserParticipant] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         requestDataProject();
@@ -24,8 +23,8 @@ const VisualizacaoProjeto = () => {
 
     const requestDataProject = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/project/${projectId} `);
-            setProject(response.data.data); // Use a função setProject para atualizar o estado
+            const response = await axios.get(`http://localhost:8000/project/${projectId}`);
+            setProject(response.data.data);
         } catch (error) {
             console.error('Erro ao obter dados do projeto:', error.message);
             if (error.response && error.response.status === 404) {
@@ -34,12 +33,11 @@ const VisualizacaoProjeto = () => {
         }
     };
 
-
     const checkUserProjectRelation = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/participants/user/${user.userId}`);
             response.data.data.forEach(item => {
-                if (item.project_id == projectId) {
+                if (item.project_id === projectId) {
                     isUserParticipant(true);
                 }
             });
@@ -48,8 +46,22 @@ const VisualizacaoProjeto = () => {
         }
     };
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setProject(prevProject => ({
+            ...prevProject,
+            [name]: value
+        }));
+    };
 
-
+    const handleSave = async () => {
+        try {
+            await axios.put(`http://localhost:8000/project/update/${projectId}`, project);
+            navigate(`/visualizacaoprojeto/${projectId}`);
+        } catch (error) {
+            console.error('Erro ao atualizar projeto:', error.message);
+        }
+    };
 
     return (
         <div>
@@ -58,29 +70,37 @@ const VisualizacaoProjeto = () => {
                 <div className={styles.container}>
                     <div className={styles.projectTitle}>
                         <h2>
-                            {project && project.title ? project.title : 'Carregando...'}
+                            <input
+                                type="text"
+                                name="title"
+                                value={project?.title || ''}
+                                onChange={handleInputChange}
+                                placeholder="Carregando..."
+                            />
                         </h2>
                     </div>
 
                     <div className={styles.column}>
                         <div className={styles.row}>
                             <h3>Sobre o projeto</h3>
-                            <p>
-                                {project && project.about ? project.about : 'Carregando...'}
-                            </p>
+                            <textarea
+                                name="about"
+                                value={project?.about || ''}
+                                onChange={handleInputChange}
+                                placeholder="Carregando..."
+                            />
                         </div>
-
                     </div>
                     <div className={styles.gridLayout}>
                         <div className={styles.column}>
-                        <AcaoParticipacaoProjeto isOwner={userParticipant} projectId={projectId} />
+                            {/* Conteúdo adicional pode ser adicionado aqui */}
                         </div>
                         <div className={styles.column}>
                             <div className={styles.row}>
                                 <h3>Participantes</h3>
                                 <div className={styles.participantList}>
                                     {/* Lista de participantes */}
-                                    {/*<img src={'/assets/Feed/FotoPerfilTelaTeste.png'} alt="FotoPerfil" />*/}
+                                    <p>Editar lista de participantes (em desenvolvimento)</p>
                                 </div>
                                 <h3>Arquivos</h3>
                                 <div className={styles.fileList}>
@@ -99,13 +119,13 @@ const VisualizacaoProjeto = () => {
                             </div>
                         </div>
                     </div>
+                    <button onClick={handleSave} className={styles.saveButton}>Salvar</button>
                 </div>
             ) : (
                 <p className={styles.projectExist}>Opa, parece que você tentou acessar um projeto que não existe</p>
-            )};
-
+            )}
         </div>
     );
 };
 
-export default VisualizacaoProjeto;
+export default EditProject;

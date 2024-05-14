@@ -10,6 +10,7 @@ import useAuth from "../hooks/useAuth";
 import EditProfile from "../components/pages/EditProfile/EditProfile";
 import FeedProjetos from "../components/pages/FeedProjetos/FeedProjetos";
 import VisualizacaoProjeto from "../components/pages/VisualizacaoProjeto/VisualizacaoProjeto";
+import EditProject from "../components/pages/EditProject/EditProject";
 
 const Private = ({ item: Item }) => {
   const { signed } = useAuth();
@@ -29,6 +30,7 @@ const RoutesApp = () => {
         <Route path="/feedProjetos" element={<FeedProjetos/>}/>
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
+        <Route path="/editproject/:projectId" element={<EditProject />} />
       </Routes>
     </Router>
   );
