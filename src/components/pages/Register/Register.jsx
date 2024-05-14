@@ -31,44 +31,26 @@ function Register() {
 
   // inserir usuários no banco
   const handleAddUser = async (e) => {
-    const dados = {
-      email: email,
+    const userData = {
+      email,
       nome_completo: nomeCompleto,
-      cpf: cpf,
-      senha: senha,
+      cpf,
+      senha,
       nome_usuario: nomeUsuario,
       data_de_nascimento: dataNascimento,
     };
-
   
     try {
-      const response = await axios.post(
-        "http://localhost:8000/auth/register",
-        {
-          email: dados.email,
-          name: dados.nome_completo, 
-          cpf: dados.cpf,
-          password: dados.senha, 
-          user_name: dados.nome_usuario,
-          birthday: dados.data_de_nascimento, 
-        },
-        {
-          headers: {
-            Authorization: 'Bearer rx2MCEpi0tHffGn',
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      
+      const response = await UserController.registerUser(userData);
   
-      if (!response.data.status) {
-        console.error("Ocorreu um erro ao tentar realizar registro: ", response.data.error);
-      } else {
-        alert("Usuário cadastrado com sucesso!");
+      if (response.status === 200) {
+        alert('Usuário cadastrado com sucesso!');
         navigate('/login');
+      } else {
+        console.error('Ocorreu um erro ao tentar realizar registro:', response.data.error);
       }
     } catch (error) {
-      console.error('Erro ao realizar cadastro:', error);
+      console.error('Erro ao realizar cadastro:', error.message);
     }
   };
   

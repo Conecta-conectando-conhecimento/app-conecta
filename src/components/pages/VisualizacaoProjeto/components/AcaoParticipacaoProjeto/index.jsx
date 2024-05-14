@@ -5,7 +5,7 @@ import ModalSolicitacao from '../ModalSolicitacao/ModalSolicitacao';
 function AcaoParticipacaoProjeto({ isOwner }) {
     function sendRequest() {
         console.log("Pedido enviado");
-    }
+    } 
 
     return (
         <div className={styles.acaoParticipacaoContainer}>

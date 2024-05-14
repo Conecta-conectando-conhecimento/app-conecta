@@ -3,37 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import style from './FeedProjetos.module.css';
 import Navbar from '../../Navbar';
 import Card from '../../CardProject';
-import axios from 'axios';
+import useAuth from '../../../hooks/useAuth';
+import ProjectController from '../../../controllers/projectController';
 
-const API_URL = 'http://localhost:8000/project/all';
-const TOKEN = 'rx2MCEpi0tHffGn';
-const ITEMS_PER_PAGE = 10;
+
 
 function FeedProjetos() {
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const { user } = useAuth();
+    const ITEMS_PER_PAGE = 10;
 
     const fetchProjects = async () => {
         try {
-            const response = await axios.get(API_URL, {
-                headers: { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
-                params: { page: currentPage, limit: ITEMS_PER_PAGE },
-            });
-            setProjects(response.data.data);
+            const { data } = await ProjectController.getAll(user.token, currentPage, ITEMS_PER_PAGE);
+            setProjects(data);
         } catch (error) {
             console.error('Erro ao buscar os dados:', error);
         }
     };
 
+
     const fetchTotalCount = async () => {
         try {
-            const totalCountResponse = await axios.get(API_URL, {
-                headers: { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
-                params: { limit: 90000 }, // Valor alto para obter a contagem total
-            });
-            const totalCount = totalCountResponse.data.data.length;
+            const totalCountResponse = await ProjectController.getAll(user.token, 1, 90000); // Usando a controller getAll para obter a contagem total
+            const totalCount = totalCountResponse.data.length; // Ajuste para pegar o comprimento direto do array
             const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
             setTotalPages(totalPages);
             setCurrentPage(1);
