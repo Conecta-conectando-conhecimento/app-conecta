@@ -76,6 +76,7 @@ const EditProject = () => {
                                 value={project?.title || ''}
                                 onChange={handleInputChange}
                                 placeholder="Carregando..."
+                                title="Digite o título do projeto"
                             />
                         </h2>
                     </div>
@@ -88,6 +89,7 @@ const EditProject = () => {
                                 value={project?.about || ''}
                                 onChange={handleInputChange}
                                 placeholder="Carregando..."
+                                title="Digite uma descrição sobre o projeto"
                             />
                         </div>
                     </div>

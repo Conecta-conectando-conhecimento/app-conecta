@@ -1,115 +1,118 @@
+/* Ícone de lápis */
+.pencilIcon {
+  margin-left: 10px;  /* Espaçamento entre o título e o ícone */
+  cursor: pointer;   /* Cursor de ponteiro para indicar que é clicável */
+  color: #000;       /* Cor preta */
+  font-size: 1rem;   /* Tamanho do ícone menor */
+}
+
+/* Outros estilos existentes */
 .projectExist {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  color: #0A05F2;
-  font-size: 2rem;
-  font-weight: bold;
+display: flex;
+justify-content: center;
+margin-top: 2rem;
+color: #0A05F2;
+font-size: 2rem;
+font-weight: bold;
 }
 
 /* Navbar */
 .navbar {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
+background-color: #333;
+color: #fff;
+padding: 1rem;
 }
 
 /* Container */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-family: "poppins", sans-serif;
-  font-weight: 400;
+max-width: 1200px;
+margin: 0 auto;
+padding: 2rem;
+font-family: "poppins", sans-serif;
+font-weight: 400;
 }
 
 /* Project Title */
 .projectTitle {
-  text-align: center;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #0A05F2;
-  /* Adicionando uma linha de borda na cor #0A05F2 */
-  padding-bottom: 1rem;
-  /* Espaçamento abaixo da linha de borda */
-  grid-column: 1 / -1;
+text-align: center;
+margin-bottom: 2rem;
+border-bottom: 2px solid #0A05F2;
+padding-bottom: 1rem;
+grid-column: 1 / -1;
 }
 
 .projectTitle h2 {
-  font-size: 2.5rem;
-  color: #333;
-  color: #0A05F2;
+font-size: 2.5rem;
+color: #0A05F2;
 }
-
 
 /* Grid Layout */
 .gridLayout {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 2rem;
 }
 
 /* Columns */
 .column {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 /* Rows */
 .row {
-  margin-bottom: 2rem;
+margin-bottom: 2rem;
 }
 
 /* Headings */
 h3 {
-  color: #333;
-  margin-bottom: 1rem;
+color: #333;
+margin-bottom: 1rem;
 }
 
 /* Descrição do Projeto */
 .row p {
-  color: #666;
+color: #666;
 }
 
 /* Participantes */
 .participantList {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #EEEDED;
-  border-radius: 8px;
-  min-height: 22vh;
+margin-top: 1rem;
+padding: 1rem;
+background-color: #EEEDED;
+border-radius: 8px;
+min-height: 22vh;
 }
 
 /* Arquivos */
 .fileList {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #EEEDED;
-  border-radius: 8px;
-  min-height: 22vh;
+margin-top: 1rem;
+padding: 1rem;
+background-color: #EEEDED;
+border-radius: 8px;
+min-height: 22vh;
 }
 
 /* Atividades */
 .activityText {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #EEEDED;
-  border-radius: 8px;
-  min-height: 55vh;
+margin-top: 1rem;
+padding: 1rem;
+background-color: #EEEDED;
+border-radius: 8px;
+min-height: 55vh;
 }
 
 .activityText p {
-
-  font-size: smaller;
-  display: flex;
+font-size: smaller;
+display: flex;
 }
 
 .fileList p {
-
-  font-size: smaller;
-  display: flex;
+font-size: smaller;
+display: flex;
 }
 
 /* Modal Solicitação */
 .modal {
-  /* Estilo do modal aqui */
+/* Estilo do modal aqui */
 }

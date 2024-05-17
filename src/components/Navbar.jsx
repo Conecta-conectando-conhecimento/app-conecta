@@ -6,7 +6,7 @@ import { IoEarthOutline } from "react-icons/io5";
 
 const Navegacao = styled.nav`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 3.5rem;
     background-color: white;
@@ -21,7 +21,7 @@ const Navegacao = styled.nav`
 const LogoConecta = styled.img`
     height: 3.5rem; /* Ajuste a altura conforme necessário */
     cursor: pointer;
-    margin-right: 1em; /* Espaçamento entre a logo e a barra de pesquisa */
+    margin-right: 1em;  /* Espaçamento entre a logo e a barra de pesquisa */
     @media (max-width: 768px) {
         display: none;
     }
@@ -74,6 +74,8 @@ const BotaoIconesNavegacao = styled.button`
 
 const IconesNavegacao = styled.div`
     display: flex;
+    align-items: center; /* Garantir que os ícones fiquem centralizados verticalmente */
+    margin-left: 1em; /* Espaçamento entre a barra de pesquisa e os ícones de navegação */
     @media (max-width: 768px) {
         display: none;
     }
@@ -105,13 +107,13 @@ const Navbar = () => {
                     <InputPesquisa type="text" placeholder="Pesquisar" />
                     <BotaoBarraPesquisa type="button"><BiSliderAlt /></BotaoBarraPesquisa>
                 </BarraPesquisa>
+                <IconesNavegacao>
+                    <BotaoIconesNavegacao type="button"><IoEarthOutline /></BotaoIconesNavegacao>
+                    <BotaoIconesNavegacao type="button"><RiUserSearchLine /></BotaoIconesNavegacao>
+                    <BotaoIconesNavegacao type="button"><BiBell /></BotaoIconesNavegacao>
+                    <BotaoIconesNavegacao type="button"><BiMenu /></BotaoIconesNavegacao>
+                </IconesNavegacao>
             </ContainerCentral>
-            <IconesNavegacao>
-                <BotaoIconesNavegacao type="button"><IoEarthOutline /></BotaoIconesNavegacao>
-                <BotaoIconesNavegacao type="button"><RiUserSearchLine /></BotaoIconesNavegacao>
-                <BotaoIconesNavegacao type="button"><BiBell /></BotaoIconesNavegacao>
-                <BotaoIconesNavegacao type="button"><BiMenu /></BotaoIconesNavegacao>
-            </IconesNavegacao>
             <IconesNavegacaoMobile>
                 <BotaoIconesNavegacao type="button"><BiMenu /></BotaoIconesNavegacao>
             </IconesNavegacaoMobile>

@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './styles.module.css'; // Importando estilos
 import ModalSolicitacao from '../ModalSolicitacao/ModalSolicitacao';
 import { useNavigate } from "react-router-dom";
 
-function AcaoParticipacaoProjeto({ isOwner, projectId }) {
+function AcaoParticipacaoProjeto({ isOwner, projectId, setIsEditing }) {
     const navigate = useNavigate();
+    const [editButtonText, setEditButtonText] = useState('Habilitar Edição do Projeto'); // Estado para o texto do botão
+
+    const handleEditClick = () => {
+        setIsEditing(prevState => !prevState);  // Toggle editing mode
+        setEditButtonText(prevText => prevText === 'Habilitar Edição do Projeto' ? 'Desabilitar Edição de Projeto' : 'Habilitar Edição do Projeto');
+    };
 
     function sendRequest() {
         console.log("Pedido enviado");
-    } 
+    }
 
-    function navigateToEditProject(){
+    function navigateToEditProject() {
         navigate(`/editproject/${projectId}`);
     }
 
@@ -20,7 +26,7 @@ function AcaoParticipacaoProjeto({ isOwner, projectId }) {
                 <div className={styles.ownerActions}>
                     <button className={styles.actionButton}>Formação de equipe</button>
                     <ModalSolicitacao />
-                    <button className={styles.actionButton} onClick={navigateToEditProject}>Editar Projeto</button>
+                    <button className={styles.actionButton} onClick={handleEditClick}>{editButtonText}</button>
                 </div>
             ) : (
                 <div className={styles.requestParticipation}>
