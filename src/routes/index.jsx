@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "../components/pages/Register/Register";
-import Profile from "../components/pages/Profile/Profile";
+import UserProfile from "../components/pages/UserProfile/UserProfile";
 import FeedUsuario from "../components/pages/FeedUsuario/FeedUsuario";
 import Login from "../components/pages/Login/Login";
 import ForgotPassword from "../components/pages/Login/ForgotPassword";
@@ -10,7 +10,6 @@ import useAuth from "../hooks/useAuth";
 import EditProfile from "../components/pages/EditProfile/EditProfile";
 import FeedProjetos from "../components/pages/FeedProjetos/FeedProjetos";
 import VisualizacaoProjeto from "../components/pages/VisualizacaoProjeto/VisualizacaoProjeto";
-import EditProject from "../components/pages/EditProject/EditProject";
 
 const Private = ({ item: Item }) => {
   const { signed } = useAuth();
@@ -23,14 +22,13 @@ const RoutesApp = () => {
       <Routes>
         <Route path="/" element={<Register />} />
         <Route path="/feedUsuario" element={<FeedUsuario />} />
-        <Route path="/profile" element={<Private item={Profile} />} />
+        <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/registerproject" element={<Private item={RegisterProject} />}/>
+        <Route path="/registerproject" element={<RegisterProject />}/>
         <Route path="/feedProjetos" element={<FeedProjetos/>}/>
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
-        <Route path="/editproject/:projectId" element={<EditProject />} />
       </Routes>
     </Router>
   );

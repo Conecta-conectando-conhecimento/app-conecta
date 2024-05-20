@@ -77,6 +77,13 @@ function FeedProjetos() {
         fetchProjects();
     }, [currentPage]);
 
+    // Função para remover as tags HTML de uma string
+    const stripHtml = (html) => {
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        return div.textContent || div.innerText || '';
+    };
+
     return (
         <div className={style.bodyFeed}>
             <div className={style.container}>
@@ -90,7 +97,7 @@ function FeedProjetos() {
                     </div>
                     <div>
                         {projects.map((item) => (
-                            <Card key={item.id} projetoId={item.id} projetoNome={item.title} texto={item.about} />
+                            <Card key={item.id} projetoId={item.id} projetoNome={stripHtml(item.title)} texto={stripHtml(item.introduction)} />
                         ))}
                     </div>
                 </div>

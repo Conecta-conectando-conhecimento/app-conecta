@@ -1,4 +1,5 @@
 /* EditModal.module.css */
+
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -14,32 +15,28 @@
 
 .modalContent {
     background: white;
-    padding: 30px; /* Ajustado para um valor mais razoável */
+    padding: 20px;
     border-radius: 8px;
-    width: 90%; /* Alterado para ocupar 90% da largura da tela */
-    max-width: 800px; /* Limitando a largura máxima do modal */
-    max-height: 90%; /* Alterado para ocupar 90% da altura da tela */
-    overflow-y: auto; /* Adicionar rolagem vertical se o conteúdo exceder a altura máxima */
-    text-align: center;
-}
-
-.textArea {
-    width: calc(100% - 20px); /* Ocupar toda a largura disponível com margem de 10px em cada lado */
-    height: calc(90% - 120px); /* Ocupar 90% da altura da tela com uma margem superior de 120px */
-    padding: 10px; /* Adicionar um padding interno para espaço interno */
-    margin-top: 10px; /* Aumentar o espaço superior */
-    border-radius: 4px;
-    border: 1px solid #ccc; /* Adicionar uma borda para distinguir a textarea */
-    font-size: 18px; /* Aumentar o tamanho da fonte */
+    width: 90%;
+    max-width: 1000px;
+    height: auto; /* Alterado de 90% para auto */
+    max-height: 80%; /* Reduzido para evitar que o modal ocupe toda a altura da tela */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px; /* Aumenta o tamanho da letra dentro do modal */
 }
 
 .buttonGroup {
-    margin-top: 30px; /* Aumentar o espaço acima dos botões */
+    margin-top: 20px;
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    margin-top: 20px; /* Move os botões para baixo */
 }
 
-.saveButton, .cancelButton {
+.saveButton, .cancelButton, .restoreButton {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -53,5 +50,10 @@
 
 .cancelButton {
     background: #f44336;
+    color: white;
+}
+
+.restoreButton {
+    background-color: #ff9800;
     color: white;
 }

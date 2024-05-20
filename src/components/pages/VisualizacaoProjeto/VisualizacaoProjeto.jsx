@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth.jsx";
 import Navbar from "../../Navbar";
-import ModalSolicitacao from "./components/ModalSolicitacao/ModalSolicitacao";
 import AcaoParticipacaoProjeto from "./components/AcaoParticipacaoProjeto/index.jsx";
 import EditModal from "./components/EditModal/EditModal";
+import EditCharacteristicsModal from "./components/EditCharacteristicsModal/EditCharacteristicsModal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from "../VisualizacaoProjeto/VisualizacaoProjeto.module.css";
@@ -20,6 +20,7 @@ const VisualizacaoProjeto = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [currentField, setCurrentField] = useState('');
     const [currentValue, setCurrentValue] = useState('');
+    const [characteristicsModalVisible, setCharacteristicsModalVisible] = useState(false);
 
     useEffect(() => {
         requestDataProject();
@@ -53,14 +54,25 @@ const VisualizacaoProjeto = () => {
         }
     };
 
-    const openModal = (field, value) => {
+    const openModal = (field, value, useSimpleEditor = false) => {
         setCurrentField(field);
         setCurrentValue(value);
         setModalVisible(true);
     };
 
+    const openCharacteristicsModal = () => {
+        setCurrentField('characteristics');
+        setCurrentValue({
+            status: project.status,
+            max_participants: project.max_participants,
+            interest_area: project.interest_area
+        });
+        setCharacteristicsModalVisible(true);
+    };
+
     const closeModal = () => {
         setModalVisible(false);
+        setCharacteristicsModalVisible(false);
     };
 
     const handleSave = async (field, value) => {
@@ -74,48 +86,92 @@ const VisualizacaoProjeto = () => {
         }
     };
 
+    const handleSaveCharacteristics = async (value) => {
+        try {
+            const updatedProject = {
+                ...project,
+                status: value.status,
+                max_participants: value.max_participants,
+                interest_area: value.interest_area
+            };
+            await axios.put(`http://localhost:8000/project/update/${projectId}`, updatedProject);
+            setProject(updatedProject);
+            closeModal();
+        } catch (error) {
+            console.error('Erro ao atualizar as características do projeto:', error.message);
+        }
+    };
+
     return (
-        <div>
+        <div className={styles.bodyVisualizacaoProjeto}>
             <Navbar />
             {projectExists ? (
-                <div className={styles.container}>
-                    <div className={styles.projectTitle}>
-                        <h2>
-                            {project && project.title ? project.title : 'Carregando...'}
-                            {isEditing && (
-                                <FontAwesomeIcon
-                                    icon={faPencilAlt}
-                                    className={styles.pencilIcon}
-                                    onClick={() => openModal('title', project.title)}
-                                />
-                            )}
-                        </h2>
-                    </div>
-
-                    <div className={styles.column}>
-                        <div className={styles.row}>
-                            <h3>
-                                Sobre o projeto
+                <div>
+                    <div className={styles.container}>
+                        {/*Título do Projeto*/}
+                        <div className={styles.projectTitle}>
+                            <h2>
+                                <span dangerouslySetInnerHTML={{ __html: project?.title || 'Carregando...' }} />
                                 {isEditing && (
                                     <FontAwesomeIcon
                                         icon={faPencilAlt}
                                         className={styles.pencilIcon}
-                                        onClick={() => openModal('about', project.about)}
+                                        onClick={() => openModal('title', project?.title)}
                                     />
                                 )}
-                            </h3>
-                            <p>
-                                {project && project.about ? project.about : 'Carregando...'}
-                            </p>
+                            </h2>
                         </div>
-                    </div>
 
-                    <div className={styles.gridLayout}>
-                        <div className={styles.column}>
-                            <AcaoParticipacaoProjeto isOwner={userParticipant} projectId={projectId} setIsEditing={setIsEditing}/>
-                        </div>
-                        <div className={styles.column}>
-                            <div className={styles.row}>
+                        <div className={styles.gridLayout}>
+                            {/* Começo Primeira Coluna da página */}
+                            <div className={styles.column}>
+                                {/*Botões de ações do Projeto */}
+                                <AcaoParticipacaoProjeto isOwner={userParticipant} projectId={projectId} setIsEditing={setIsEditing} />
+
+                                {/*Características do Projeto */}
+                                <h3>
+                                    Características do Projeto
+                                    {isEditing && (
+                                        <FontAwesomeIcon
+                                            icon={faPencilAlt}
+                                            className={styles.pencilIcon}
+                                            onClick={openCharacteristicsModal}
+                                        />
+                                    )}
+                                </h3>
+                                <div className={styles.featureList}>
+                                    <p>
+                                        * Projeto: {project ? (
+                                            project.status === true ? (
+                                                'Aberto'
+                                            ) : (
+                                                'Fechado'
+                                            )
+                                        ) : (
+                                            'Carregando...'
+                                        )}
+                                    </p>
+
+                                    <p>* Número máximo de participantes: {project?.max_participants ? (
+                                        <span dangerouslySetInnerHTML={{ __html: project.max_participants }} />
+                                    ) : 'Carregando...'}</p>
+
+                                    <p>* Áreas de Interesse: {project?.interest_area ? (
+                                        <span dangerouslySetInnerHTML={{ __html: project.interest_area }} />
+                                    ) : 'Carregando...'}</p>
+
+                                    <p>
+                                        * Criado: {project?.created_at ? (
+                                            new Date(project.created_at).toLocaleDateString('pt-BR', {
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                year: 'numeric',
+                                            })
+                                        ) : 'Carregando...'}
+                                    </p>
+                                </div>
+
+                                {/*Participantes do Projeto */}
                                 <h3>
                                     Participantes
                                     {isEditing && <FontAwesomeIcon icon={faPencilAlt} className={styles.pencilIcon} />}
@@ -123,6 +179,25 @@ const VisualizacaoProjeto = () => {
                                 <div className={styles.participantList}>
                                     {/* Lista de participantes */}
                                 </div>
+
+                                {/*Atividades do Projeto */}
+                                <h3>
+                                    Atividades
+                                    {isEditing && (
+                                        <FontAwesomeIcon
+                                            icon={faPencilAlt}
+                                            className={styles.pencilIcon}
+                                            onClick={() => openModal('activities', project?.activities)}
+                                        />
+                                    )}
+                                </h3>
+                                <div className={styles.activityText}>
+                                    <p>{project?.activities ? (
+                                        <span dangerouslySetInnerHTML={{ __html: project.activities }} />
+                                    ) : 'Carregando...'}</p>
+                                </div>
+
+                                {/*Arquivos do Projeto */}
                                 <h3>
                                     Arquivos
                                     {isEditing && <FontAwesomeIcon icon={faPencilAlt} className={styles.pencilIcon} />}
@@ -132,32 +207,75 @@ const VisualizacaoProjeto = () => {
                                     <p>Nenhum arquivo adicionado</p>
                                 </div>
                             </div>
-                        </div>
-                        <div className={styles.column}>
-                            <div className={styles.row}>
-                                <h3>
-                                    Atividades
-                                    {isEditing && <FontAwesomeIcon icon={faPencilAlt} className={styles.pencilIcon} />}
-                                </h3>
-                                <div className={styles.activityText}>
-                                    {/* Texto das atividades */}
-                                    <p>Nenhuma atividade concluída</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+                            {/* Começo Segunda Coluna da página */}
+                            <div className={styles.column}>
+
+                                {/*Introduçaõ do Projeto*/}
+                                <h3>
+                                    Introdução do projeto
+                                    {isEditing && (
+                                        <FontAwesomeIcon
+                                            icon={faPencilAlt}
+                                            className={styles.pencilIcon}
+                                            onClick={() => openModal('introduction', project?.introduction, true)}
+                                        />
+                                    )}
+                                </h3>
+                                <p>
+                                    {project?.introduction ? (
+                                        <span dangerouslySetInnerHTML={{ __html: project.introduction }} />
+                                    ) : 'Carregando...'}
+                                </p>
+
+                                {/*Sobre o Projeto*/}
+                                <h3>
+                                    Sobre o projeto
+                                    {isEditing && (
+                                        <FontAwesomeIcon
+                                            icon={faPencilAlt}
+                                            className={styles.pencilIcon}
+                                            onClick={() => openModal('about', project?.about)}
+                                        />
+                                    )}
+                                </h3>
+                                <p>
+                                    {project?.about ? (
+                                        <span dangerouslySetInnerHTML={{ __html: project.about }} />
+                                    ) : 'Carregando...'}
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <br />
                     {modalVisible && (
-                        <EditModal 
+                        <EditModal
                             field={currentField}
                             value={currentValue}
                             onClose={closeModal}
                             onSave={handleSave}
                         />
                     )}
+                    {characteristicsModalVisible && (
+                        <EditCharacteristicsModal
+                            field={currentField}
+                            value={currentValue}
+                            onClose={closeModal}
+                            onSave={handleSaveCharacteristics}
+                        />
+                    )}
                 </div>
             ) : (
-                <p className={styles.projectExist}>Opa, parece que você tentou acessar um projeto que não existe</p>
+                <div className={styles.bodyVisualizacaoProjeto}>
+                    <div className={styles.container}>
+                        <p>Projeto não encontrado.</p>
+                        
+
+                    </div>
+                    
+                </div>
             )}
         </div>
     );

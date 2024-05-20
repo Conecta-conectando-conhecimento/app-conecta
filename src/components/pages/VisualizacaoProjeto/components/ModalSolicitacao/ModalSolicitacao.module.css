@@ -10,21 +10,26 @@
 
 /* Botões */
 .Button {
-  background-color: #0A05F2; /* Green */
+  background-color: #0A05F2;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 20px;
+  /* Reduzido para diminuir a largura */
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  transition-duration: 0.4s;
+  border-radius: 8px;
+  /* Bordas arredondadas */
+  transition: background-color 0.3s ease;
+  /* Transição para a cor de fundo */
 }
 
 .Button:hover {
-  background-color: #007bff; /* Cor ao passar o mouse */
+  background-color: #007bff;
+  /* Cor ao passar o mouse */
 }
 
 /* Modal */

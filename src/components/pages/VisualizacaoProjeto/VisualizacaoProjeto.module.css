@@ -1,118 +1,157 @@
 /* Ícone de lápis */
 .pencilIcon {
-  margin-left: 10px;  /* Espaçamento entre o título e o ícone */
-  cursor: pointer;   /* Cursor de ponteiro para indicar que é clicável */
-  color: #000;       /* Cor preta */
-  font-size: 1rem;   /* Tamanho do ícone menor */
+  margin-left: 10px;
+  /* Espaçamento entre o título e o ícone */
+  cursor: pointer;
+  /* Cursor de ponteiro para indicar que é clicável */
+  color: #000;
+  /* Cor preta */
+  font-size: 1rem;
+  /* Tamanho do ícone menor */
+  align-self: center;
+  /* Alinha o ícone ao centro do texto */
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.bodyVisualizacaoProjeto {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background: rgb(52, 136, 136);
+  background: linear-gradient(90deg,
+      rgba(52, 136, 136, 1) 15%,
+      rgba(158, 248, 238, 1) 39%,
+      rgba(151, 240, 231, 1) 62%,
+      rgba(52, 136, 136, 1) 87%);
+}
+
 
 /* Outros estilos existentes */
 .projectExist {
-display: flex;
-justify-content: center;
-margin-top: 2rem;
-color: #0A05F2;
-font-size: 2rem;
-font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  color: #0A05F2;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 /* Navbar */
 .navbar {
-background-color: #333;
-color: #fff;
-padding: 1rem;
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
 }
 
 /* Container */
 .container {
-max-width: 1200px;
-margin: 0 auto;
-padding: 2rem;
-font-family: "poppins", sans-serif;
-font-weight: 400;
+  background-color: white;
+  max-width: 1200px;
+  margin: 0.5rem auto;
+  padding: 2rem;
+  font-family: "poppins", sans-serif;
+  font-weight: 400;
+  border: 3px solid #d3d3d3;
+  border-radius: 14px;
 }
 
 /* Project Title */
 .projectTitle {
-text-align: center;
-margin-bottom: 2rem;
-border-bottom: 2px solid #0A05F2;
-padding-bottom: 1rem;
-grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #0A05F2;
+  padding-bottom: 1rem;
+  grid-column: 1 / -1;
 }
 
 .projectTitle h2 {
-font-size: 2.5rem;
-color: #0A05F2;
+  font-size: 2.5rem;
+  color: #0A05F2;
+  display: flex;
+  align-items: center;
 }
 
 /* Grid Layout */
 .gridLayout {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  /* Primeira coluna menor que a segunda */
+  gap: 2rem;
 }
 
 /* Columns */
 .column {
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Rows */
 .row {
-margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* Headings */
 h3 {
-color: #333;
-margin-bottom: 1rem;
+  color: #333;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 /* Descrição do Projeto */
 .row p {
-color: #666;
+  color: #666;
+}
+
+/*Características*/
+.featureList {
+  padding: 1rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 12vh;
 }
 
 /* Participantes */
 .participantList {
-margin-top: 1rem;
-padding: 1rem;
-background-color: #EEEDED;
-border-radius: 8px;
-min-height: 22vh;
+  padding: 1rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 18vh;
 }
 
 /* Arquivos */
 .fileList {
-margin-top: 1rem;
-padding: 1rem;
-background-color: #EEEDED;
-border-radius: 8px;
-min-height: 22vh;
+  padding: 1rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 12vh;
 }
 
 /* Atividades */
 .activityText {
-margin-top: 1rem;
-padding: 1rem;
-background-color: #EEEDED;
-border-radius: 8px;
-min-height: 55vh;
+  padding: 1.5rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 22vh;
 }
 
 .activityText p {
-font-size: smaller;
-display: flex;
+  font-size: smaller;
+  display: flex;
 }
 
 .fileList p {
-font-size: smaller;
-display: flex;
+  font-size: smaller;
+  display: flex;
 }
 
 /* Modal Solicitação */
 .modal {
-/* Estilo do modal aqui */
+  /* Estilo do modal aqui */
 }
