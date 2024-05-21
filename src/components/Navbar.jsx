@@ -108,7 +108,6 @@ const Navbar = () => {
                     <BotaoBarraPesquisa type="button"><BiSliderAlt /></BotaoBarraPesquisa>
                 </BarraPesquisa>
                 <IconesNavegacao>
-                    <BotaoIconesNavegacao type="button"><IoEarthOutline /></BotaoIconesNavegacao>
                     <BotaoIconesNavegacao type="button"><RiUserSearchLine /></BotaoIconesNavegacao>
                     <BotaoIconesNavegacao type="button"><BiBell /></BotaoIconesNavegacao>
                     <BotaoIconesNavegacao type="button"><BiMenu /></BotaoIconesNavegacao>

@@ -21,14 +21,17 @@ const RoutesApp = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Register />} />
-        <Route path="/feedUsuario" element={<FeedUsuario />} />
-        <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/registerproject" element={<RegisterProject />}/>
-        <Route path="/feedProjetos" element={<FeedProjetos/>}/>
+        <Route path="/feedUsuario" element={<FeedUsuario />} />
+        <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/feedProjetos" element={<FeedProjetos/>}/>
+        <Route path="/registerproject" element={<RegisterProject />}/>
         <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
+        {/*Meus salvos */}
+        {/*Meus Projetos */}
+        {/*Formação de equipe */}
       </Routes>
     </Router>
   );
