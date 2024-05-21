@@ -1,3 +1,37 @@
+/* Ícone de lápis */
+.pencilIcon {
+  margin-left: 10px;
+  /* Espaçamento entre o título e o ícone */
+  cursor: pointer;
+  /* Cursor de ponteiro para indicar que é clicável */
+  color: #000;
+  /* Cor preta */
+  font-size: 1rem;
+  /* Tamanho do ícone menor */
+  align-self: center;
+  /* Alinha o ícone ao centro do texto */
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.bodyVisualizacaoProjeto {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background: rgb(52, 136, 136);
+  background: linear-gradient(90deg,
+      rgba(52, 136, 136, 1) 15%,
+      rgba(158, 248, 238, 1) 39%,
+      rgba(151, 240, 231, 1) 62%,
+      rgba(52, 136, 136, 1) 87%);
+}
+
+
+/* Outros estilos existentes */
 .projectExist {
   display: flex;
   justify-content: center;
@@ -16,35 +50,39 @@
 
 /* Container */
 .container {
+  background-color: white;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0.5rem auto;
   padding: 2rem;
   font-family: "poppins", sans-serif;
   font-weight: 400;
+  border: 3px solid #d3d3d3;
+  border-radius: 14px;
 }
 
 /* Project Title */
 .projectTitle {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 2rem;
   border-bottom: 2px solid #0A05F2;
-  /* Adicionando uma linha de borda na cor #0A05F2 */
   padding-bottom: 1rem;
-  /* Espaçamento abaixo da linha de borda */
   grid-column: 1 / -1;
 }
 
 .projectTitle h2 {
   font-size: 2.5rem;
-  color: #333;
   color: #0A05F2;
+  display: flex;
+  align-items: center;
 }
-
 
 /* Grid Layout */
 .gridLayout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr;
+  /* Primeira coluna menor que a segunda */
   gap: 2rem;
 }
 
@@ -63,6 +101,7 @@
 h3 {
   color: #333;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 /* Descrição do Projeto */
@@ -70,41 +109,44 @@ h3 {
   color: #666;
 }
 
-/* Participantes */
-.participantList {
-  margin-top: 1rem;
+/*Características*/
+.featureList {
   padding: 1rem;
   background-color: #EEEDED;
   border-radius: 8px;
-  min-height: 22vh;
+  min-height: 12vh;
+}
+
+/* Participantes */
+.participantList {
+  padding: 1rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 18vh;
 }
 
 /* Arquivos */
 .fileList {
-  margin-top: 1rem;
   padding: 1rem;
+  background-color: #EEEDED;
+  border-radius: 8px;
+  min-height: 12vh;
+}
+
+/* Atividades */
+.activityText {
+  padding: 1.5rem;
   background-color: #EEEDED;
   border-radius: 8px;
   min-height: 22vh;
 }
 
-/* Atividades */
-.activityText {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #EEEDED;
-  border-radius: 8px;
-  min-height: 55vh;
-}
-
 .activityText p {
-
   font-size: smaller;
   display: flex;
 }
 
 .fileList p {
-
   font-size: smaller;
   display: flex;
 }
