@@ -1,8 +1,8 @@
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { BiSearch, BiSliderAlt, BiBell, BiMenu } from "react-icons/bi";
 import { RiUserSearchLine } from "react-icons/ri";
 import { useNavigate } from "react-router";
-import { IoEarthOutline } from "react-icons/io5";
 
 const Navegacao = styled.nav`
     display: flex;
@@ -19,9 +19,10 @@ const Navegacao = styled.nav`
 `;
 
 const LogoConecta = styled.img`
-    height: 3.5rem; /* Ajuste a altura conforme necessário */
+    height: 3.5rem;
     cursor: pointer;
-    margin-right: 1em;  /* Espaçamento entre a logo e a barra de pesquisa */
+    margin-right: 1em;
+
     @media (max-width: 768px) {
         display: none;
     }
@@ -43,11 +44,11 @@ const BarraPesquisa = styled.div`
 const InputPesquisa = styled.input`
     flex-grow: 1;
     font-size: 1rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 10px;
     border: none;
     outline: none;
     background-color: transparent;
+
     @media (max-width: 768px) {
         width: 50vw;
     }
@@ -70,12 +71,14 @@ const BotaoIconesNavegacao = styled.button`
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    position: relative; /* Added for positioning the dropdown */
 `;
 
 const IconesNavegacao = styled.div`
     display: flex;
-    align-items: center; /* Garantir que os ícones fiquem centralizados verticalmente */
-    margin-left: 1em; /* Espaçamento entre a barra de pesquisa e os ícones de navegação */
+    align-items: center;
+    margin-left: 1em;
+
     @media (max-width: 768px) {
         display: none;
     }
@@ -83,6 +86,7 @@ const IconesNavegacao = styled.div`
 
 const IconesNavegacaoMobile = styled.div`
     display: flex;
+
     @media (min-width: 768px) {
         display: none;
     }
@@ -95,8 +99,58 @@ const ContainerCentral = styled.div`
     justify-content: center;
 `;
 
+const DropdownMenu = styled.div`
+    position: absolute;
+    top: 3.5rem; /* Adjusted to position below the menu icon */
+    right: 15rem; /* Adjusted to align with the right edge of the icon */
+    background-color: white;
+    box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.2); /* Added shadow */
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 10;
+    width: 250px;
+`;
+
+const DropdownItem = styled.button`
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:hover {
+        background-color: #f0f0f0;
+    }
+`;
+
 const Navbar = () => {
     const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef(null);
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
+
+    const handleNavigation = (path) => {
+        navigate(path);
+        setMenuOpen(false);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [menuRef]);
 
     return (
         <Navegacao>
@@ -110,11 +164,22 @@ const Navbar = () => {
                 <IconesNavegacao>
                     <BotaoIconesNavegacao type="button"><RiUserSearchLine /></BotaoIconesNavegacao>
                     <BotaoIconesNavegacao type="button"><BiBell /></BotaoIconesNavegacao>
-                    <BotaoIconesNavegacao type="button"><BiMenu /></BotaoIconesNavegacao>
+                    <BotaoIconesNavegacao type="button" onClick={toggleMenu} ref={menuRef}><BiMenu /></BotaoIconesNavegacao>
+                    {menuOpen && (
+                        <DropdownMenu>
+                            <DropdownItem onClick={() => handleNavigation("/userprofile")}>Perfil do usuário</DropdownItem>
+                            <DropdownItem onClick={() => handleNavigation("/meus-projetos")}>Meus projetos</DropdownItem>
+                            <DropdownItem onClick={() => handleNavigation("/meus-salvos")}>Meus salvos</DropdownItem>
+                            <DropdownItem onClick={() => handleNavigation("/reportar-problema")}>Reportar problema</DropdownItem>
+                            <DropdownItem onClick={() => handleNavigation("/sugestoes")}>Sugestões</DropdownItem>
+                            <DropdownItem onClick={() => handleNavigation("/configuracoes")}>Configurações</DropdownItem>
+                            <DropdownItem onClick={() => handleNavigation("/")}>Sair</DropdownItem>
+                        </DropdownMenu>
+                    )}
                 </IconesNavegacao>
             </ContainerCentral>
             <IconesNavegacaoMobile>
-                <BotaoIconesNavegacao type="button"><BiMenu /></BotaoIconesNavegacao>
+                <BotaoIconesNavegacao type="button" onClick={toggleMenu}><BiMenu /></BotaoIconesNavegacao>
             </IconesNavegacaoMobile>
         </Navegacao>
     );
