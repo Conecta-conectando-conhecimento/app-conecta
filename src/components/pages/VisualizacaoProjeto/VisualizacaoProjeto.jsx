@@ -9,10 +9,12 @@ import EditCharacteristicsModal from "./components/EditCharacteristicsModal/Edit
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from "../VisualizacaoProjeto/VisualizacaoProjeto.module.css";
+import CardParticipante from "./components/CardParticipante/CardParticipante.jsx";
 
 const VisualizacaoProjeto = () => {
     const { projectId } = useParams();
     const [project, setProject] = useState(null);
+    const [participantes, setParticipantes] = useState(null);
     const [projectExists, setProjectExists] = useState(true);
     const { user } = useAuth();
     const [userParticipant, isUserParticipant] = useState(false);
@@ -39,6 +41,13 @@ const VisualizacaoProjeto = () => {
                 setProjectExists(false);
             }
         }
+
+        // try {
+        //     const responseParticipantes = await axios.get(`http://localhost:8000/participant-view/project/${projectId}`)
+        //     setParticipantes(responde.data.data);
+        // } catch (error) {
+        //     console.error("Erro ao obter participante do projeto:", error.message);
+        // }
     };
 
     const checkUserProjectRelation = async () => {
@@ -177,7 +186,25 @@ const VisualizacaoProjeto = () => {
                                     {isEditing && <FontAwesomeIcon icon={faPencilAlt} className={styles.pencilIcon} />}
                                 </h3>
                                 <div className={styles.participantList}>
-                                    {/* Lista de participantes */}
+                                    {/* {participantes.map((item) => (
+                                        <CardParticipante key={item.participant_id} user_id={item.user_id} nome={item.user_name} fotoUrl={item.user_image_url} />
+                                    ))} */}
+                                    <CardParticipante
+                                        nome="Riltter Kenedy Nunes de Matos"
+                                        faculdade="CEUB - Asa norte"
+                                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Riltter.jpg" />
+                                    <CardParticipante
+                                        nome="Halycia"
+                                        faculdade="CEUB - Asa norte"
+                                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Halycia.jpg" />
+                                        <CardParticipante
+                                        nome="Thallyston"
+                                        faculdade="CEUB - Asa norte"
+                                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Thallyston.jpg" />
+                                        <CardParticipante
+                                        nome="Ana Luisa Bonjardim"
+                                        faculdade="CEUB - Asa norte"
+                                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Ana%20Luisa.jpg" />
                                 </div>
 
                                 {/*Atividades do Projeto */}
@@ -271,10 +298,10 @@ const VisualizacaoProjeto = () => {
                 <div className={styles.bodyVisualizacaoProjeto}>
                     <div className={styles.container}>
                         <p>Projeto não encontrado.</p>
-                        
+
 
                     </div>
-                    
+
                 </div>
             )}
         </div>

@@ -119,6 +119,9 @@ h3 {
 
 /* Participantes */
 .participantList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   padding: 1rem;
   background-color: #EEEDED;
   border-radius: 8px;
