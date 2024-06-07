@@ -10,6 +10,7 @@ import useAuth from "../hooks/useAuth";
 import EditProfile from "../components/pages/EditProfile/EditProfile";
 import FeedProjetos from "../components/pages/FeedProjetos/FeedProjetos";
 import VisualizacaoProjeto from "../components/pages/VisualizacaoProjeto/VisualizacaoProjeto";
+import FormacaoEquipe from "../components/pages/FormacaoEquipe/FormacaoEquipe";
 
 const Private = ({ item: Item }) => {
   const { signed } = useAuth();
@@ -29,9 +30,9 @@ const RoutesApp = () => {
         <Route path="/feedProjetos" element={<FeedProjetos/>}/>
         <Route path="/registerproject" element={<RegisterProject />}/>
         <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
+        <Route path="/formacaoequipe/:projectId" element={<FormacaoEquipe />}/>
         {/*Meus salvos */}
         {/*Meus Projetos */}
-        {/*Formação de equipe */}
       </Routes>
     </Router>
   );
