@@ -71,7 +71,7 @@ const BotaoIconesNavegacao = styled.button`
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    position: relative; /* Added for positioning the dropdown */
+    position: relative;
 `;
 
 const IconesNavegacao = styled.div`
@@ -101,10 +101,8 @@ const ContainerCentral = styled.div`
 
 const DropdownMenu = styled.div`
     position: absolute;
-    top: 3.5rem; /* Adjusted to position below the menu icon */
-    right: 15rem; /* Adjusted to align with the right edge of the icon */
     background-color: white;
-    box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.2); /* Added shadow */
+    box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     overflow: hidden;
     z-index: 10;
@@ -129,6 +127,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
+    const buttonRef = useRef(null);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -141,7 +140,7 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
+            if (menuRef.current && !menuRef.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(event.target)) {
                 setMenuOpen(false);
             }
         };
@@ -150,7 +149,15 @@ const Navbar = () => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [menuRef]);
+    }, []);
+
+    useEffect(() => {
+        if (menuOpen && buttonRef.current && menuRef.current) {
+            const { bottom, right, width } = buttonRef.current.getBoundingClientRect();
+            menuRef.current.style.top = `${bottom}px`;
+            menuRef.current.style.left = `${right - width - 190}px`; // Adjust for the menu width
+        }
+    }, [menuOpen]);
 
     return (
         <Navegacao>
@@ -164,12 +171,10 @@ const Navbar = () => {
                 <IconesNavegacao>
                     <BotaoIconesNavegacao type="button"><RiUserSearchLine /></BotaoIconesNavegacao>
                     <BotaoIconesNavegacao type="button"><BiBell /></BotaoIconesNavegacao>
-                    <BotaoIconesNavegacao type="button" onClick={toggleMenu} ref={menuRef}><BiMenu /></BotaoIconesNavegacao>
+                    <BotaoIconesNavegacao type="button" onClick={toggleMenu} ref={buttonRef}><BiMenu /></BotaoIconesNavegacao>
                     {menuOpen && (
-                        <DropdownMenu>
+                        <DropdownMenu ref={menuRef}>
                             <DropdownItem onClick={() => handleNavigation("/userprofile")}>Perfil do usuário</DropdownItem>
-                            <DropdownItem onClick={() => handleNavigation("/meus-projetos")}>Meus projetos</DropdownItem>
-                            <DropdownItem onClick={() => handleNavigation("/meus-salvos")}>Meus salvos</DropdownItem>
                             <DropdownItem onClick={() => handleNavigation("/reportar-problema")}>Reportar problema</DropdownItem>
                             <DropdownItem onClick={() => handleNavigation("/sugestoes")}>Sugestões</DropdownItem>
                             <DropdownItem onClick={() => handleNavigation("/configuracoes")}>Configurações</DropdownItem>
