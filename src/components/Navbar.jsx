@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { BiSearch, BiSliderAlt, BiBell, BiMenu } from "react-icons/bi";
-import { RiUserSearchLine } from "react-icons/ri";
+import { BiSearch, BiSliderAlt, BiSolidBell, BiMenu, BiSolidUserDetail } from "react-icons/bi";
 import { useNavigate } from "react-router";
 
 const Navegacao = styled.nav`
@@ -55,7 +54,7 @@ const InputPesquisa = styled.input`
 `;
 
 const BotaoBarraPesquisa = styled.button`
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     padding: 10px;
     background-color: transparent;
     border: none;
@@ -82,6 +81,17 @@ const IconesNavegacao = styled.div`
     @media (max-width: 768px) {
         display: none;
     }
+`;
+
+const BotaoIconesNavegacaoBell = styled.button`
+    font-size: 1.5rem;
+    padding: 10px;
+    background-color: transparent;
+    color: #808080;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
 `;
 
 const IconesNavegacaoMobile = styled.div`
@@ -133,9 +143,28 @@ const Navbar = () => {
         setMenuOpen(!menuOpen);
     };
 
-    const handleNavigation = (path) => {
+    const handleNavigation = async (path) => {
+        if (path === "/") {
+            await logout();
+        }
         navigate(path);
         setMenuOpen(false);
+    };
+
+
+    //Função para Logout que não está funcionando
+    const logout = async () => {
+        try {
+            // Remover o token de autenticação
+            localStorage.removeItem("authToken");
+
+            // Limpar outros dados do usuário
+            localStorage.removeItem("userData");
+
+            console.log("Usuário deslogado com sucesso");
+        } catch (error) {
+            console.error("Erro ao deslogar o usuário", error);
+        }
     };
 
     useEffect(() => {
@@ -164,13 +193,13 @@ const Navbar = () => {
             <ContainerCentral>
                 <LogoConecta src="/assets/Logo para Navbar.png" alt="Logo" onClick={() => navigate("/feedProjetos")} />
                 <BarraPesquisa>
-                    <BotaoBarraPesquisa type="button"><BiSearch /></BotaoBarraPesquisa>
-                    <InputPesquisa type="text" placeholder="Pesquisar" />
                     <BotaoBarraPesquisa type="button"><BiSliderAlt /></BotaoBarraPesquisa>
+                    <InputPesquisa type="text" placeholder="Pesquisar" />
+                    <BotaoBarraPesquisa type="button"><BiSearch /></BotaoBarraPesquisa>
                 </BarraPesquisa>
                 <IconesNavegacao>
-                    <BotaoIconesNavegacao type="button"><RiUserSearchLine /></BotaoIconesNavegacao>
-                    <BotaoIconesNavegacao type="button"><BiBell /></BotaoIconesNavegacao>
+                    <BotaoIconesNavegacao type="button"><BiSolidUserDetail /></BotaoIconesNavegacao>
+                    <BotaoIconesNavegacaoBell type="button"><BiSolidBell /></BotaoIconesNavegacaoBell>
                     <BotaoIconesNavegacao type="button" onClick={toggleMenu} ref={buttonRef}><BiMenu /></BotaoIconesNavegacao>
                     {menuOpen && (
                         <DropdownMenu ref={menuRef}>
