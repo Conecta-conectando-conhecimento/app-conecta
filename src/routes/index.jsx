@@ -24,7 +24,7 @@ const RoutesApp = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/feedUsuario" element={<FeedUsuario />} />
-        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/userprofile/:userId" element={<UserProfile />} />
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/feedProjetos" element={<FeedProjetos/>}/>
         <Route path="/registerproject" element={<RegisterProject />}/>

@@ -9,7 +9,7 @@
     rgba(158, 248, 238, 1) ,
     rgba(151, 240, 231, 1) ,
     rgba(52, 136, 136, 1) );
-    height: 100vh;
+    padding-bottom: 2em;
 }
 
 .bodyUserProfile {
@@ -21,7 +21,6 @@
     margin-right: auto;
     margin-top: 2em;
     border-radius: 25px 25px 25px 25px;
-   
 }
 
 .capaUserProfile {
@@ -203,7 +202,6 @@
     padding: .8em;
     background-color: #e6e6e6;
     border-radius: 8px;
-    height: 50vh;
     width: auto;
     font-size: 1.2rem;
 

@@ -126,6 +126,8 @@ h3 {
   background-color: #EEEDED;
   border-radius: 8px;
   min-height: 18vh;
+  max-height: 400px; 
+  overflow-y: auto;  
 }
 
 /* Arquivos */
@@ -152,9 +154,4 @@ h3 {
 .fileList p {
   font-size: smaller;
   display: flex;
-}
-
-/* Modal Solicitação */
-.modal {
-  /* Estilo do modal aqui */
 }

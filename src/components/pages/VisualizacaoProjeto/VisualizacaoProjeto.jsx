@@ -42,12 +42,14 @@ const VisualizacaoProjeto = () => {
             }
         }
 
-        // try {
-        //     const responseParticipantes = await axios.get(`http://localhost:8000/participant-view/project/${projectId}`)
-        //     setParticipantes(responde.data.data);
-        // } catch (error) {
-        //     console.error("Erro ao obter participante do projeto:", error.message);
-        // }
+        try {
+            const responseParticipantes = await axios.get(`http://localhost:8000/participant-view/project/${projectId}`)
+            console.log(projectId)
+            setParticipantes(responseParticipantes.data.data);
+            console.log(responseParticipantes.data.data)
+        } catch (error) {
+            console.error("Erro ao obter participante do projeto:", error.message);
+        }
     };
 
     const checkUserProjectRelation = async () => {
@@ -186,26 +188,21 @@ const VisualizacaoProjeto = () => {
                                     {isEditing && <FontAwesomeIcon icon={faPencilAlt} className={styles.pencilIcon} />}
                                 </h3>
                                 <div className={styles.participantList}>
-                                    {/* {participantes.map((item) => (
-                                        <CardParticipante key={item.participant_id} user_id={item.user_id} nome={item.user_name} fotoUrl={item.user_image_url} />
-                                    ))} */}
-                                    <CardParticipante
-                                        nome="Riltter Kenedy Nunes de Matos"
-                                        faculdade="CEUB - Asa norte"
-                                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Riltter.jpg" />
-                                    <CardParticipante
-                                        nome="Halycia"
-                                        faculdade="CEUB - Asa norte"
-                                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Halycia.jpg" />
-                                        <CardParticipante
-                                        nome="Thallyston"
-                                        faculdade="CEUB - Asa norte"
-                                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Thallyston.jpg" />
-                                        <CardParticipante
-                                        nome="Ana Luisa Bonjardim"
-                                        faculdade="CEUB - Asa norte"
-                                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Ana%20Luisa.jpg" />
+                                    {Array.isArray(participantes) && participantes.length > 0 ? (
+                                        participantes.map((item) => (
+                                            <CardParticipante
+                                                key={item.participant_id}
+                                                id={item.user_id}
+                                                nome={item.user_name}
+                                                faculdade="CEUB - Asa norte"
+                                                fotoUrl={item.user_image_url}
+                                            />
+                                        ))
+                                    ) : (
+                                        <p>Nenhum participante encontrado.</p> // Ou qualquer mensagem de feedback apropriada
+                                    )}
                                 </div>
+
 
                                 {/*Atividades do Projeto */}
                                 <h3>
