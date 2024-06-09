@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { BiSearch, BiSliderAlt, BiSolidBell, BiMenu, BiSolidUserDetail } from "react-icons/bi";
 import { useNavigate } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 const Navegacao = styled.nav`
     display: flex;
@@ -138,6 +139,8 @@ const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
     const buttonRef = useRef(null);
+    const { signout } = useAuth();
+    
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -152,20 +155,15 @@ const Navbar = () => {
     };
 
 
-    //Função para Logout que não está funcionando
     const logout = async () => {
         try {
-            // Remover o token de autenticação
-            localStorage.removeItem("authToken");
-
-            // Limpar outros dados do usuário
-            localStorage.removeItem("userData");
-
-            console.log("Usuário deslogado com sucesso");
+            await signout();
+            navigate("/");
         } catch (error) {
-            console.error("Erro ao deslogar o usuário", error);
+            console.error("Erro ao fazer logout:", error);
         }
     };
+    
 
     useEffect(() => {
         const handleClickOutside = (event) => {
