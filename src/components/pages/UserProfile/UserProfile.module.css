@@ -3,6 +3,15 @@
     src: url('OpenSans-Regular.ttf') format('truetype');
   } 
 
+.pageStyle {
+    background: linear-gradient(90deg,
+    rgba(52, 136, 136, 1) ,
+    rgba(158, 248, 238, 1) ,
+    rgba(151, 240, 231, 1) ,
+    rgba(52, 136, 136, 1) );
+    padding-bottom: 2em;
+}
+
 .bodyUserProfile {
     background-color: white;
     width: 80%;
@@ -10,21 +19,25 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2em;
+    border-radius: 25px 25px 25px 25px;
 }
 
 .capaUserProfile {
     display: flex;
-    border-radius: 25px 25px 0px 0px;
     padding: 20px;
     width: auto;
     height: auto;
     text-align: center;
-    background-image: linear-gradient(to bottom,rgba(229,119,72,1), rgba(255,0,0,0));
+    border-bottom: solid .2em blue;
+    border-radius: 25px 25px 0px 0px;
 }
 
 .capaNome{
     display: flex;
     width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .fotoNomeProfile {
@@ -32,33 +45,27 @@
 }
 
 .fotoDePerfil {
-    margin: 20px;
-    width: 100px;
-    height: 100px;
+    width: 10em;
+    height: 10em;
     border-radius: 50%;
     overflow: hidden;
     align-self: flex-end;
-    /* Ensure the image stays within the circular mask */
 }
 
 .fotoDePerfil img {
     max-width: 100%;
-    /* Make the image fill the circular container */
     height: auto;
-    /* Maintain the aspect ratio of the image */
-    
 }
 
 .nomeDePerfil {
-    margin: 30px;
-    padding-right: 20%;
+    padding: 1em;
     display: flex;
-    align-self: flex-end;
-    justify-self: flex-start;
+    height: 100%;
+    align-items: center;
+    display: flex;
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     font-size: 1.5em;
-    color: #ffffff;
-    text-shadow: 2px 2px 8px #000000;
+    color: blue;
 }
 
 .btnEditProfile {
@@ -66,16 +73,18 @@
     flex-direction: column;
     background-color: transparent;
     border: none;
-    color: rgb(190, 16, 16);
+    color: blue;
     padding: 15px 32px;
     text-decoration: none;
     justify-content: end;
+    cursor: pointer;
 }
 
 
 .blocoConteudo {
     display: flex;
     justify-content: space-between;
+    padding: 1.4em;
 }
 
   /* On smaller screens, stack items vertically */
@@ -88,8 +97,9 @@
 
 .coluna1UserProfile {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 1em;
     width: 33%;
 }
 
@@ -98,20 +108,14 @@
     font-family: "Inter", sans-serif;
     font-weight: bold;
     color: rgb(255, 255, 255);
-    font-size: 1rem;
-    width: 100%;
-    max-width: 100rem;
-    min-height: 2.8rem;
-    padding: 2rem;
+    font-size: 1.2rem;
+    padding: 1em;
     border-radius: 1rem;
-    background: rgb(242,68,5);
+    background: blue;
+    width: 100%;
     border: none; 
     cursor: pointer;
     text-align: center;
-    margin-bottom: 10px;
-    transition: background 0.8s;
-    align-self: flex-end;
-    margin-top: 1rem;
 }
 
 .btnMeusProjetosHover {
@@ -119,41 +123,42 @@
     color: #fff;
 }
 
-.linhaDeRedirecionamentoExterno {
-display: flex;
-justify-content: center;
+.linhaDeRedirecionamentoExterno{
+    display: flex;
 }
 
-.btnLinkedIn {
-    color: rgb(0, 0, 0);
-    width: 100%;
-    max-width: 10rem;
-    min-height: 2.8rem;
-    border-radius: 1rem;
-    background-color:transparent;
-    border: none; 
-    cursor: pointer;
-}
-.btnInstagram {
-    color: rgb(0, 0, 0);
-    width: 100%;
-    max-width: 10rem;
-    min-height: 2.8rem;
-    border-radius: 1rem;
-    background-color:transparent;
-    border: none; 
-    cursor: pointer;
-}
+.btnLinkedIn,
+.btnInstagram,
 .btnGMail {
-    color: rgb(0, 0, 0);
     width: 100%;
-    max-width: 10rem;
-    min-height: 2.8rem;
-    border-radius: 1rem;
-    background-color:transparent;
-    border: none; 
+    min-height: 3rem;
+    border-radius: 1.5rem;
+    background-color: transparent;
+    border: 2px solid transparent; 
     cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; 
 }
+
+.btnLinkedIn:hover,
+.btnInstagram:hover,
+.btnGMail:hover {
+    background-color: #f0f0f0; 
+}
+
+.btnLinkedIn:focus,
+.btnInstagram:focus,
+.btnGMail:focus {
+    outline: none; 
+    border-color: #0077b5;
+}
+
+.btnLinkedIn svg,
+.btnInstagram svg,
+.btnGMail svg {
+    vertical-align: middle; 
+    margin-right: 0.5rem;
+}
+
 
 
 .Campus {
@@ -178,12 +183,11 @@ justify-content: center;
     min-height: 2.8rem;
     padding: 2rem;
     border-radius: 1rem;
-    background: rgb(242,68,5);
+    background: blue;
     border: none; 
     cursor: pointer;
     text-align: center;
     margin-bottom: 10px;
-    transition: background 0.8s;
     align-self: flex-end;
     margin-top: 1rem;
 }
@@ -195,9 +199,10 @@ justify-content: center;
 }
 
 .retanguloCinza {
+    padding: .8em;
     background-color: #e6e6e6;
     border-radius: 8px;
-    height: 50vh;
     width: auto;
+    font-size: 1.2rem;
 
 }
