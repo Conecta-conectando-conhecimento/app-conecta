@@ -26,10 +26,10 @@ const RoutesApp = () => {
         <Route path="/feedUsuario" element={<FeedUsuario />} />
         <Route path="/userprofile/:userId" element={<UserProfile />} />
         <Route path="/editprofile" element={<EditProfile />} />
+        {/*Meus salvos */}
         <Route path="/feedProjetos" element={<FeedProjetos/>}/>
         <Route path="/registerproject" element={<RegisterProject />}/>
         <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
-        {/*Meus salvos */}
         {/*Meus Projetos */}
         {/*Formação de equipe */}
       </Routes>
