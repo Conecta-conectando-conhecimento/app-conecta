@@ -4,6 +4,7 @@
   } 
 
 .pageStyle {
+    height: 100vh;
     background: linear-gradient(90deg,
     rgba(52, 136, 136, 1) ,
     rgba(158, 248, 238, 1) ,
@@ -205,4 +206,10 @@
     width: auto;
     font-size: 1.2rem;
 
+}
+
+.iconEdit {
+    margin-left: 8px;
+    background: transparent;
+    cursor: pointer;
 }
