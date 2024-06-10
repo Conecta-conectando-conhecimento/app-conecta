@@ -14,7 +14,7 @@
     display: block;
     height: 100vh;
     align-items: center;
-   
+
 }
 
 
@@ -31,7 +31,7 @@
 }
 
 .sectionMain button {
-    background-color: transparent;  
+    background-color: transparent;
     border: none;
 }
 
@@ -58,12 +58,19 @@
 .card {
     border: 2px solid #0A05F2;
     background: transparent;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     margin: 2em;
     padding: 1rem 2rem;
     max-height: fit-content;
 }
+
+.card:hover {
+    box-shadow: 2px 2px 10px blue;
+    background-color: rgb(245, 245, 245);
+}
+
 
 @media (max-width: 768px) {
     .bodyCardsFeed {
@@ -114,11 +121,9 @@
 }
 
 .botaoVerMais:hover {
-    background-color: transparent;
+    background-color: #ff4400;
     padding: 10px 20px;
-    outline: 1px black;
-    color: #0A05F2;
-    border: 1px solid #0A05F2;
+    border: 1px solid #505050;
     transform: scale(1.1);
 }
 
@@ -154,28 +159,14 @@
     }
 }
 
-.informacoesTexto{
+.informacoesTexto {
     padding: 10px;
-    max-height:fit-content;
+    max-height: fit-content;
 }
 
 .linkNaoSublinhado {
     text-decoration: none;
 }
-
-/*
-A FAZER: 
-#botao ver mais levar a outra pagina (a de projetos)
-#centralizar texto do botao
-#centralizar botao na div (deixar ele enfileirado)
-
-#mexer no scroll (prox sprint)
-
-git branch
-git checkout master
-git merge(sobrescreve as alyteracoes automaticamente)
-
-*/
 
 /* Paginação */
 .pagination {
@@ -200,4 +191,3 @@ git merge(sobrescreve as alyteracoes automaticamente)
     color: white;
     background-color: #0A05F2;
 }
-

@@ -16,6 +16,6 @@ const Card = ({ projetoNome, texto, projetoId }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Card;

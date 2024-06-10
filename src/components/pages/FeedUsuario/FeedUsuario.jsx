@@ -80,7 +80,6 @@ function FeedUsuario() {
                     <button id="nextBtn"> <img src={"assets/Feed/botaoDireita.svg"} alt="" /> </button>
                 </div>
                 <div className={style.bodyCardsFeed}>
-                    {/*espacamento entre cards */}
                     <div className={style.card}>
                         <div className={style.colunaImagemPerfilBotaoVerMais}>
                             <img className={style.imagemPerfil} src="../../../public/assets/maos.jpg" alt="foto-perfil" />

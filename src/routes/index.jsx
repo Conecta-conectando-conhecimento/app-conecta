@@ -11,6 +11,8 @@ import EditProfile from "../components/pages/EditProfile/EditProfile";
 import FeedProjetos from "../components/pages/FeedProjetos/FeedProjetos";
 import VisualizacaoProjeto from "../components/pages/VisualizacaoProjeto/VisualizacaoProjeto";
 import FormacaoEquipe from "../components/pages/FormacaoEquipe/FormacaoEquipe";
+import FormacaoEquipe2 from "../components/pages/FormacaoEquipe2/FormacaoEquipe2";
+
 
 const Private = ({ item: Item }) => {
   const { signed } = useAuth();
@@ -31,6 +33,7 @@ const RoutesApp = () => {
         <Route path="/registerproject" element={<RegisterProject />}/>
         <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
         <Route path="/formacaoequipe/:projectId" element={<FormacaoEquipe />}/>
+        <Route path="/formacaoequipe2/:projectId" element={<FormacaoEquipe2 />}/>
         {/*Meus salvos */}
         {/*Meus Projetos */}
       </Routes>

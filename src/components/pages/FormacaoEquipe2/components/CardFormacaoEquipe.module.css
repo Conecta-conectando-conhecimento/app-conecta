@@ -1,0 +1,43 @@
+.card {
+    display: flex;
+    background-color: var(--white);
+    box-shadow: var(--blue) 0px 5px 15px;
+    border: none;
+    padding: 10px 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    min-height: 14.5rem;
+}
+
+.fotoPerfil {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    padding: 10px;
+}
+
+.skill {
+    display: flex;
+    flex-direction: column;
+}
+
+.commonButton {
+    background-color: #0A05F2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    max-width: 10rem;
+    transition: background-color 0.3s ease;
+}
+
+.commonButton:hover {
+background-color: #007bff;
+}
