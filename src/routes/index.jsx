@@ -27,15 +27,15 @@ const RoutesApp = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/feedUsuario" element={<FeedUsuario />} />
-        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/userprofile/:userId" element={<UserProfile />} />
         <Route path="/editprofile" element={<EditProfile />} />
+        {/*Meus salvos */}
         <Route path="/feedProjetos" element={<FeedProjetos/>}/>
         <Route path="/registerproject" element={<RegisterProject />}/>
         <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
         <Route path="/formacaoequipe/:projectId" element={<FormacaoEquipe />}/>
         <Route path="/formacaoequipe2/:projectId" element={<FormacaoEquipe2 />}/>
         {/*Meus salvos */}
-        {/*Meus Projetos */}
       </Routes>
     </Router>
   );
