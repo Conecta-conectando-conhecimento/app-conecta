@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Certifique-se de importar Link
 import style from './MyProjects.module.css';
 import Card from '../../../../CardProject';
 
@@ -22,12 +23,12 @@ const MyProjects = ({ show, onClose, userId }) => {
     };
 
     if (!show) {
-        return '';
+        return null;
     }
 
     // IDs dos projetos a serem filtrados
     const projectIds = [1, 26, 50, 18, 19];
-    
+
     // Filtra os projetos com os IDs desejados
     const filteredProjects = projects.filter(proj => projectIds.includes(proj.id));
 
@@ -36,16 +37,23 @@ const MyProjects = ({ show, onClose, userId }) => {
             <div className={style.modalContent}>
                 <button className={style.closeButton} onClick={onClose}>&times;</button>
                 <h2>Meus Projetos</h2>
-                <ul className={style.projectList}>
+                <div className={style.projectList}>
+                    {/* Mapeia os projetos filtrados e renderiza um card para cada um */}
                     {filteredProjects.map(project => (
-                        <Card 
-                            key={project.id} 
-                            projetoId={project.id} 
-                            projetoNome={project.projetoNome} 
-                            texto={project.texto} 
-                        />
+                        <div className={style.card} key={project.id}>
+                            <div className={style.informacoesTexto}>
+                                <p className={style.projetoNome}>{project.name}</p>
+                                <p className={style.texto}>{project.description}</p>
+                            </div>
+                            <div className={style.colunaImagemPerfilBotaoVerMais}>
+                                {/* Adicione o link para o projeto ou detalhes adicionais */}
+                                <Link to={`/project/${project.id}`} className={style.linkNaoSublinhado}>
+                                    <button className={style.botaoVerMais}>Ver mais +</button>
+                                </Link>
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         </div>
     );

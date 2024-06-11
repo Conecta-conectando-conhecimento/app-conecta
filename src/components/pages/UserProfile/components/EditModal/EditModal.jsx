@@ -1,38 +1,57 @@
-// components/EditModal/EditModal.js
 import React, { useState, useEffect } from 'react';
 import styles from './EditModal.module.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
-// Começo estilo do React Quill
-const fullModules = {
-    toolbar: {
-        container: [
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-            ['bold', 'italic', 'underline'],
-            [{ 'align': [] }],
-            ['clean']
-        ]
-    }
-};
-
-const fullFormats = [
-    'list', 'bullet', 'bold', 'italic', 'underline', 'align'
-];
-// Fim estilo do React Quill
+import InputMask from 'react-input-mask';
 
 const EditModal = ({ show, user, onClose, onSave }) => {
-    const [name, setName] = useState(user.name);
+    const [userData, setUserData] = useState({
+        name: '',
+        user_name: '',
+        cpf: '',
+        birthday: '',
+        sobre: '',
+        user_image_path: '',
+        campus: '',
+        linkedin: '',
+        instagram: '',
+        email: ''
+    });
 
     useEffect(() => {
-        setName(user.name); // Atualize o estado local quando o usuário mudar
+        setUserData(user);
     }, [user]);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
     const handleSaveClick = () => {
-        onSave(name);
+        onSave(userData);
     };
 
     if (!show) return null;
+
+    const fullModules = {
+        toolbar: {
+            container: [
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['bold', 'italic', 'underline'],
+                [{ 'align': [] }],
+                ['clean']
+            ]
+        }
+    };
+
+    const formatBirthday = (dateString) => {
+        // Assume que a data está no formato "DD/MM/YYYY"
+        const [day, month, year] = dateString.split('/');
+        return `${year}-${month}-${day}`;
+    };
 
     return (
         <div className={styles.modalOverlay}>
@@ -43,50 +62,103 @@ const EditModal = ({ show, user, onClose, onSave }) => {
                         <label htmlFor="name">Nome Completo</label>
                         <input
                             id="name"
+                            name="name"
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={userData.name}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className={styles.field}>
-                        <label>Nome de Usuário</label>
-                        <input type="text" />
+                        <label htmlFor="user_name">Nome de Usuário</label>
+                        <input
+                            id="user_name"
+                            name="user_name"
+                            type="text"
+                            value={userData.user_name}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.field}>
-                        <label>CPF</label>
-                        <input type="text" />
+                        <label htmlFor="cpf">CPF</label>
+                        <input
+                            id="cpf"
+                            name="cpf"
+                            type="text"
+                            value={userData.cpf}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.field}>
-                        <label>Data de Nascimento</label>
-                        <input type="text" />
+                        <label htmlFor="birthday">Data de Nascimento</label>
+                        <InputMask
+                            mask="99/99/9999"
+                            id="birthday"
+                            name="birthday"
+                            value={userData.birthday}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.field}>
-                        <label>Sobre</label>
+                        <label htmlFor="sobre">Sobre</label>
                         <ReactQuill
                             theme="snow"
                             modules={fullModules}
-                            formats={fullFormats}
+                            value={userData.sobre || ''}
+                            onChange={(value) => setUserData(prevState => ({
+                                ...prevState,
+                                sobre: value
+                            }))}
                         />
                     </div>
                     <div className={styles.field}>
-                        <label>Imagem de Perfil</label>
-                        <input type="text" />
+                        <label htmlFor="user_image_path">Imagem de Perfil</label>
+                        <input
+                            id="user_image_path"
+                            name="user_image_path"
+                            type="text"
+                            value={userData.user_image_path}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.field}>
-                        <label>Campus</label>
-                        <input type="text" />
+                        <label htmlFor="campus">Campus</label>
+                        <input
+                            id="campus"
+                            name="campus"
+                            type="text"
+                            value={userData.campus}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.field}>
-                        <label>Linkedin</label>
-                        <input type="text" />
+                        <label htmlFor="linkedin">Linkedin</label>
+                        <input
+                            id="linkedin"
+                            name="linkedin"
+                            type="text"
+                            value={userData.linkedin}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.field}>
-                        <label>Instagram</label>
-                        <input type="text" />
+                        <label htmlFor="instagram">Instagram</label>
+                        <input
+                            id="instagram"
+                            name="instagram"
+                            type="text"
+                            value={userData.instagram}
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className={styles.field}>
-                        <label>E-mail</label>
-                        <input type="text" />
+                        <label htmlFor="email">E-mail</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="text"
+                            value={userData.email}
+                            onChange={handleChange}
+                        />
                     </div>
 
                 </div>

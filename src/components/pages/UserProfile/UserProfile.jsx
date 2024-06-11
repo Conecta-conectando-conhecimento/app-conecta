@@ -1,4 +1,3 @@
-// UserProfile.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -60,10 +59,10 @@ const UserProfile = () => {
         setShowProjectsModal(false);
     };
 
-    const handleSave = async (updatedName) => {
+    const handleSave = async (updatedUser) => {
         try {
-            console.log('Dados enviados:', { name: updatedName });
-            const response = await axios.put(`http://localhost:8000/user/update/${userId}`, { name: updatedName });
+            console.log('Dados enviados:', updatedUser);
+            const response = await axios.put(`http://localhost:8000/user/update/${userId}`, updatedUser);
             console.log('Resposta do servidor:', response.data);
             if (response.data.status) {
                 requestDataUser(); // Obter dados atualizados após salvar
@@ -126,7 +125,7 @@ const UserProfile = () => {
                         <div>
                             <label htmlFor="sobre">Sobre</label>
                             <div className={style.retanguloCinza}>
-                                <p>{user.sobre || 'Carregando...'}</p>
+                                <p dangerouslySetInnerHTML={{ __html: user.sobre || 'Carregando...' }} />
                             </div>
                         </div>
                     </div>

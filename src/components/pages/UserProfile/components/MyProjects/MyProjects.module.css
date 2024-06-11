@@ -48,3 +48,45 @@
     margin-bottom: 10px;
     padding: 10px;
 }
+
+.card {
+    border: 2px solid #0A05F2;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    margin: 2em;
+    padding: 1rem 2rem;
+    max-height: fit-content;
+}
+
+.informacoesTexto{
+    padding: 10px;
+    max-height:fit-content;
+}
+
+.projetoNome {
+    font-family: poppins;
+    font-size: 15pt;
+    color: #0A05F2;
+}
+
+.texto {
+    font-family: Inter, bold;
+    font-size: 12pt;
+    padding: 10px 0px;
+}
+
+.colunaImagemPerfilBotaoVerMais {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    width: auto;
+}
+
+.linkNaoSublinhado {
+    text-decoration: none;
+}
+
+.botaoVerMais:focus {
+    outline: 0;
+}
