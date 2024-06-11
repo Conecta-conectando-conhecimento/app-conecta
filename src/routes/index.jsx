@@ -10,6 +10,9 @@ import useAuth from "../hooks/useAuth";
 import EditProfile from "../components/pages/EditProfile/EditProfile";
 import FeedProjetos from "../components/pages/FeedProjetos/FeedProjetos";
 import VisualizacaoProjeto from "../components/pages/VisualizacaoProjeto/VisualizacaoProjeto";
+import FormacaoEquipe from "../components/pages/FormacaoEquipe/FormacaoEquipe";
+import FormacaoEquipe2 from "../components/pages/FormacaoEquipe2/FormacaoEquipe2";
+
 
 const Private = ({ item: Item }) => {
   const { signed } = useAuth();
@@ -24,14 +27,13 @@ const RoutesApp = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/feedUsuario" element={<FeedUsuario />} />
-        <Route path="/userprofile/:userId" element={<UserProfile />} />
-        <Route path="/editprofile" element={<EditProfile />} />
-        {/*Meus salvos */}
+        <Route path="/userprofile/:userId" element={<Private item={UserProfile} />} />
+        <Route path="/editprofile" element={<Private item={EditProfile} />} />
         <Route path="/feedProjetos" element={<FeedProjetos/>}/>
-        <Route path="/registerproject" element={<RegisterProject />}/>
+        <Route path="/registerproject" element={<Private item={RegisterProject} />}/>
         <Route path="/visualizacaoprojeto/:projectId" element={<VisualizacaoProjeto />} />
-        {/*Meus Projetos */}
-        {/*Formação de equipe */}
+        <Route path="/formacaoequipe/:projectId" element={<FormacaoEquipe />}/>
+        <Route path="/formacaoequipe2/:projectId" element={<FormacaoEquipe2 />}/>
       </Routes>
     </Router>
   );

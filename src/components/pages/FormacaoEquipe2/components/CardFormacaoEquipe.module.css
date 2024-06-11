@@ -1,0 +1,101 @@
+.card {
+    display: flex;
+    background-color: var(--white);
+    box-shadow: var(--blue) 0px 1px 5px;
+    border: none;
+    padding: 10px 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4rem 8px 8px;
+    min-height: 14.5rem;
+    max-width: 35rem;
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+.informacao {
+    width: 100%;
+}
+
+.card:hover {
+    box-shadow: var(--blue) 0px 2px 7px;
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-wrap: wrap;
+}
+
+.fotoPerfil {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 100%;
+    padding: 10px;
+}
+
+.informacoesPerfil {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.userName {
+    color: var(--black);
+    font-family: poppins, inter;
+}
+
+.campus {
+    color: var(--black);
+    font-family: poppins, inter;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0;
+}
+
+.campusChar {
+    padding-left: 5px;
+}
+
+.skill {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.ioios {
+    padding-top: 5px;
+}
+
+.button {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.commonButton {
+    background-color: #0A05F2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    max-width: 10rem;
+    transition: var(--blue) 0.3s ease;
+    width: 10em;
+}
+
+.commonButton:hover {
+    background-color: #007bff;
+}
+
+.subtitulo {
+    font-weight: bold;
+}

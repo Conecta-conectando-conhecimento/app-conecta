@@ -87,7 +87,7 @@ function FeedProjetos() {
     return (
         <div className={style.bodyFeed}>
             <div className={style.container}>
-                <Navbar />
+                <Navbar/>
                 <div className={style.bodyCardsFeed}>
                     <div className={style.pagination}>
                         <button onClick={handlePreviousPage}>Anterior</button>

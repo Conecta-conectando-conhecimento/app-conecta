@@ -76,26 +76,10 @@ function FeedUsuario() {
                         <div className={style.carousel_slide}>
                             <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
                         </div>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
                         </div>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
-                        </div>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
-                        </div>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
-                        </div>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
-                        </div>
-                    </div>
                     <button id="nextBtn"> <img src={"assets/Feed/botaoDireita.svg"} alt="" /> </button>
                 </div>
                 <div className={style.bodyCardsFeed}>
-                    {/*espacamento entre cards */}
                     <div className={style.card}>
                         <div className={style.colunaImagemPerfilBotaoVerMais}>
                             <img className={style.imagemPerfil} src="../../../public/assets/maos.jpg" alt="foto-perfil" />
