@@ -26,6 +26,9 @@
     align-items: center;
     font-size: 16px;
 }
+.field {
+    padding: 5px;
+}
 
 .fieldGroup {
     margin-bottom: 20px;
@@ -51,7 +54,8 @@
     width: 100%;
 }
 
-.saveButton, .cancelButton {
+.saveButton,
+.cancelButton {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -65,5 +69,5 @@
 
 .cancelButton {
     background: #f44336;
-   color: white;
+    color: white;
 }
