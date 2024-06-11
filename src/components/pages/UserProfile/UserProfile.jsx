@@ -1,36 +1,81 @@
-import style from "./UserProfile.module.css";
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../../Navbar";
-import { Link, useNavigate } from "react-router-dom";
+import EditModal from './components/EditModal/EditModal';
+import MyProjects from './components/MyProjects/MyProjects';
 import { BiLogoLinkedinSquare, BiLogoInstagram } from "react-icons/bi";
 import { CgMail } from "react-icons/cg";
 import { RiGraduationCapLine } from "react-icons/ri";
 import { MdOutlineEdit } from "react-icons/md";
-import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import style from "./UserProfile.module.css";
 
 const UserProfile = () => {
-
     const { userId } = useParams();
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({
+        id: '',
+        email: '',
+        cpf: '',
+        name: '',
+        user_name: '',
+        birthday: '',
+        password: '',
+        campus: '',
+        sobre: '',
+        linkedin: '',
+        instagram: '',
+        user_image_path: ''
+    });
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [showProjectsModal, setShowProjectsModal] = useState(false);
 
     useEffect(() => {
         requestDataUser();
-    }, [])
+    }, []);
 
     const requestDataUser = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/user/${userId}`);
             setUser(response.data.data);
-            console.log(response.data.data)
+            console.log('Dados do usuário recebidos:', response.data.data);
         } catch (error) {
-            console.error('Erro ao obter dados do projeto:', error.message);
+            console.error('Erro ao obter dados do usuário:', error.message);
+        }
+    };
+
+    const handleEditButtonClick = () => {
+        setShowEditModal(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setShowEditModal(false);
+    };
+
+    const handleProjectsButtonClick = () => {
+        setShowProjectsModal(true);
+    };
+
+    const handleCloseProjectsModal = () => {
+        setShowProjectsModal(false);
+    };
+
+    const handleSave = async (updatedUser) => {
+        try {
+            console.log('Dados enviados:', updatedUser);
+            const response = await axios.put(`http://localhost:8000/user/update/${userId}`, updatedUser);
+            console.log('Resposta do servidor:', response.data);
+            if (response.data.status) {
+                requestDataUser(); // Obter dados atualizados após salvar
+                setShowEditModal(false);
+            } else {
+                console.error('Erro ao atualizar usuário:', response.data.error);
+            }
+        } catch (error) {
+            console.error('Erro ao salvar dados do usuário:', error.message);
         }
     };
 
     return (
-
-
         <div className={style.pageStyle}>
             <Navbar />
             <div className={style.bodyUserProfile}>
@@ -43,31 +88,26 @@ const UserProfile = () => {
                             <p>{user.name ? user.name : 'Carregando...'}</p>
                         </div>
                     </div>
-
                     <div className={style.divbtnEditProfile}>
-                        <Link to="/editprofile">
-                            <button className={style.btnEditProfile} type="button" >
-                                <MdOutlineEdit size={'3em'} />
-                            </button>
-                        </Link>
+                        <button className={style.btnEditProfile} type="button" onClick={handleEditButtonClick}>
+                            <MdOutlineEdit size={'3em'} />
+                        </button>
                     </div>
-
                 </div>
                 <div className={style.blocoConteudo}>
                     <div className={style.coluna1UserProfile}>
-
                         <div className={style.linhaDeRedirecionamentoExterno}>
-                            <a href="/url linkedin ou api?">
+                            <a href={user.linkedin || "#"}>
                                 <button className={style.btnLinkedIn} type="button">
                                     <BiLogoLinkedinSquare size={'2.5em'} />
                                 </button>
                             </a>
-                            <a href="/url linkedin ou api?">
+                            <a href={user.instagram || "#"}>
                                 <button className={style.btnInstagram} type="button">
                                     <BiLogoInstagram size={'2.5em'} />
                                 </button>
                             </a>
-                            <a href="/url linkedin ou api?">
+                            <a href={`mailto:${user.email}`} >
                                 <button className={style.btnGMail} type="button">
                                     <CgMail size={'2.5em'} />
                                 </button>
@@ -76,27 +116,34 @@ const UserProfile = () => {
                         <div className={style.Campus}>
                             <RiGraduationCapLine size={'2em'} />
                             <p>{user.campus ? user.campus : 'Carregando...'}</p>
-
                         </div>
-                        <Link to="/PaginaMeusProjetos">
-                            <button className={style.btnMeusProjetos} type="button">
-                                Projetos
-                            </button>
-                        </Link>
-
+                        <button className={style.btnMeusProjetos} type="button" onClick={handleProjectsButtonClick}>
+                            Projetos
+                        </button>
                     </div>
                     <div className={style.coluna2UserProfile}>
                         <div>
                             <label htmlFor="sobre">Sobre</label>
                             <div className={style.retanguloCinza}>
-                                <p>{user.sobre ? user.sobre : 'Carregando...'}</p>
+                                <p dangerouslySetInnerHTML={{ __html: user.sobre || 'Carregando...' }} />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <EditModal 
+                show={showEditModal} 
+                user={user} 
+                onClose={handleCloseEditModal} 
+                onSave={handleSave} 
+            />
+            <MyProjects 
+                show={showProjectsModal} 
+                userId={userId} 
+                onClose={handleCloseProjectsModal} 
+            />
         </div>
-
     );
-}
+};
+
 export default UserProfile;
