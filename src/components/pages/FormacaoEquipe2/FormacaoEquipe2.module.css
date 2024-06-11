@@ -1,0 +1,33 @@
+.bodyFormacaoEquipe2 {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background: rgb(52, 136, 136);
+    background: linear-gradient(90deg,
+        rgba(52, 136, 136, 1) 15%,
+        rgba(158, 248, 238, 1) 39%,
+        rgba(151, 240, 231, 1) 62%,
+        rgba(52, 136, 136, 1) 87%);
+}
+
+.container {
+    background-color: var(--white);
+    max-width: 1200px;
+    margin: 0.5rem auto;
+    padding: 2rem;
+    font-family: "poppins", sans-serif;
+    font-weight: 400;
+    border: 3px solid #d3d3d3;
+    border-radius: 14px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+
+.titulo {
+    padding: 10px 0px 20px;
+}
