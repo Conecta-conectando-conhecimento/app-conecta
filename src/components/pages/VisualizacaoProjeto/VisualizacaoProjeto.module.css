@@ -133,11 +133,13 @@ h3 {
 
 /* Arquivos */
 .fileList {
-  padding: 1rem;
-  background-color: #EEEDED;
   border-radius: 8px;
   min-height: 12vh;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
 }
+
 
 /* Atividades */
 .activityText {
