@@ -20,11 +20,15 @@ function AcaoParticipacaoProjeto({ isOwner, projectId, setIsEditing }) {
         navigate(`/editproject/${projectId}`);
     }
 
+    function navigateToFormacaoEquipe() {
+        navigate(`/formacaoequipe/${projectId}`);
+    }
+
     return (
         <div className={styles.acaoParticipacaoContainer}>
             {isOwner ? (
                 <div className={styles.ownerActions}>
-                    <button className={styles.actionButton}>Formação de equipe</button>
+                    <button className={styles.actionButton} onClick={navigateToFormacaoEquipe}>Formação de equipe</button>
                     <ModalSolicitacao />
                     <button className={styles.actionButton} onClick={handleEditClick}>{editButtonText}</button>
                 </div>
