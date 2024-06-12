@@ -1,7 +1,24 @@
 import Navbar from '../../Navbar';
 import style from './FormacaoEquipe.module.css';
+import axios from "axios";
 
 const FormacaoEquipe = () => {
+
+    const formTeam = async () => {
+        // Objetivo: buscar quantidade de usuários definida, que possuam determinada área de interesse e estejam no campus selecionado 
+
+        try {
+            const response = await axios.get(`http://localhost:8000/project/${projectId}`);
+            setProject(response.data.data);
+        } catch (error) {
+            console.error('Erro ao obter dados do projeto:', error.message);
+            if (error.response && error.response.status === 404) {
+                setProjectExists(false);
+            }
+        }
+
+    }
+
 
     return (
         <div className={style.bodyFormacaoEquipe}>
@@ -29,21 +46,14 @@ const FormacaoEquipe = () => {
                         <option value="designGrafico">Design Gráfico</option>
                         <option value="turismo">Turismo</option>
                     </select>
-                    <label className={style.label}>Habilidade desejada</label>
-                    <select id="habilidadeDesejada" className={style.select}>
-                        <option value="excel">Excel</option>
-                        <option value="figma">Figma</option>
-                        <option value="powerBI">Power BI</option>
-                        <option value="trafegoPago">Tráfego Pago</option>
-                    </select>
                     <label className={style.label}>Campus</label>
                     <select id="campus" className={style.select}>
                         <option value="asaNorte">Asa Norte</option>
                         <option value="taguatinga">Taguatinga</option>
                     </select>
                     <div className={style.divBotao}>
-                    <input type="submit" value="Submeter" className={style.submit}></input>
-                    <input type="reset" value="Resetar" className={style.reset}></input>
+                    <input type="button" value="Submeter" className={style.submit} onClick={() => {}}></input>
+                    <input type="button" value="Resetar" className={style.reset}></input>
                     </div>
                 </form>
             </div>

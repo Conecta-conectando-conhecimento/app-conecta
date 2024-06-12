@@ -10,11 +10,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from "../VisualizacaoProjeto/VisualizacaoProjeto.module.css";
 import CardParticipante from "./components/CardParticipante/CardParticipante.jsx";
+import CardArquivo from './components/CardArquivo/CardArquivo.jsx';
 
 const VisualizacaoProjeto = () => {
     const { projectId } = useParams();
     const [project, setProject] = useState(null);
     const [participantes, setParticipantes] = useState(null);
+    const [projectFiles, setProjectFiles] = useState(null);
     const [projectExists, setProjectExists] = useState(true);
     const { user } = useAuth();
     const [userParticipant, isUserParticipant] = useState(false);
@@ -49,6 +51,14 @@ const VisualizacaoProjeto = () => {
             console.log(responseParticipantes.data.data)
         } catch (error) {
             console.error("Erro ao obter participante do projeto:", error.message);
+        }
+
+        try {
+            const responseFiles = await axios.get(`http://localhost:8000/projectfiles/project/${projectId}`);
+            console.log("arquivos: ", responseFiles.data.data);
+            setProjectFiles(responseFiles.data.data);
+        } catch (error) {
+            console.error('Erro ao obter dados do projeto:', error.message);
         }
     };
 
@@ -227,8 +237,17 @@ const VisualizacaoProjeto = () => {
                                     {isEditing && <FontAwesomeIcon icon={faPencilAlt} className={styles.pencilIcon} />}
                                 </h3>
                                 <div className={styles.fileList}>
-                                    {/* Lista de arquivos */}
-                                    <p>Nenhum arquivo adicionado</p>
+                                    {Array.isArray(projectFiles) && projectFiles.length > 0 ? (
+                                        projectFiles.map((item) => (
+                                            <CardArquivo
+                                                key={item.id}
+                                                nome={item.name}
+                                                url={item.file_url}
+                                            />
+                                        ))
+                                    ) : (
+                                        <p>Nenhum arquivo encontrado.</p> // Ou qualquer mensagem de feedback apropriada
+                                    )}
                                 </div>
                             </div>
 
