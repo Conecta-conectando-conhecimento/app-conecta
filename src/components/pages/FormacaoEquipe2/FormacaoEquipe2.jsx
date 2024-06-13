@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './FormacaoEquipe2.module.css';
-import Navbar from '../../Navbar';
+import Navbar from '../../navbar/Navbar';
 import CardFormacaoEquipe from './components/CardFormacaoEquipe.jsx';
 
 function FormacaoEquipe2() {

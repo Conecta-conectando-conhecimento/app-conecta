@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './FeedProjetos.module.css';
-import Navbar from '../../Navbar';
+import Navbar from '../../navbar/Navbar';
 import Card from '../../CardProject';
 import useAuth from '../../../hooks/useAuth';
 import ProjectController from '../../../controllers/projectController';
@@ -53,7 +53,7 @@ function FeedProjetos() {
             setCurrentPage((prevPage) => prevPage + 1);
         }
     };
-    
+
 
     const renderPagination = () => {
         const pages = [];
@@ -64,10 +64,10 @@ function FeedProjetos() {
                 </button>
             );
         }
-    
+
         return pages;
     };
-       
+
 
     useEffect(() => {
         fetchTotalCount();
@@ -87,7 +87,7 @@ function FeedProjetos() {
     return (
         <div className={style.bodyFeed}>
             <div className={style.container}>
-                <Navbar/>
+                <Navbar />
                 <div className={style.bodyCardsFeed}>
                     <div className={style.pagination}>
                         <button onClick={handlePreviousPage}>Anterior</button>

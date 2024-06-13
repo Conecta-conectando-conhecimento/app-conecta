@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth.jsx";
-import Navbar from "../../Navbar";
+import Navbar from '../../navbar/Navbar';
 import AcaoParticipacaoProjeto from "./components/AcaoParticipacaoProjeto/index.jsx";
 import EditModal from "./components/EditModal/EditModal";
 import EditCharacteristicsModal from "./components/EditCharacteristicsModal/EditCharacteristicsModal";
