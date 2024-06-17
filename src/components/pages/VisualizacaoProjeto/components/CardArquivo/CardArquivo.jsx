@@ -1,13 +1,18 @@
 import React from "react";
 import styles from "./CardArquivo.module.css";
-import { IoDocumentTextOutline } from 'react-icons/io5'; // Ícone de arquivo
+import { IoDocumentTextOutline } from 'react-icons/io5';
+import { BiSolidTrashAlt, BiPencil } from "react-icons/bi";
+import { useState } from "react";
+import ModalArquivo from "./ModalArquivo";
+const CardArquivo = ({ nome, url, isAdmin, isEditing, action }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-const CardArquivo = ({ nome, url }) => {
-  const handleVerClick = (event) => {
-    // Verificar se o clique foi feito com o botão do scroll (button === 1)
-    if (event.button === 0 || event.button === 1) {
-      window.open(url, "_blank", "noopener noreferrer"); 
-    }
+  const handleVerClick = () => {
+    window.open(url, "_blank", "noopener noreferrer");
+  };
+
+  const handleEditarClick = () => {
+    action();
   };
 
   return (
@@ -17,7 +22,17 @@ const CardArquivo = ({ nome, url }) => {
       </div>
       <div className={styles.content}>
         <p className={styles.nome}>{nome}</p>
-        <button className={styles.btnVer} onMouseDown={handleVerClick}>
+        {isAdmin && isEditing && (
+          <>
+            <button className={styles.btnEditar} onClick={handleEditarClick}>
+              <BiPencil />
+            </button>
+            <button className={styles.btnExcluir}>
+              <BiSolidTrashAlt />
+            </button>
+          </>
+        )}
+        <button className={styles.btnVer} onClick={handleVerClick}>
           Ver
         </button>
       </div>
