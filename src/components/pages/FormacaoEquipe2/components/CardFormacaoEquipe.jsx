@@ -4,7 +4,7 @@ import style from "./CardFormacaoEquipe.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 
-const CardFormacaoEquipe = ({ userName, campus, userId, fotoUrl }) => {
+const CardFormacaoEquipe = ({ userName, campus, userId, fotoUrl, textoAreaInteresse, textoSobre }) => {
     return (
         <div className={style.card}>
             <div className={style.informacao}>
@@ -25,13 +25,20 @@ const CardFormacaoEquipe = ({ userName, campus, userId, fotoUrl }) => {
                     </div>
                 </div>
                 <div className={style.skill}>
-                    <div className={style.campus}>
-                        <IoIosArrowDown size={'1rem'} className={style.ioios} />
-                        <p className={style.subtitulo}>Área de interesse</p>
+
+                    <div className={style.informacoesTexto}>
+                        <div className={style.subtitulo}>
+                            <IoIosArrowDown size={'1rem'} className={style.ioios} />
+                            <p>Sobre</p>
+                        </div>
+                        <p className={style.textoSubtitulo}>{textoSobre}</p>
                     </div>
-                    <div className={style.campus}>
-                        <IoIosArrowDown size={'1rem'} className={style.ioios} />
-                        <p className={style.subtitulo}>Sobre</p>
+                    <div className={style.informacoesTexto}>
+                        <div className={style.subtitulo}>
+                            <IoIosArrowDown size={'1rem'} className={style.ioios} />
+                            <p>Área de interesse</p>
+                        </div>
+                        <p className={style.textoSubtitulo}>{textoAreaInteresse}</p>
                     </div>
                 </div>
             </div>

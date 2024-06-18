@@ -101,7 +101,10 @@ function FormacaoEquipe2() {
                         userName="Halycia"
                         campus="Asa norte"
                         projetoId="1"
-                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Halycia.jpg" />
+                        fotoUrl="https://xhnrrtnynnrvpduxhkbp.supabase.co/storage/v1/object/public/projectfiles/images/Halycia.jpg"
+                        textoAreaInteresse="Enfermagem"
+                        textoSobre="Gosto de enfermagem" />
+
                 </div>
             </div>
         </div>
