@@ -57,18 +57,19 @@
 
 .card {
     border: 2px solid #0A05F2;
-    background: transparent;
+    background-color: var(--white);
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
     margin: 2em;
     padding: 1rem 2rem;
     max-height: fit-content;
+    transition: 0.3s ease;
+    width: 100%;
 }
 
 .card:hover {
-    box-shadow: 2px 2px 10px blue;
-    background-color: rgb(245, 245, 245);
+    box-shadow: var(--blue) 0px 1px 5px;
 }
 
 
