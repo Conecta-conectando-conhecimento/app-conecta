@@ -1,7 +1,7 @@
 import style from './RegisterProject.module.css'
 import { Link } from "react-router-dom";
 import { useState } from 'react';
-import Navbar from '../../Navbar';
+import Navbar from '../../navbar/Navbar';
 
 const RegisterProject = () => {
     const [NomePorjeto, setNomeProjeto] = useState("");

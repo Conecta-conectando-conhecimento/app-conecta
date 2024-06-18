@@ -3,7 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import style from "./FeedUsuario.module.css";
 import { VscMortarBoard } from "react-icons/vsc";
-import Navbar from '../../Navbar';
+import Navbar from '../../navbar/Navbar';
 
 function FeedUsuario() {
     const { signout } = useAuth();

@@ -1,4 +1,4 @@
-import Navbar from '../../Navbar';
+import Navbar from '../../navbar/Navbar';
 import style from './FormacaoEquipe.module.css';
 import axios from "axios";
 

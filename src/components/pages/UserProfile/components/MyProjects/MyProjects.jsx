@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Certifique-se de importar Link
-import style from './MyProjects.module.css';
 import Card from '../../../../CardProject';
+import styles from './MyProjects.module.css';
 
-const MyProjects = ({ show, onClose, userId }) => {
+const MyProjects = ({ show, userId, onClose }) => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
@@ -13,46 +12,53 @@ const MyProjects = ({ show, onClose, userId }) => {
         }
     }, [show]);
 
-    const fetchProjects = async () => {
+    const fetchProjectDetails = async (projectId) => {
         try {
-            const response = await axios.get(`http://localhost:8000/user/${userId}/projects`);
-            setProjects(response.data.projects);
+            const response = await axios.get(`http://localhost:8000/project/${projectId}`);
+            return response.data.data;
         } catch (error) {
-            console.error('Erro ao obter projetos do usuário:', error.message);
+            console.error(`Erro ao obter detalhes do projeto ${projectId}:`, error.message);
+            return null;
         }
     };
 
-    if (!show) {
-        return null;
-    }
+    const fetchProjects = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/participants/user/${userId}`);
+            console.log('Projetos recebidos:', response.data);
 
-    // IDs dos projetos a serem filtrados
-    const projectIds = [1, 26, 50, 18, 19];
+            const projectDetailsPromises = response.data.data.map(project =>
+                fetchProjectDetails(project.project_id)
+            );
 
-    // Filtra os projetos com os IDs desejados
-    const filteredProjects = projects.filter(proj => projectIds.includes(proj.id));
+            const projectDetails = await Promise.all(projectDetailsPromises);
+            setProjects(projectDetails.filter(project => project)); // Filtrar projetos que não foram carregados corretamente
+
+        } catch (error) {
+            console.error('Erro ao obter projetos:', error.message);
+        }
+    };
+
+    if (!show) return null;
 
     return (
-        <div className={style.modalOverlay}>
-            <div className={style.modalContent}>
-                <button className={style.closeButton} onClick={onClose}>&times;</button>
+        <div className={styles.modalOverlay}>
+            <div className={styles.modalContent}>
+                <button className={styles.closeButton} onClick={onClose}>X</button>
                 <h2>Meus Projetos</h2>
-                <div className={style.projectList}>
-                    {/* Mapeia os projetos filtrados e renderiza um card para cada um */}
-                    {filteredProjects.map(project => (
-                        <div className={style.card} key={project.id}>
-                            <div className={style.informacoesTexto}>
-                                <p className={style.projetoNome}>{project.name}</p>
-                                <p className={style.texto}>{project.description}</p>
-                            </div>
-                            <div className={style.colunaImagemPerfilBotaoVerMais}>
-                                {/* Adicione o link para o projeto ou detalhes adicionais */}
-                                <Link to={`/project/${project.id}`} className={style.linkNaoSublinhado}>
-                                    <button className={style.botaoVerMais}>Ver mais +</button>
-                                </Link>
-                            </div>
-                        </div>
-                    ))}
+                <div className={styles.projectsList}>
+                    {projects && projects.length > 0 ? (
+                        projects.map((project) => (
+                            <Card
+                                key={project.id}
+                                projetoNome={project.title}
+                                texto={project.introduction.replace(/(<([^>]+)>)/gi, "")} // Remove tags HTML
+                                projetoId={project.id}
+                            />
+                        ))
+                    ) : (
+                        <p>Nenhum projeto encontrado.</p>
+                    )}
                 </div>
             </div>
         </div>

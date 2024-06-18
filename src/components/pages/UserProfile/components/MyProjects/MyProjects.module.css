@@ -1,5 +1,4 @@
 /* MyProjects.module.css */
-
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -18,75 +17,44 @@
     padding: 20px;
     border-radius: 8px;
     width: 90%;
-    max-width: 1000px;
-    max-height: 80%;
+    max-width: 1700px;
+    max-height: 90%;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 16px;
+    position: relative;
 }
 
 .closeButton {
-    align-self: flex-end;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
 }
 
-.projectList {
-    width: 100%;
+.projectsList {
     list-style: none;
     padding: 0;
 }
 
-.projectListItem {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
+.projectItem {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.projectItem h3 {
+    margin: 0;
     margin-bottom: 10px;
-    padding: 10px;
 }
 
-.card {
-    border: 2px solid #0A05F2;
-    background: transparent;
-    display: flex;
-    justify-content: space-between;
-    margin: 2em;
-    padding: 1rem 2rem;
+.projectItem p {
+    margin: 0;
+}
+
+.informacoesTexto {
+    padding: 10px;
     max-height: fit-content;
-}
-
-.informacoesTexto{
-    padding: 10px;
-    max-height:fit-content;
-}
-
-.projetoNome {
-    font-family: poppins;
-    font-size: 15pt;
-    color: #0A05F2;
-}
-
-.texto {
-    font-family: Inter, bold;
-    font-size: 12pt;
-    padding: 10px 0px;
-}
-
-.colunaImagemPerfilBotaoVerMais {
-    display: flex;
-    flex-direction: center;
-    align-items: center;
-    width: auto;
-}
-
-.linkNaoSublinhado {
-    text-decoration: none;
-}
-
-.botaoVerMais:focus {
-    outline: 0;
 }

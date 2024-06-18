@@ -1,7 +1,8 @@
+// UserProfile.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../../Navbar";
+import Navbar from '../../navbar/Navbar';
 import EditModal from './components/EditModal/EditModal';
 import MyProjects from './components/MyProjects/MyProjects';
 import { BiLogoLinkedinSquare, BiLogoInstagram } from "react-icons/bi";
@@ -9,6 +10,13 @@ import { CgMail } from "react-icons/cg";
 import { RiGraduationCapLine } from "react-icons/ri";
 import { MdOutlineEdit } from "react-icons/md";
 import style from "./UserProfile.module.css";
+
+// Funções de formatação de data
+const formatDateToDDMMYYYY = (dateString) => {
+    if (!dateString) return '';
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+};
 
 const UserProfile = () => {
     const { userId } = useParams();
@@ -36,8 +44,13 @@ const UserProfile = () => {
     const requestDataUser = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/user/${userId}`);
-            setUser(response.data.data);
-            console.log('Dados do usuário recebidos:', response.data.data);
+            const userData = response.data.data;
+            
+            // Formatar a data de nascimento para dd/mm/yyyy
+            userData.birthday = formatDateToDDMMYYYY(userData.birthday);
+
+            setUser(userData);
+            console.log('Dados do usuário recebidos:', userData);
         } catch (error) {
             console.error('Erro ao obter dados do usuário:', error.message);
         }
@@ -61,6 +74,9 @@ const UserProfile = () => {
 
     const handleSave = async (updatedUser) => {
         try {
+            // Reverter a formatação da data para yyyy/mm/dd
+            updatedUser.birthday = formatDateToYYYYMMDD(updatedUser.birthday);
+
             console.log('Dados enviados:', updatedUser);
             const response = await axios.put(`http://localhost:8000/user/update/${userId}`, updatedUser);
             console.log('Resposta do servidor:', response.data);

@@ -1,3 +1,5 @@
+/* ModalStyles.module.css */
+
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -37,6 +39,7 @@
 
 .field {
     margin-bottom: 15px;
+    width: 90%; /* Ajuste opcional para largura total */
 }
 
 .field label {
@@ -69,7 +72,7 @@
 }
 
 .saveButton {
-    background: #4CAF50;
+    background: #4caf50;
     color: white;
 }
 
@@ -84,4 +87,15 @@
     border: none;
     font-size: 24px;
     cursor: pointer;
+}
+
+.quill-container {
+    width: calc(100% - 30px); /* Ajuste para a largura do conteúdo dentro do padding do modal */
+    max-height: 300px; /* Defina uma altura máxima se necessário */
+    overflow-y: auto; /* Adicione rolagem vertical se necessário */
+}
+
+.quill-container .ql-editor {
+    height: 2000px !important; /* Garante que a altura do editor seja automática */
+    min-height: 250px; /* Ajuste a altura mínima do editor */
 }
