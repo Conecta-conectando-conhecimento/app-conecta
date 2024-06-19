@@ -12,6 +12,7 @@ import styles from "../VisualizacaoProjeto/VisualizacaoProjeto.module.css";
 import CardParticipante from "./components/CardParticipante/CardParticipante.jsx";
 import CardArquivo from './components/CardArquivo/CardArquivo.jsx';
 import ModalArquivo from './components/CardArquivo/ModalArquivo.jsx';
+import FileUploadButton from './components/CardArquivo/FileUploadButton.jsx';
 
 const VisualizacaoProjeto = () => {
     const { projectId } = useParams();
@@ -150,7 +151,14 @@ const VisualizacaoProjeto = () => {
         } catch (error) {
             console.error('Erro ao atualizar o arquivo:', error.message);
         }
+    }
 
+    const handleDeleteArquivo = async (id) => {
+        try {
+            await axios.delete(`http://localhost:8000/projectfiles/delete/${id}`);
+        } catch (error) {
+            console.error('Erro ao apagar o arquivo:', error.message);
+        }
     }
 
     return (
@@ -265,16 +273,21 @@ const VisualizacaoProjeto = () => {
                                 <h3>
                                     Arquivos
                                 </h3>
+                                {isEditing && (
+                                    <FileUploadButton projectId={projectId}/>
+                                )}
                                 <div className={styles.fileList}>
                                     {Array.isArray(projectFiles) && projectFiles.length > 0 ? (
                                         projectFiles.map((item) => (
                                             <CardArquivo
-                                                key={item.id} // Adicione uma key para ajudar o React a identificar os elementos
+                                                key={item.id}
+                                                id={item.id}
                                                 nome={item.name}
                                                 url={item.file_url}
                                                 isAdmin={userIsAdmin}
                                                 isEditing={isEditing}
-                                                action={() => openModalArquivo(item.name, item.id, item.url)} // Usando uma função de callback
+                                                action={() => openModalArquivo(item.name, item.id, item.url)}
+                                                handleDelete={handleDeleteArquivo}
                                             />
                                         ))
                                     ) : (
@@ -365,5 +378,4 @@ const VisualizacaoProjeto = () => {
         </div>
     );
 };
-
 export default VisualizacaoProjeto;
