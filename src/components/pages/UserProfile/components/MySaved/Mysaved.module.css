@@ -1,0 +1,40 @@
+/* MySaved.module.css */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 70vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.projectsList {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.5rem;
+}

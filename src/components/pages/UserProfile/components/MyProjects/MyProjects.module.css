@@ -17,10 +17,11 @@
     padding: 20px;
     border-radius: 8px;
     width: 90%;
-    max-width: 1700px;
+    max-width: 1600px;
     max-height: 90%;
     overflow-y: auto;
     position: relative;
+
 }
 
 .closeButton {
@@ -36,6 +37,9 @@
 .projectsList {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .projectItem {

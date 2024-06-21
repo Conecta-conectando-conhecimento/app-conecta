@@ -1,10 +1,10 @@
-// UserProfile.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from '../../navbar/Navbar';
 import EditModal from './components/EditModal/EditModal';
 import MyProjects from './components/MyProjects/MyProjects';
+import MySaved from './components/MySaved/MySaved'; // Importar o novo modal
 import { BiLogoLinkedinSquare, BiLogoInstagram } from "react-icons/bi";
 import { CgMail } from "react-icons/cg";
 import { RiGraduationCapLine } from "react-icons/ri";
@@ -36,6 +36,7 @@ const UserProfile = () => {
     });
     const [showEditModal, setShowEditModal] = useState(false);
     const [showProjectsModal, setShowProjectsModal] = useState(false);
+    const [showSavedModal, setShowSavedModal] = useState(false); // Estado para o novo modal
 
     useEffect(() => {
         requestDataUser();
@@ -70,6 +71,14 @@ const UserProfile = () => {
 
     const handleCloseProjectsModal = () => {
         setShowProjectsModal(false);
+    };
+
+    const handleSavedButtonClick = () => {
+        setShowSavedModal(true);
+    };
+
+    const handleCloseSavedModal = () => {
+        setShowSavedModal(false);
     };
 
     const handleSave = async (updatedUser) => {
@@ -133,6 +142,10 @@ const UserProfile = () => {
                             <RiGraduationCapLine size={'2em'} />
                             <p>{user.campus ? user.campus : 'Carregando...'}</p>
                         </div>
+                        <button className={style.btnMeusProjetos} type="button" onClick={handleSavedButtonClick}>
+                            Salvos
+                        </button>
+
                         <button className={style.btnMeusProjetos} type="button" onClick={handleProjectsButtonClick}>
                             Projetos
                         </button>
@@ -157,6 +170,11 @@ const UserProfile = () => {
                 show={showProjectsModal} 
                 userId={userId} 
                 onClose={handleCloseProjectsModal} 
+            />
+            <MySaved
+                show={showSavedModal} 
+                userId={userId} 
+                onClose={handleCloseSavedModal} 
             />
         </div>
     );
