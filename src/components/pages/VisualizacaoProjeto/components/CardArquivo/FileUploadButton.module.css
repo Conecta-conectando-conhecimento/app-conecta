@@ -19,7 +19,7 @@
     font-size: 1em;
     font-weight: 700;
     color: white;
-    background-color: #007bff;
+    background-color: #0A05F2;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
@@ -27,7 +27,7 @@
   }
   
   .uploadButton:hover {
-    background-color: #0056b3;
+    opacity: 0.8;
   }
   
   .fileDetails {

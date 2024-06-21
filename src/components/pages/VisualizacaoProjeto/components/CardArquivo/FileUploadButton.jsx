@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './FileUploadButton.module.css';
 
-const FileUploadButton = ({ projectId }) => {
+const FileUploadButton = ({ projectId, updatePage }) => {
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
+        setUploadStatus(''); // Reset upload status on file change
     };
 
     const handleUpload = async () => {
-        if (!selectedFile) return;
+        if (!selectedFile) {
+            setUploadStatus('Nenhum arquivo selecionado.');
+            return;
+        }
 
         const formData = new FormData();
         formData.append('file', selectedFile);
@@ -23,8 +27,10 @@ const FileUploadButton = ({ projectId }) => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log('File uploaded successfully', response.data);
+            await updatePage();
+            setSelectedFile(null)
         } catch (error) {
+            setUploadStatus('Erro ao enviar o arquivo.');
             console.error('Error uploading file', error);
         }
     };

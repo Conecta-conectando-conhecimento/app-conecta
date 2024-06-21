@@ -156,6 +156,7 @@ const VisualizacaoProjeto = () => {
     const handleDeleteArquivo = async (id) => {
         try {
             await axios.delete(`http://localhost:8000/projectfiles/delete/${id}`);
+            await requestDataProject();
         } catch (error) {
             console.error('Erro ao apagar o arquivo:', error.message);
         }
@@ -274,7 +275,7 @@ const VisualizacaoProjeto = () => {
                                     Arquivos
                                 </h3>
                                 {isEditing && (
-                                    <FileUploadButton projectId={projectId}/>
+                                    <FileUploadButton projectId={projectId} updatePage={requestDataProject}/>
                                 )}
                                 <div className={styles.fileList}>
                                     {Array.isArray(projectFiles) && projectFiles.length > 0 ? (

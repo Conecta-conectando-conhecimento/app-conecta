@@ -8,8 +8,14 @@ const CardArquivo = ({ id, nome, url, isAdmin, isEditing, action, handleDelete }
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleVerClick = () => {
-    window.open(url, "_blank", "noopener noreferrer");
-  };
+    if (url) {
+      console.log(url)
+        window.open(url, '_blank');
+    } else {
+        console.error('URL do arquivo não está disponível.');
+    }
+};
+
 
   const handleEditarClick = () => {
     action();
