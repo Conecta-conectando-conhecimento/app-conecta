@@ -1,98 +1,126 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import style from "./FeedUsuario.module.css";
-import { VscMortarBoard } from "react-icons/vsc";
 import Navbar from '../../navbar/Navbar';
+import CardUser from '../../CardUser/CardUser';
 
 function FeedUsuario() {
     const { signout } = useAuth();
     const navigate = useNavigate();
-    const carouselRef = useRef(null);
-
-    let scrollInterval = null;
-    let userNome = "Genival Ramos de Oliveira";
-    let texto = "Dedicado estudante de Medicina. Minha paixão pela área da saúde me impulsiona a buscar constantemente conhecimento e aprimorar minhas habilidades. Com uma postura atenciosa e empática, sou admirado por meus colegas de classe. Minha determinação e comprometimento são evidentes em minha rotina de estudos e participação ativa em estágios.";
-    let userfaculdade = "Asa Norte";
-    let atividadeOnline = "Online";
+    const [users, setUsers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const usersPerPage = 20; // Quantidade de usuários por página
 
     useEffect(() => {
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const carousel = carouselRef.current;
-
-        // Função para rolar para a esquerda
-        const scrollLeft = () => {
-            carousel.scrollLeft -= 10; // Altere o valor conforme necessário
-        };
-
-        // Função para rolar para a direita
-        const scrollRight = () => {
-            carousel.scrollLeft += 10; // Altere o valor conforme necessário
-        };
-
-        // Adicione evento de mousedown para o botão "Anterior"
-        prevBtn.addEventListener('mousedown', () => {
-            scrollInterval = setInterval(scrollLeft, 50); // Altere o valor do intervalo conforme necessário
-        });
-
-        // Adicione evento de mouseup para o botão "Anterior"
-        prevBtn.addEventListener('mouseup', () => {
-            clearInterval(scrollInterval);
-        });
-
-        // Adicione evento de mousedown para o botão "Próximo"
-        nextBtn.addEventListener('mousedown', () => {
-            scrollInterval = setInterval(scrollRight, 50); // Altere o valor do intervalo conforme necessário
-        });
-
-        // Adicione evento de mouseup para o botão "Próximo"
-        nextBtn.addEventListener('mouseup', () => {
-            clearInterval(scrollInterval);
-        });
-
-        // Limpar o intervalo se o mouse for solto fora do botão
-        clearInterval(scrollInterval);
-        window.addEventListener('mouseup', () => {
-        });
+        fetch('http://localhost:8000/user/all')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status && Array.isArray(data.data)) {
+                    setUsers(data.data);
+                } else {
+                    console.error('API response is not as expected:', data);
+                    setUsers([]);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching users:', error);
+                setUsers([]);
+            });
     }, []);
 
+    // Calcula o índice inicial e final dos usuários para a página atual
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+    const totalPages = Math.ceil(users.length / usersPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage((prevPage) => prevPage - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    const renderPagination = () => {
+        const pages = [];
+        for (let i = 1; i <= totalPages; i++) {
+            pages.push(
+                <button key={i} onClick={() => handlePageChange(i)} className={currentPage === i ? `${style.activePage} activePage` : ''}>
+                    {i}
+                </button>
+            );
+        }
+        return pages;
+    };
+
+    // Divide currentUsers into two columns dynamically
+    const halfIndex = Math.ceil(currentUsers.length / 2);
+    const firstColumnUsers = currentUsers.slice(0, halfIndex);
+    const secondColumnUsers = currentUsers.slice(halfIndex);
+
     return (
-        <div className={style.bodyFeed}>
-            <div className={style.container}>
-                <Navbar />
-                <div className={style.sectionMain}>
-                    <button id="prevBtn"><img src={"assets/Feed/botaoEsquerda.svg"} alt="" /></button>
-                    <div className={style.circlesCarrousel} ref={carouselRef}>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
-                        </div>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
-                        </div>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
-                        </div>
-                        <div className={style.carousel_slide}>
-                            <img src={'/assets/Feed/CircleTI.png'} alt="alguma imagem" />
-                        </div>
-                        </div>
-                    <button id="nextBtn"> <img src={"assets/Feed/botaoDireita.svg"} alt="" /> </button>
-                </div>
-                <div className={style.bodyCardsFeed}>
-                    <div className={style.card}>
-                        <div className={style.colunaImagemPerfilBotaoVerMais}>
-                            <img className={style.imagemPerfil} src="../../../public/assets/maos.jpg" alt="foto-perfil" />
-                            <button id="verMais" className={style.botaoVerMais}>Ver mais +</button>
-                        </div>
-                        <div className={style.informacoesTexto}>
-                            <p className={style.userNome}>{userNome}</p>
-                            <p className={style.texto}>{texto}</p>
-                            <div className={style.faculdade}>
-                                <p className={style.nomeFaculdade}><VscMortarBoard className={style.iconFaculdade}/>Ceub - {userfaculdade}</p>
-                                <p>Atividade: {atividadeOnline}</p>
+        <div>
+            <Navbar />
+            <div className={style.bodyFeed}>
+
+                <div className={style.container}>
+                    <div className={style.pagination}>
+                        <button onClick={handlePreviousPage}>Anterior</button>
+                        {renderPagination()}
+                        <button onClick={handleNextPage}>Próxima</button>
+                    </div>
+                    <div className={style.bodyCardsFeed}>
+                        <div className={style.cardsContainer}>
+                            <div className={style.column}>
+                                {firstColumnUsers.length > 0 ? (
+                                    firstColumnUsers.map(user => (
+                                        <CardUser
+                                            key={user.id}
+                                            userName={user.user_name}
+                                            campus={user.campus}
+                                            userId={user.id}
+                                            fotoUrl={user.user_image_path}
+                                            textoAreaInteresse={user.textoAreaInteresse}
+                                            textoSobre={user.sobre}
+                                        />
+                                    ))
+                                ) : (
+                                    <p>No users found</p>
+                                )}
+                            </div>
+                            <div className={style.column}>
+                                {secondColumnUsers.length > 0 ? (
+                                    secondColumnUsers.map(user => (
+                                        <CardUser
+                                            key={user.id}
+                                            userName={user.user_name}
+                                            campus={user.campus}
+                                            userId={user.id}
+                                            fotoUrl={user.user_image_path}
+                                            textoAreaInteresse={user.textoAreaInteresse}
+                                            textoSobre={user.sobre}
+                                        />
+                                    ))
+                                ) : (
+                                    <p>No users found</p>
+                                )}
                             </div>
                         </div>
+                    </div>
+                    <div className={style.pagination}>
+                        <button onClick={handlePreviousPage}>Anterior</button>
+                        {renderPagination()}
+                        <button onClick={handleNextPage}>Próxima</button>
                     </div>
                 </div>
             </div>
