@@ -79,12 +79,12 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #007BFF;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 4px;
 }
 
 .modalButton {
-  background-color: #6c757d;
+  background-color: #dc3545;
 }
