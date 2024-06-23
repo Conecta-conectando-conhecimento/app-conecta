@@ -1,129 +1,90 @@
-/* ModalSolicitacao.module.css */
-
-/* Layout */
-.Container {
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  justify-content: center;
+  text-align: center;
   width: 100%;
 }
 
-/* Botões */
-.Button {
-  background-color: #0A05F2;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  /* Reduzido para diminuir a largura */
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+.button {
+  padding: .5em;
   font-size: 16px;
-  margin: 4px 2px;
+  width: 99%;
   cursor: pointer;
-  border-radius: 8px;
-  /* Bordas arredondadas */
-  transition: background-color 0.3s ease;
-  /* Transição para a cor de fundo */
+  background-color: #0A05F2;
+  color: white;
+  border: none;
+  border-radius: 6px;
 }
 
-.Button:hover {
-  background-color: #007bff;
-  /* Cor ao passar o mouse */
-}
-
-/* Modal */
-.modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75); /* Ajuste a opacidade conforme necessário */
+  z-index: 1000; /* Certifique-se de que o modal esteja acima de outros elementos */
 }
 
-.modal-content {
+.modalContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
   background-color: white;
+  padding: 20px;
   border-radius: 8px;
-  padding: 24px;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  z-index: 1001; /* Certifique-se de que o modal esteja acima do overlay */
 }
 
-.modal-title {
-  color: #333;
+.modalTitle {
   font-size: 24px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
-.modal-text {
-  color: #666;
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 24px;
-}
-
-.modal-button {
-  background-color: transparent;
-  border: none;
-  color: blue;
-  padding: 12px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition-duration: 0.4s;
-}
-
-/* Formulário */
-.botaoEnviar {
-  background-color: #13F000;
-  border: none;
-  color: white;
-  padding: 12px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition-duration: 0.4s;
-}
-
-.input {
-  background-color: #D9D9D9;
-  width: 300px;
-  height: 25px;
-  padding-left: 10px;
-  margin: 1px;
-  border-radius: 50px;
-  display: flex;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.mais {
-  background-color: #0A05F2;
-  color: #D9D9D9;
-  font-size: larger;
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-  border: #0A05F2;
-  align-self: center;
-  cursor: pointer;
+.modalSubtitle {
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 
 .formulario {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selectedUsers {
+  margin-top: 10px;
+}
+
+.userItem {
+  margin: 5px 0;
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.modalButton, .botaoEnviar {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.modalButton {
+  background-color: #6c757d;
 }

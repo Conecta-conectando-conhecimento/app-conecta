@@ -1,0 +1,47 @@
+.searchUser {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .searchInputContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .searchButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .userResults {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .userResult {
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+  }
+  
+  .userResult:hover {
+    background-color: #f1f1f1;
+  }
+  
