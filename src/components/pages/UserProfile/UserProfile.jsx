@@ -14,8 +14,23 @@ import style from "./UserProfile.module.css";
 // Funções de formatação de data
 const formatDateToDDMMYYYY = (dateString) => {
     if (!dateString) return '';
-    const [year, month, day] = dateString.split('-');
+    let date;
+    if (dateString.includes('T')) {
+        date = new Date(dateString);
+    } else {
+        const [year, month, day] = dateString.split('-');
+        date = new Date(year, month - 1, day);
+    }
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
     return `${day}/${month}/${year}`;
+};
+
+const formatDateToYYYYMMDD = (dateString) => {
+    if (!dateString) return '';
+    const [day, month, year] = dateString.split('/');
+    return `${year}-${month}-${day}`;
 };
 
 const UserProfile = () => {
@@ -46,7 +61,6 @@ const UserProfile = () => {
             const response = await axios.get(`http://localhost:8000/user/${userId}`);
             const userData = response.data.data;
             
-            // Formatar a data de nascimento para dd/mm/yyyy
             userData.birthday = formatDateToDDMMYYYY(userData.birthday);
 
             setUser(userData);
@@ -74,14 +88,13 @@ const UserProfile = () => {
 
     const handleSave = async (updatedUser) => {
         try {
-            // Reverter a formatação da data para yyyy/mm/dd
             updatedUser.birthday = formatDateToYYYYMMDD(updatedUser.birthday);
 
             console.log('Dados enviados:', updatedUser);
             const response = await axios.put(`http://localhost:8000/user/update/${userId}`, updatedUser);
             console.log('Resposta do servidor:', response.data);
             if (response.data.status) {
-                requestDataUser(); // Obter dados atualizados após salvar
+                requestDataUser();
                 setShowEditModal(false);
             } else {
                 console.error('Erro ao atualizar usuário:', response.data.error);
