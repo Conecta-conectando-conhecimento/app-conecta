@@ -1,16 +1,24 @@
 import style from "./Login.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
-import UserController from "../../../controllers/userController";
+import AuthController from "../../../controllers/authController";
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
-  const { signin } = useAuth(); // Obtenha a função de login do contexto de autenticação
+  const { signin } = useAuth();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user && user.userId) {
+      navigate('/feedprojetos');
+    }
+  }, [user, navigate]);
+  
 
 
   const handleLogin = async () => {
@@ -18,10 +26,10 @@ const Login = () => {
       setError('Preencha todos os campos');
       return;
     }
-  
+
     try {
-      const { data } = await UserController.loginUser({ email, password: senha, signin });
-    
+      const { data } = await AuthController.loginUser({ email, password: senha, signin });
+
       if (data.accessToken) {
         const { name, id } = data.user;
         signin(email, data.accessToken, name, id);
