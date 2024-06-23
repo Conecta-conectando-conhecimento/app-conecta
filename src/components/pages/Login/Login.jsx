@@ -74,7 +74,7 @@ const Login = () => {
                 required
               />
               <div className={style.senha}>
-                <a href="/forgotPassword">Esqueceu a senha?</a>
+                <a href="/resetpassword">Esqueceu a senha?</a>
               </div>
             </div>
             {error && <p className={style.errorMessage}>{error}</p>}
