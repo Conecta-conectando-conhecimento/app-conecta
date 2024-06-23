@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import style from './FormacaoEquipe2.module.css';
+import style from '../../CardUser/CardUser.module.css';
 import Navbar from '../../navbar/Navbar';
-import CardFormacaoEquipe from './components/CardFormacaoEquipe.jsx';
+import CardFormacaoEquipe from '../../CardUser/CardUser';
 
 function FormacaoEquipe2() {
     // const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { RiGraduationCapLine } from "react-icons/ri";
-import style from "./CardFormacaoEquipe.module.css";
+import style from "./CardUser.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 
