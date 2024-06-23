@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Card from '../../../../CardProject'; // Certifique-se de que o caminho para o Card está correto
+import Card from '../../../../CardProject';
 import styles from './MySaved.module.css';
 
 const MySaved = ({ show, userId, onClose }) => {
@@ -15,9 +15,10 @@ const MySaved = ({ show, userId, onClose }) => {
     const fetchSavedProjects = async () => {
         try {
             const response = await axios.get(`http://localhost:8000/favorite/user/${userId}`);
-            setSavedProjects(response.data.data); // Ajuste conforme a estrutura da resposta do backend
+            const savedProjectsData = response.data.data; // Acessa a propriedade data da resposta
+            setSavedProjects(savedProjectsData);
         } catch (error) {
-            console.error('Erro ao buscar projetos salvos:', error);
+            console.error('Erro ao buscar projetos salvos:', error.message);
         }
     };
 
@@ -32,10 +33,11 @@ const MySaved = ({ show, userId, onClose }) => {
                     {savedProjects && savedProjects.length > 0 ? (
                         savedProjects.map((project) => (
                             <Card
-                                key={project.id}
-                                projetoNome={project.project.title} // Acesse o título do projeto salvo
+                                key={project.project_id}
+                                projetoNome={project.project.title} // Acessa a propriedade title do projeto
                                 texto={project.project.introduction.replace(/(<([^>]+)>)/gi, "")} // Remove tags HTML
-                                projetoId={project.project.id} // ID do projeto salvo
+                                projetoId={project.project_id} // Acessa o id do projeto
+                                userId={userId} // Passa o userId como prop
                             />
                         ))
                     ) : (

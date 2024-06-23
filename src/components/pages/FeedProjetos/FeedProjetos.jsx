@@ -6,8 +6,6 @@ import Card from '../../CardProject';
 import useAuth from '../../../hooks/useAuth';
 import ProjectController from '../../../controllers/projectController';
 
-
-
 function FeedProjetos() {
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
@@ -15,6 +13,10 @@ function FeedProjetos() {
     const [totalPages, setTotalPages] = useState(1);
     const { user } = useAuth();
     const ITEMS_PER_PAGE = 10;
+
+    useEffect(() => {
+        console.log('User:', user);
+    }, [user]);
 
     const fetchProjects = async () => {
         try {
@@ -24,7 +26,6 @@ function FeedProjetos() {
             console.error('Erro ao buscar os dados:', error);
         }
     };
-
 
     const fetchTotalCount = async () => {
         try {
@@ -54,7 +55,6 @@ function FeedProjetos() {
         }
     };
 
-
     const renderPagination = () => {
         const pages = [];
         for (let i = 1; i <= totalPages; i++) {
@@ -67,7 +67,6 @@ function FeedProjetos() {
 
         return pages;
     };
-
 
     useEffect(() => {
         fetchTotalCount();
@@ -92,12 +91,17 @@ function FeedProjetos() {
                     <div className={style.pagination}>
                         <button onClick={handlePreviousPage}>Anterior</button>
                         {renderPagination()}
-
                         <button onClick={handleNextPage}>Próxima</button>
                     </div>
                     <div>
                         {projects.map((item) => (
-                            <Card key={item.id} projetoId={item.id} projetoNome={stripHtml(item.title)} texto={stripHtml(item.introduction)} />
+                            <Card
+                                key={item.id}
+                                projetoId={item.id}
+                                projetoNome={stripHtml(item.title)}
+                                texto={stripHtml(item.introduction)}
+                                userId={user.userId} // Passando o userId para o componente Card
+                            />
                         ))}
                     </div>
                 </div>

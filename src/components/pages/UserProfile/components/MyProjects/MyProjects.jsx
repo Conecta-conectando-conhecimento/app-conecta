@@ -3,7 +3,7 @@ import axios from 'axios';
 import Card from '../../../../CardProject';
 import styles from './MyProjects.module.css';
 
-const MyProjects = ({ show, userId, onClose }) => {
+const MyProjects = ({ show, userId, onClose, isOwner }) => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
@@ -24,18 +24,23 @@ const MyProjects = ({ show, userId, onClose }) => {
 
     const fetchProjects = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/participants/user/${userId}`);
-            console.log('Projetos recebidos:', response.data);
+            const participantResponse = await axios.get(`http://localhost:8000/participant-view/user/${userId}`);
+            const projectIds = participantResponse.data.data.map(project => project.project_id); // Obtem os IDs dos projetos participados
 
-            const projectDetailsPromises = response.data.data.map(project =>
-                fetchProjectDetails(project.project_id)
-            );
+            const favoriteResponse = await axios.get(`http://localhost:8000/favorite/user/${userId}`);
+            const savedProjectIds = favoriteResponse.data.data.map(project => project.project_id); // Obtem os IDs dos projetos salvos
 
+            // Mesclar e remover duplicatas
+            const allProjectIds = Array.from(new Set([...projectIds, ...savedProjectIds]));
+            console.log('IDs de todos os projetos:', allProjectIds);
+
+            const projectDetailsPromises = allProjectIds.map(projectId => fetchProjectDetails(projectId));
             const projectDetails = await Promise.all(projectDetailsPromises);
-            setProjects(projectDetails.filter(project => project)); // Filtrar projetos que não foram carregados corretamente
+
+            setProjects(projectDetails.filter(project => project)); // Filtra projetos que não foram carregados corretamente
 
         } catch (error) {
-            console.error('Erro ao obter projetos:', error.message);
+            console.error('Erro ao obter IDs dos projetos do usuário:', error.message);
         }
     };
 
@@ -47,6 +52,17 @@ const MyProjects = ({ show, userId, onClose }) => {
                 <button className={styles.closeButton} onClick={onClose}>X</button>
                 <h2>Meus Projetos</h2>
                 <div className={styles.projectsList}>
+                    {/* Card de criação de projeto */}
+                    {isOwner && (
+                        <Card
+                            projetoNome="Deseja criar um projeto?"
+                            texto="Comece um novo projeto! Estamos aqui para apoiar e fazer seu projeto prosperar, vamos começar agora?"
+                            projetoId={null}
+                            userId={userId}
+                            isCreationCard={true} // Flag indicando que é um card de criação
+                        />
+                    )}
+                    {/* Lista de projetos do usuário */}
                     {projects && projects.length > 0 ? (
                         projects.map((project) => (
                             <Card
@@ -54,6 +70,8 @@ const MyProjects = ({ show, userId, onClose }) => {
                                 projetoNome={project.title}
                                 texto={project.introduction.replace(/(<([^>]+)>)/gi, "")} // Remove tags HTML
                                 projetoId={project.id}
+                                userId={userId} // Passando o userId para o componente Card
+                                isCreationCard={false} // Flag indicando que não é um card de criação
                             />
                         ))
                     ) : (
