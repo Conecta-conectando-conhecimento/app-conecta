@@ -1,73 +1,82 @@
-import style from "./ModalSolicitacao.module.css";
-import { useState } from "react";
-import Modal from "react-modal";
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import SearchUser from './SearchUser';
+import style from './ModalSolicitacao.module.css';
+import axios from 'axios';
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
-function ModalSolicitacao() {
-  //funções relacionadas ao modal
+function ModalSolicitacao({projectId, onAddParticipants, isOwner}) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
-  function openModal() {
-    setIsOpen(true);
+  const openModal = () => {
+    if(isOwner) {
+      setIsOpen(true);
+    } else {
+      alert("Somente admins do projeto podem adicionar colaboradores");
+    }
+    
   }
-
-  function closeModal() {
+  const closeModal = () => {
     setIsOpen(false);
-    setEmails(['']);
+    setSelectedUsers([]);
   }
 
-
-  //funções relacionadas ao email
-  const [emails, setEmails] = useState(['']);
-
-  const addEmailField = () => {
-    setEmails([...emails, '']);
-  };
-
-  const handleEmailChange = (index, event) => {
-    const newEmails = [...emails];
-    newEmails[index] = event.target.value;
-    setEmails(newEmails);
+  const handleUserSelect = (user) => {
+    setSelectedUsers([...selectedUsers, user]);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(emails); //logica de email no email
+    addUsersToProject();
   };
 
+  const addUsersToProject = async () => {
+    for (const dados of selectedUsers) {
+      try {
+        const response = await axios.post('http://localhost:8000/participants/create',
+          {
+            project_id: projectId,
+            user_id: dados.id
+          }
+        ); 
+        console.log(`Participante adicionado com sucesso: ${response.data.data}`);
+        setSelectedUsers([]);
+        closeModal();
+        onAddParticipants();
+      } catch (error) {
+        console.error(`Erro ao adicionar participante: ${error.message}`);
+      }
+    }
+  }
+
   return (
-    <div className={style.Container}>
-      <button className={style.Button} onClick={openModal}>Convidar colaboradores</button>
+    <div className={style.container}>
+      <button className={style.button} onClick={openModal}>Adicionar colaboradores</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
-        overlayClassName={style["modal-overlay"]}
-        className={style["modal-content"]}
+        contentLabel="Solicitação"
+        overlayClassName={style.modalOverlay}
+        className={style.modalContent}
       >
-        <h2 className={style["modal-title"]}>Solicitação</h2>
-        <h3 className={style["modal-subtitle"]}>Convide pessoas para participar do seu projeto</h3>
-        <div>
-      <form className={style.formulario} onSubmit={handleSubmit}>
-        {emails.map((email, index) => (
-          <div key={index}>
-            <input className= {style["input"]}
-              type="email"
-              placeholder="Informe o email para solicitar participação"
-              value={email}
-              onChange={(e) => handleEmailChange(index, e)}
-            />
+        <h2 className={style.modalTitle}>Solicitação</h2>
+        <h3 className={style.modalSubtitle}>Adicione os usuários que deseja participar do seu projeto</h3>
+        <form className={style.formulario} onSubmit={handleSubmit}>
+          <SearchUser onUserSelect={handleUserSelect} />
+          <div className={style.selectedUsers}>
+            {selectedUsers.map((user, index) => (
+              <div key={index} className={style.userItem}>
+                {user.name}
+              </div>
+            ))}
           </div>
-        ))}
-        <button type="button" className= {style.mais}onClick={addEmailField}>+</button>
-        <br />
-      </form>
-    </div>
-        <div className={style.buttons}>
-        <button className={style["modal-button"]} onClick={closeModal}>Fechar</button>
-        <button className= {style.botaoEnviar} type="submit" onClick={closeModal}>Enviar</button>
-        </div>
+          <div className={style.buttons}>
+            <button className={style.modalButton} onClick={closeModal}>Fechar</button>
+            <button className={style.botaoEnviar} type="submit">Enviar</button>
+          </div>
+        </form>
       </Modal>
     </div>
   );

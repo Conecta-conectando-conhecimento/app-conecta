@@ -22,7 +22,8 @@
   
   .content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 1em;
     width: 100%;
     align-items: center;
   }
@@ -31,17 +32,33 @@
     margin: 0;
     font-size: 16px;
   }
-  
-  .btnVer {
+
+  .adminActions {
+    display: flex;
+    gap: .2em;
+  }
+
+  .btnVer, .btnExcluir, .btnEditar{
     padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .btnVer:hover {
-    background-color: #0056b3;
+  .btnVer {
+    background-color: #007bff;
+  }
+
+  .btnExcluir {
+    background-color: #dc3545;
+  }
+
+  .btnEditar {
+    background-color: #28a745;
+  }
+  
+  button:hover {
+    opacity: .8;;
   }
