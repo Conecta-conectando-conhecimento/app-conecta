@@ -3,7 +3,7 @@ import styles from './styles.module.css'; // Importando estilos
 import ModalSolicitacao from '../ModalSolicitacao/ModalSolicitacao';
 import { useNavigate } from "react-router-dom";
 
-function AcaoParticipacaoProjeto({ isOwner, projectId, setIsEditing }) {
+function AcaoParticipacaoProjeto({ isOwner, projectId, setIsEditing, onAddParticipants }) {
     const navigate = useNavigate();
     const [editButtonText, setEditButtonText] = useState('Habilitar Edição do Projeto'); // Estado para o texto do botão
 
@@ -29,7 +29,7 @@ function AcaoParticipacaoProjeto({ isOwner, projectId, setIsEditing }) {
             {isOwner ? (
                 <div className={styles.ownerActions}>
                     <button className={styles.actionButton} onClick={navigateToFormacaoEquipe}>Formação de equipe</button>
-                    <ModalSolicitacao />
+                    <ModalSolicitacao projectId={projectId} onAddParticipants={onAddParticipants} isOwner={isOwner}/>
                     <button className={styles.actionButton} onClick={handleEditClick}>{editButtonText}</button>
                 </div>
             ) : (

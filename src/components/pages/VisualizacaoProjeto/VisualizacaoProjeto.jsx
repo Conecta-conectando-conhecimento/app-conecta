@@ -13,6 +13,7 @@ import CardParticipante from "./components/CardParticipante/CardParticipante.jsx
 import CardArquivo from './components/CardArquivo/CardArquivo.jsx';
 import ModalArquivo from './components/CardArquivo/ModalArquivo.jsx';
 import FileUploadButton from './components/CardArquivo/FileUploadButton.jsx';
+import { BiLogOut } from "react-icons/bi";
 
 const VisualizacaoProjeto = () => {
     const { projectId } = useParams();
@@ -162,6 +163,32 @@ const VisualizacaoProjeto = () => {
         }
     }
 
+    const handleKickParticipant = async (participantId, nome, isUser) => {
+        if (isUser){
+            var resposta = confirm("Tem certeza que deseja sair do projeto?");
+        } else {
+            var resposta = confirm("Tem certeza que deseja remover '" + nome + "' do projeto?");
+        }
+       
+        if (resposta) {
+            try {
+                const response = await axios.delete(`http://localhost:8000/participants/delete/${participantId}`);
+                await requestDataProject();
+            } catch (error) {
+                console.error('Erro ao excluir participante:', error.message);
+            }
+        }
+    }
+
+    const tryKickParticipant = () => {
+        const participant = participantes.find(part => part.user_id == user.userId);
+        if (participant) {
+            handleKickParticipant(participant.id, participant.user_name, true);
+        } else {
+            console.log('Participante não encontrado');
+        }
+    };
+
     return (
         <div className={styles.bodyVisualizacaoProjeto}>
             <Navbar />
@@ -180,13 +207,21 @@ const VisualizacaoProjeto = () => {
                                     />
                                 )}
                             </h2>
+                            <button className={styles.btnExitProject} onClick={() => tryKickParticipant()}>
+                                <BiLogOut className={styles.icon} />
+                            </button>
                         </div>
+
 
                         <div className={styles.gridLayout}>
                             {/* Começo Primeira Coluna da página */}
                             <div className={styles.column}>
                                 {/*Botões de ações do Projeto */}
-                                <AcaoParticipacaoProjeto isOwner={userParticipant} projectId={projectId} setIsEditing={setIsEditing} />
+                                <AcaoParticipacaoProjeto
+                                    isOwner={userParticipant}
+                                    projectId={projectId}
+                                    setIsEditing={setIsEditing}
+                                    onAddParticipants={requestDataProject} />
 
                                 {/*Características do Projeto */}
                                 <h3>
@@ -238,22 +273,26 @@ const VisualizacaoProjeto = () => {
                                 </h3>
                                 <div className={styles.participantList}>
                                     {Array.isArray(participantes) && participantes.length > 0 ? (
-                                        participantes.map((item) => (
-                                            <CardParticipante
-                                                key={item.participant_id}
-                                                id={item.user_id}
-                                                nome={item.user_name}
-                                                faculdade="CEUB - Asa norte"
-                                                fotoUrl={item.user_image_url}
-                                            />
-                                        ))
+                                        participantes
+                                            .filter(item => item.deleted_at === null) // Filtrar participantes que não foram deletados
+                                            .map(item => (
+                                                <CardParticipante
+                                                    key={item.participant_id}
+                                                    participantId={item.participant_id}
+                                                    id={item.user_id}
+                                                    nome={item.user_name}
+                                                    faculdade="CEUB - Asa norte"
+                                                    fotoUrl={item.user_image_url}
+                                                    isEditing={isEditing}
+                                                    isAdmin={userIsAdmin}
+                                                    onKickParticipant={handleKickParticipant}
+                                                />
+                                            ))
                                     ) : (
                                         <p>Nenhum participante encontrado.</p> // Ou qualquer mensagem de feedback apropriada
                                     )}
                                 </div>
 
-
-                                {/*Atividades do Projeto */}
                                 <h3>
                                     Atividades
                                     {isEditing && (
@@ -274,8 +313,10 @@ const VisualizacaoProjeto = () => {
                                 <h3>
                                     Arquivos
                                 </h3>
-                                {isEditing && (
-                                    <FileUploadButton projectId={projectId} updatePage={requestDataProject}/>
+                                {isEditing && userIsAdmin && (
+                                    <FileUploadButton 
+                                    projectId={projectId}
+                                    updatePage={requestDataProject} />
                                 )}
                                 <div className={styles.fileList}>
                                     {Array.isArray(projectFiles) && projectFiles.length > 0 ? (
