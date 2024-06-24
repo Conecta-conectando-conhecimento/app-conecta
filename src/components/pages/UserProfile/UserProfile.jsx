@@ -5,7 +5,7 @@ import useAuth from "../../../hooks/useAuth.jsx";
 import Navbar from '../../navbar/Navbar';
 import EditModal from './components/EditModal/EditModal';
 import MyProjects from './components/MyProjects/MyProjects';
-import MySaved from './components/MySaved/Mysaved.jsx';
+import MySaved from './components/MySaved/mysaved.jsx';
 import { BiLogoLinkedinSquare, BiLogoInstagram } from "react-icons/bi";
 import { CgMail } from "react-icons/cg";
 import { RiGraduationCapLine } from "react-icons/ri";
