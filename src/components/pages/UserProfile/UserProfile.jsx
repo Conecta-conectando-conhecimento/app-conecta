@@ -11,6 +11,7 @@ import { CgMail } from "react-icons/cg";
 import { RiGraduationCapLine } from "react-icons/ri";
 import { MdOutlineEdit } from "react-icons/md";
 import style from "./UserProfile.module.css";
+import { apiUrl } from '../../../controllers/api.js';
 
 // Funções de formatação de data
 const formatDateToDDMMYYYY = (dateString) => {
@@ -65,7 +66,7 @@ const UserProfile = () => {
 
     const requestDataUser = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/user/${userId}`);
+            const response = await axios.get(`${apiUrl}/user/${userId}`);
             const userData = response.data.data;
             
             userData.birthday = formatDateToDDMMYYYY(userData.birthday);
