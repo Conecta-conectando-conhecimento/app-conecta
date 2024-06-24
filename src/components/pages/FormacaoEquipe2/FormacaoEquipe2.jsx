@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import style from './FormacaoEquipe2.module.css';
+import style from '../../CardUser/CardUser.module.css';
 import Navbar from '../../navbar/Navbar';
-import CardFormacaoEquipe from './components/CardFormacaoEquipe.jsx';
+import CardUser from '../../CardUser/CardUser';
 
 function FormacaoEquipe2() {
     // const navigate = useNavigate();
@@ -97,7 +97,7 @@ function FormacaoEquipe2() {
                             <Card key={item.id} projetoId={item.id} projetoNome={stripHtml(item.title)} texto={stripHtml(item.introduction)} />
                         ))} 
                     </div>*/}
-                    <CardFormacaoEquipe
+                    <CardUser
                         userName="Halycia"
                         campus="Asa norte"
                         projetoId="1"

@@ -85,8 +85,9 @@ function FeedProjetos() {
 
     return (
         <div className={style.bodyFeed}>
+            <Navbar />
             <div className={style.container}>
-                <Navbar />
+                
                 <div className={style.bodyCardsFeed}>
                     <div className={style.pagination}>
                         <button onClick={handlePreviousPage}>Anterior</button>
@@ -103,6 +104,11 @@ function FeedProjetos() {
                                 userId={user.userId} // Passando o userId para o componente Card
                             />
                         ))}
+                    </div>
+                    <div className={style.pagination}>
+                        <button onClick={handlePreviousPage}>Anterior</button>
+                        {renderPagination()}
+                        <button onClick={handleNextPage}>Próxima</button>
                     </div>
                 </div>
             </div>

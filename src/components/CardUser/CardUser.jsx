@@ -1,10 +1,16 @@
 import React from 'react';
 import { RiGraduationCapLine } from "react-icons/ri";
-import style from "./CardFormacaoEquipe.module.css";
+import style from "./CardUser.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 
-const CardFormacaoEquipe = ({ userName, campus, userId, fotoUrl, textoAreaInteresse, textoSobre }) => {
+const CardUser = ({ userName, campus, userId, fotoUrl, textoAreaInteresse, textoSobre }) => {
+    // Garantir que textoSobre seja uma string
+    const sobre = textoSobre || '';
+    const maxChars = 300;
+    const isLongText = sobre.length > maxChars;
+    const displayedText = isLongText ? sobre.substring(0, maxChars) + '...' : sobre;
+
     return (
         <div className={style.card}>
             <div className={style.informacao}>
@@ -25,13 +31,17 @@ const CardFormacaoEquipe = ({ userName, campus, userId, fotoUrl, textoAreaIntere
                     </div>
                 </div>
                 <div className={style.skill}>
-
                     <div className={style.informacoesTexto}>
                         <div className={style.subtitulo}>
                             <IoIosArrowDown size={'1rem'} className={style.ioios} />
                             <p>Sobre</p>
                         </div>
-                        <p className={style.textoSubtitulo}>{textoSobre}</p>
+                        <p className={style.textoSubtitulo} dangerouslySetInnerHTML={{ __html: displayedText }}></p>
+                        {isLongText && (
+                            <Link to={`/userprofile/${userId}`} className={style.verMaisLink}>
+                                Ver mais...
+                            </Link>
+                        )}
                     </div>
                     <div className={style.informacoesTexto}>
                         <div className={style.subtitulo}>
@@ -46,4 +56,4 @@ const CardFormacaoEquipe = ({ userName, campus, userId, fotoUrl, textoAreaIntere
     );
 }
 
-export default CardFormacaoEquipe;
+export default CardUser;
