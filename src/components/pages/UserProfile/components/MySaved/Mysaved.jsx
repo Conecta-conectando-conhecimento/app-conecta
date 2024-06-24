@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '../../../../CardProject';
-import styles from './MySaved.module.css';
+import styles from './Mysaved.module.css';
 
 const MySaved = ({ show, userId, onClose }) => {
     const [savedProjects, setSavedProjects] = useState([]);
