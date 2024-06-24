@@ -12,7 +12,8 @@
   /* Alinha o ícone ao centro do texto */
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -22,12 +23,12 @@ html, body {
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  background: rgb(52, 136, 136);
-  background: linear-gradient(90deg,
-      rgba(52, 136, 136, 1) 15%,
-      rgba(158, 248, 238, 1) 39%,
-      rgba(151, 240, 231, 1) 62%,
-      rgba(52, 136, 136, 1) 87%);
+  background: linear-gradient(to top,
+  #016877 15%,
+  #0CA9BC 39%,
+  #0CA9BC 62%,
+  #016877 87%);
+
 }
 
 
@@ -56,7 +57,7 @@ html, body {
   padding: 2rem;
   font-family: "poppins", sans-serif;
   font-weight: 400;
-  
+
   border: 3px solid #d3d3d3;
   border-radius: 14px;
 }
@@ -65,14 +66,15 @@ html, body {
 .projectTitle {
   display: flex;
   align-items: baseline;
-  justify-content: space-between; /* Ajusta para space-between */
+  justify-content: space-between;
+  /* Ajusta para space-between */
   margin-bottom: 2rem;
-  border-bottom: 2px solid #0A05F2;
+  border-bottom: 2px solid #0CA9BC;
   padding-bottom: 1rem;
   grid-column: 1 / -1;
 }
 
-.btnExitProject{
+.btnExitProject {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,7 +90,7 @@ html, body {
 
 .projectTitle h2 {
   font-size: 2.5rem;
-  color: #0A05F2;
+  color: #016877;
   display: flex;
   align-items: center;
   margin: auto;
@@ -115,7 +117,7 @@ html, body {
 
 /* Headings */
 h3 {
-  color: #333;
+  color: #014A5B;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
@@ -142,8 +144,8 @@ h3 {
   background-color: #EEEDED;
   border-radius: 8px;
   min-height: 18vh;
-  max-height: 400px; 
-  overflow-y: auto;  
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 /* Arquivos */
@@ -173,5 +175,3 @@ h3 {
   font-size: smaller;
   display: flex;
 }
-
-

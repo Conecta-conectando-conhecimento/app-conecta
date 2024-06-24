@@ -31,7 +31,7 @@
 
 .actionButton,
 .requestButton {
-    background-color: #0A05F2;
+    background-color: #016877;
     border: none;
     color: white;
     padding: 10px 20px; /* Reduzido para diminuir a largura */
@@ -42,10 +42,11 @@
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px; /* Bordas arredondadas */
-    transition: background-color 0.3s ease; /* Transição para a cor de fundo */
+    transition: opacity 0.3s; /* Transição para a cor de fundo */
+    font-weight: bold;
 }
 
 .actionButton:hover,
 .requestButton:hover {
-    background-color: #007bff; /* Cor ao passar o mouse */
+    opacity: .8;
 }

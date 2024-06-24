@@ -164,12 +164,12 @@ const VisualizacaoProjeto = () => {
     }
 
     const handleKickParticipant = async (participantId, nome, isUser) => {
-        if (isUser){
+        if (isUser) {
             var resposta = confirm("Tem certeza que deseja sair do projeto?");
         } else {
             var resposta = confirm("Tem certeza que deseja remover '" + nome + "' do projeto?");
         }
-       
+
         if (resposta) {
             try {
                 const response = await axios.delete(`http://localhost:8000/participants/delete/${participantId}`);
@@ -207,9 +207,12 @@ const VisualizacaoProjeto = () => {
                                     />
                                 )}
                             </h2>
-                            <button className={styles.btnExitProject} onClick={() => tryKickParticipant()}>
-                                <BiLogOut className={styles.icon} />
-                            </button>
+                            {userParticipant && (
+                                <button className={styles.btnExitProject} onClick={() => tryKickParticipant()}>
+                                    <BiLogOut className={styles.icon} />
+                                </button>
+                            )}
+
                         </div>
 
 
@@ -314,9 +317,9 @@ const VisualizacaoProjeto = () => {
                                     Arquivos
                                 </h3>
                                 {isEditing && userIsAdmin && (
-                                    <FileUploadButton 
-                                    projectId={projectId}
-                                    updatePage={requestDataProject} />
+                                    <FileUploadButton
+                                        projectId={projectId}
+                                        updatePage={requestDataProject} />
                                 )}
                                 <div className={styles.fileList}>
                                     {Array.isArray(projectFiles) && projectFiles.length > 0 ? (

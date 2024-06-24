@@ -74,7 +74,7 @@ function ModalSolicitacao({projectId, onAddParticipants, isOwner}) {
           </div>
           <div className={style.buttons}>
             <button className={style.modalButton} onClick={closeModal}>Fechar</button>
-            <button className={style.botaoEnviar} type="submit">Enviar</button>
+            <button className={style.botaoEnviar} type="submit">Adicionar</button>
           </div>
         </form>
       </Modal>

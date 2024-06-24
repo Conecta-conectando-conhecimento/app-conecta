@@ -17,10 +17,10 @@
     background: white;
     padding: 20px;
     border-radius: 8px;
-    width: 90%;
-    max-width: 1000px;
     height: auto; /* Alterado de 90% para auto */
-    max-height: 80%; /* Reduzido para evitar que o modal ocupe toda a altura da tela */
+    max-height: 80%; 
+    min-width: auto;
+    max-width: 70%;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -34,6 +34,7 @@
     justify-content: space-around;
     width: 100%;
     margin-top: 20px; /* Move os botões para baixo */
+    gap: .8em;
 }
 
 .saveButton, .cancelButton, .restoreButton {

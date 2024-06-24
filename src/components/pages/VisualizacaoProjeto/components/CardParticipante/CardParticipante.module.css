@@ -8,7 +8,7 @@
     width: 100%; /* Ocupa toda a largura disponível */
     max-width: 400px; /* Defina o tamanho máximo do card */
     border-bottom: 1px solid #ddd; /* Linha divisória no final do card */
-    border: 1px solid blue;
+    border: 1px solid #016877;
     cursor: pointer;
   }
 
