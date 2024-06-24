@@ -13,7 +13,7 @@ function FeedUsuario() {
     const usersPerPage = 20; // Quantidade de usuários por página
 
     useEffect(() => {
-        fetch('http://localhost:8000/user/all')
+        fetch(`${apiUrl}/user/all`)	
             .then(response => response.json())
             .then(data => {
                 if (data.status && Array.isArray(data.data)) {

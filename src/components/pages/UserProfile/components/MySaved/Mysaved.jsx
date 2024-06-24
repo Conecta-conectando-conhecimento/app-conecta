@@ -14,7 +14,7 @@ const MySaved = ({ show, userId, onClose }) => {
 
     const fetchSavedProjects = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/favorite/user/${userId}`);
+            const response = await axios.get(`${apiUrl}/favorite/user/${userId}`);
             const savedProjectsData = response.data.data; // Acessa a propriedade data da resposta
             setSavedProjects(savedProjectsData);
         } catch (error) {

@@ -8,7 +8,7 @@ const FormacaoEquipe = () => {
         // Objetivo: buscar quantidade de usuários definida, que possuam determinada área de interesse e estejam no campus selecionado 
 
         try {
-            const response = await axios.get(`http://localhost:8000/project/${projectId}`);
+            const response = await axios.get(`${apiUrl}/project/${projectId}`);
             setProject(response.data.data);
         } catch (error) {
             console.error('Erro ao obter dados do projeto:', error.message);

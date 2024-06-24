@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './ModalStyles.module.css';
 import axios from 'axios';
 import InputMask from 'react-input-mask';
+import { apiUrl } from '../../controllers/api';
 
 const ConfigurationsModal = ({ show, user, onClose, onSave }) => {
     const [configData, setConfigData] = useState({
@@ -65,7 +66,7 @@ const ConfigurationsModal = ({ show, user, onClose, onSave }) => {
         }
 
         try {
-            const response = await axios.put(`http://localhost:8000/user/update/${user.id}`, configData);
+            const response = await axios.put(`${apiUrl}/user/update/${user.id}`, configData);
             console.log('Dados atualizados:', response.data);
             onSave(response.data);
         } catch (error) {

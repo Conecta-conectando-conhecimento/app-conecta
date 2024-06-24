@@ -67,7 +67,7 @@ const Navbar = () => {
 
     const handleConfigurations = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/user/${user.userId}`);
+            const response = await axios.get(`${apiUrl}/user/${user.userId}`);
             setUserConfigData(response.data.data);
             setIsConfigurationsModalOpen(true);
         } catch (error) {

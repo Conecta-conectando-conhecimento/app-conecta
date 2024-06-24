@@ -107,7 +107,7 @@ const UserProfile = () => {
             updatedUser.birthday = formatDateToYYYYMMDD(updatedUser.birthday);
 
             console.log('Dados enviados:', updatedUser);
-            const response = await axios.put(`http://localhost:8000/user/update/${userId}`, updatedUser);
+            const response = await axios.put(`${apiUrl}/user/update/${userId}`, updatedUser);
             console.log('Resposta do servidor:', response.data);
             if (response.data.status) {
                 requestDataUser();
