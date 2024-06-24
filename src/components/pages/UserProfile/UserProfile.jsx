@@ -36,7 +36,7 @@ const formatDateToYYYYMMDD = (dateString) => {
 
 const UserProfile = () => {
     const { userId } = useParams();
-    const [user, setUser] = useState({
+    const [userData, setUserData] = useState({
         id: '',
         email: '',
         cpf: '',
@@ -50,18 +50,18 @@ const UserProfile = () => {
         instagram: '',
         user_image_path: ''
     });
-    const { user: loggedInUser } = useAuth(); // Obtém o usuário logado do hook useAuth
+    const { user } = useAuth(); // Obtém o usuário logado do hook useAuth
     const [showEditModal, setShowEditModal] = useState(false);
     const [showProjectsModal, setShowProjectsModal] = useState(false);
     const [showSavedModal, setShowSavedModal] = useState(false); // Estado para o novo modal
     const [isOwner, setIsOwner] = useState(false); // Estado para verificar se o usuário logado é o dono da página
 
     useEffect(() => {
-        if (loggedInUser && loggedInUser.userId === userId) {
+        if(user && user.userId == userId) {
             setIsOwner(true);
         }
         requestDataUser();
-    }, [userId, loggedInUser]);
+    }, [userId]);
 
     const requestDataUser = async () => {
         try {
@@ -70,7 +70,7 @@ const UserProfile = () => {
             
             userData.birthday = formatDateToDDMMYYYY(userData.birthday);
 
-            setUser(userData);
+            setUserData(userData);
             console.log('Dados do usuário recebidos:', userData);
         } catch (error) {
             console.error('Erro ao obter dados do usuário:', error.message);
@@ -126,10 +126,10 @@ const UserProfile = () => {
                 <div className={style.capaUserProfile}>
                     <div className={style.capaNome}>
                         <div className={style.fotoDePerfil}>
-                            <img src={user.user_image_path} alt="Foto de Perfil" />
+                            <img src={userData.user_image_path} alt="Foto de Perfil" />
                         </div>
                         <div className={style.nomeDePerfil}>
-                            <p>{user.name ? user.name : 'Carregando...'}</p>
+                            <p>{userData.name ? userData.name : 'Carregando...'}</p>
                         </div>
                     </div>
                     {isOwner && (
@@ -143,17 +143,17 @@ const UserProfile = () => {
                 <div className={style.blocoConteudo}>
                     <div className={style.coluna1UserProfile}>
                         <div className={style.linhaDeRedirecionamentoExterno}>
-                            <a href={user.linkedin || "#"}>
+                            <a href={userData.linkedin || "#"}>
                                 <button className={style.btnLinkedIn} type="button">
                                     <BiLogoLinkedinSquare size={'2.5em'} />
                                 </button>
                             </a>
-                            <a href={user.instagram || "#"}>
+                            <a href={userData.instagram || "#"}>
                                 <button className={style.btnInstagram} type="button">
                                     <BiLogoInstagram size={'2.5em'} />
                                 </button>
                             </a>
-                            <a href={`mailto:${user.email}`} >
+                            <a href={`mailto:${userData.email}`} >
                                 <button className={style.btnGMail} type="button">
                                     <CgMail size={'2.5em'} />
                                 </button>
@@ -161,7 +161,7 @@ const UserProfile = () => {
                         </div>
                         <div className={style.Campus}>
                             <RiGraduationCapLine size={'2em'} />
-                            <p>{user.campus ? user.campus : 'Carregando...'}</p>
+                            <p>{userData.campus ? userData.campus : 'Carregando...'}</p>
                         </div>
                         {isOwner && (
                             <button className={style.btnMeusProjetos} type="button" onClick={handleSavedButtonClick}>
@@ -176,7 +176,7 @@ const UserProfile = () => {
                         <div>
                             <label htmlFor="sobre">Sobre</label>
                             <div className={style.retanguloCinza}>
-                                <p dangerouslySetInnerHTML={{ __html: user.sobre || 'Carregando...' }} />
+                                <p dangerouslySetInnerHTML={{ __html: userData.sobre || 'Carregando...' }} />
                             </div>
                         </div>
                     </div>
@@ -184,7 +184,7 @@ const UserProfile = () => {
             </div>
             <EditModal 
                 show={showEditModal} 
-                user={user} 
+                user={userData} 
                 onClose={handleCloseEditModal} 
                 onSave={handleSave} 
             />
