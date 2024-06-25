@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './FileUploadButton.module.css';
+import { apiUrl }  from '../../../../../controllers/api';
 
 const FileUploadButton = ({ projectId, updatePage }) => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -22,7 +23,7 @@ const FileUploadButton = ({ projectId, updatePage }) => {
         formData.append('project_id', projectId);
 
         try {
-            const response = await axios.post('http://localhost:8000/projectfiles/create', formData, {
+            const response = await axios.post(`${apiUrl}/projectfiles/create`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

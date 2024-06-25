@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import style from './ResetPassword.module.css';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import { apiUrl } from '../../../controllers/api';
 
 function ResetPassword() {
     const [cpf, setCpf] = useState('');
@@ -16,7 +17,7 @@ function ResetPassword() {
 
     const handleFetchUser = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/user/email/${email}`);
+            const response = await axios.get(`${apiUrl}/user/email/${email}`);
             const userData = response.data.data;
             setUser(userData);
             return userData;
@@ -38,7 +39,7 @@ function ResetPassword() {
                 if (newPassword === confirmNewPassword) {
                     try {
                         // Enviar a nova senha diretamente para o endpoint new-password
-                        await axios.post(`http://localhost:8000/auth/new-password`, { email, newPassword });
+                        await axios.post(`${apiUrl}/auth/new-password`, { email, newPassword });
                         
                         // Exibir mensagem de sucesso
                         alert('Senha redefinida com sucesso!');

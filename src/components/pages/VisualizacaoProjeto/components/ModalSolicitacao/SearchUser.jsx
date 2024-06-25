@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import style from './SearchUser.module.css';
 import axios from 'axios';
+import { apiUrl } from '../../../../../controllers/api';
 
 function SearchUser({ onUserSelect }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,7 +15,7 @@ function SearchUser({ onUserSelect }) {
     
     // Requisição ao banco de dados
     try {
-        const response = await axios.get(`http://localhost:8000/user/name/${searchTerm}`);
+        const response = await axios.get(`${apiUrl}/user/name/${searchTerm}`);
         setUsers(response.data.data);
     } catch (error) {
         console.error('Erro ao obter dados de usuários:', error.message);

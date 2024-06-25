@@ -14,6 +14,7 @@ import CardArquivo from './components/CardArquivo/CardArquivo.jsx';
 import ModalArquivo from './components/CardArquivo/ModalArquivo.jsx';
 import FileUploadButton from './components/CardArquivo/FileUploadButton.jsx';
 import { BiLogOut } from "react-icons/bi";
+import { apiUrl } from '../../../controllers/api.js';
 
 const VisualizacaoProjeto = () => {
     const { projectId } = useParams();
@@ -42,7 +43,7 @@ const VisualizacaoProjeto = () => {
 
     const requestDataProject = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/project/${projectId}`);
+            const response = await axios.get(`${apiUrl}/project/${projectId}`);
             setProject(response.data.data);
         } catch (error) {
             console.error('Erro ao obter dados do projeto:', error.message);
@@ -51,7 +52,7 @@ const VisualizacaoProjeto = () => {
             }
         }
         try {
-            const responseParticipantes = await axios.get(`http://localhost:8000/participant-view/project/${projectId}`);
+            const responseParticipantes = await axios.get(`${apiUrl}/participant-view/project/${projectId}`);
             const participantsData = responseParticipantes.data.data;
             setParticipantes(participantsData);
 
@@ -66,7 +67,7 @@ const VisualizacaoProjeto = () => {
         }
 
         try {
-            const responseFiles = await axios.get(`http://localhost:8000/projectfiles/project/${projectId}`);
+            const responseFiles = await axios.get(`${apiUrl}/projectfiles/project/${projectId}`);
             setProjectFiles(responseFiles.data.data);
         } catch (error) {
             console.error('Erro ao obter dados do projeto:', error.message);
@@ -75,7 +76,7 @@ const VisualizacaoProjeto = () => {
 
     const checkUserProjectRelation = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/participants/user/${user.userId}`);
+            const response = await axios.get(`${apiUrl}/participants/user/${user.userId}`);
             response.data.data.forEach(item => {
                 if (item.project_id == projectId) {
                     isUserParticipant(true);
@@ -115,7 +116,7 @@ const VisualizacaoProjeto = () => {
     const handleSave = async (field, value) => {
         try {
             const updatedProject = { ...project, [field]: value };
-            await axios.put(`http://localhost:8000/project/update/${projectId}`, updatedProject);
+            await axios.put(`${apiUrl}/project/update/${projectId}`, updatedProject);
             setProject(updatedProject);
             closeModal();
         } catch (error) {
@@ -131,7 +132,7 @@ const VisualizacaoProjeto = () => {
                 max_participants: value.max_participants,
                 interest_area: value.interest_area
             };
-            await axios.put(`http://localhost:8000/project/update/${projectId}`, updatedProject);
+            await axios.put(`${apiUrl}/project/update/${projectId}`, updatedProject);
             setProject(updatedProject);
             closeModal();
         } catch (error) {
@@ -147,7 +148,7 @@ const VisualizacaoProjeto = () => {
         };
 
         try {
-            await axios.put(`http://localhost:8000/projectfiles/update/${currentFile.id}`, updatedFile);
+            await axios.put(`${apiUrl}/projectfiles/update/${currentFile.id}`, updatedFile);
             await requestDataProject();
         } catch (error) {
             console.error('Erro ao atualizar o arquivo:', error.message);
@@ -156,7 +157,7 @@ const VisualizacaoProjeto = () => {
 
     const handleDeleteArquivo = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/projectfiles/delete/${id}`);
+            await axios.delete(`${apiUrl}/projectfiles/delete/${id}`);
             await requestDataProject();
         } catch (error) {
             console.error('Erro ao apagar o arquivo:', error.message);
@@ -172,7 +173,7 @@ const VisualizacaoProjeto = () => {
 
         if (resposta) {
             try {
-                const response = await axios.delete(`http://localhost:8000/participants/delete/${participantId}`);
+                const response = await axios.delete(`${apiUrl}/participants/delete/${participantId}`);
                 await requestDataProject();
             } catch (error) {
                 console.error('Erro ao excluir participante:', error.message);

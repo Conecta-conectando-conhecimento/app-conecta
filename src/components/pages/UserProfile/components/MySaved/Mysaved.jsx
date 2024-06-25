@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '../../../../CardProject';
-import styles from './MySaved.module.css';
+import styles from './Mysaved.module.css';
+import { apiUrl } from '../../../../../controllers/api';
 
 const MySaved = ({ show, userId, onClose }) => {
     const [savedProjects, setSavedProjects] = useState([]);
@@ -14,7 +15,7 @@ const MySaved = ({ show, userId, onClose }) => {
 
     const fetchSavedProjects = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/favorite/user/${userId}`);
+            const response = await axios.get(`${apiUrl}/favorite/user/${userId}`);
             const savedProjectsData = response.data.data; // Acessa a propriedade data da resposta
             setSavedProjects(savedProjectsData);
         } catch (error) {

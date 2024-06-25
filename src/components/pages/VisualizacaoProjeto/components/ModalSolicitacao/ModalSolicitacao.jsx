@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import SearchUser from './SearchUser';
 import style from './ModalSolicitacao.module.css';
 import axios from 'axios';
+import { apiUrl } from '../../../../../controllers/api';
 
 Modal.setAppElement('#root');
 
@@ -35,7 +36,7 @@ function ModalSolicitacao({projectId, onAddParticipants, isOwner}) {
   const addUsersToProject = async () => {
     for (const dados of selectedUsers) {
       try {
-        const response = await axios.post('http://localhost:8000/participants/create',
+        const response = await axios.post(`${apiUrl}/participants/create`,	
           {
             project_id: projectId,
             user_id: dados.id
