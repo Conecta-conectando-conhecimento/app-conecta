@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CardUser from '../../CardUser/CardUser';
+import { apiUrl } from '../../../controllers/api';
 
 const FormacaoEquipe = () => {
 
@@ -29,7 +30,7 @@ const FormacaoEquipe = () => {
     const formTeam = async () => {
         try {
             // Fazendo a primeira requisição para obter os usuários com base na área de interesse e limite
-            const response = await axios.get(`http://localhost:8000/userAreas/all?interestAreaId=${areaInteresse}&limit=${tamanhoEquipe}`);
+            const response = await axios.get(`${apiUrl}/userAreas/all?interestAreaId=${areaInteresse}&limit=${tamanhoEquipe}`);
             const users = response.data.data;
 
             // Inicializando a lista de usuários escolhidos
@@ -38,7 +39,7 @@ const FormacaoEquipe = () => {
             // Fazendo uma nova requisição para cada usuário obtido na pesquisa anterior
             for (let user of users) {
                 try {
-                    const userResponse = await axios.get(`http://localhost:8000/user/${user.user_id}`);
+                    const userResponse = await axios.get(`${apiUrl}/user/${user.user_id}`);
                     chosenUsers.push(userResponse.data.data);
                 } catch (userError) {
                     console.error(`Erro ao obter dados do usuário ${user.userId}:`, userError);
@@ -55,7 +56,7 @@ const FormacaoEquipe = () => {
 
     const addUserToTeam = async (userId) => {
         try {
-            const response = await axios.post('http://localhost:8000/participants/create',
+            const response = await axios.post(`${apiUrl}/participants/create`,
                 {
                     project_id: projectId,
                     user_id: userId
