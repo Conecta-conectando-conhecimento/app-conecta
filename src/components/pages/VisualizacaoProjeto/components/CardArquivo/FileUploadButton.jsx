@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './FileUploadButton.module.css';
-import { apiUrl } from '../../../controllers/api';
+import { apiUrl }  from '../../../../../controllers/api';
 
 const FileUploadButton = ({ projectId, updatePage }) => {
     const [selectedFile, setSelectedFile] = useState(null);
