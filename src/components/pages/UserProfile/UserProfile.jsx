@@ -5,7 +5,7 @@ import useAuth from "../../../hooks/useAuth.jsx";
 import Navbar from '../../navbar/Navbar';
 import EditModal from './components/EditModal/EditModal';
 import MyProjects from './components/MyProjects/MyProjects';
-import MySaved  from './components/MySaved/Mysaved.jsx';
+import MySaved from './components/MySaved/Mysaved.jsx';
 import { BiLogoLinkedinSquare, BiLogoInstagram } from "react-icons/bi";
 import { CgMail } from "react-icons/cg";
 import { RiGraduationCapLine } from "react-icons/ri";
@@ -56,19 +56,30 @@ const UserProfile = () => {
     const [showProjectsModal, setShowProjectsModal] = useState(false);
     const [showSavedModal, setShowSavedModal] = useState(false); // Estado para o novo modal
     const [isOwner, setIsOwner] = useState(false); // Estado para verificar se o usuário logado é o dono da página
+    const [interestAreas, setInterestAreas] = useState([])
+    const [interestAreasTipos, setInterestAreasTipos] = useState([])
 
     useEffect(() => {
-        if(user && user.userId == userId) {
+        if (user && user.userId == userId) {
             setIsOwner(true);
         }
         requestDataUser();
+        requestUserAreasInterest();
+        requestAllInterestAreas();
     }, [userId]);
+
+    const getUserInterestAreaNames = () => {
+        return interestAreas.map(area => {
+            const interestAreaTipo = interestAreasTipos.find(tipo => tipo.id === area.area_id);
+            return interestAreaTipo ? interestAreaTipo.name : 'Desconhecido';
+        });
+    };
 
     const requestDataUser = async () => {
         try {
             const response = await axios.get(`${apiUrl}/user/${userId}`);
             const userData = response.data.data;
-            
+
             userData.birthday = formatDateToDDMMYYYY(userData.birthday);
 
             setUserData(userData);
@@ -116,9 +127,41 @@ const UserProfile = () => {
                 console.error('Erro ao atualizar usuário:', response.data.error);
             }
         } catch (error) {
-            console.error('Erro ao salvar dados do usuário:', error.message);
+            console.error('Erro ao salvar dados do usuário:', error.message); // /userAreas/user/:userId
         }
+
+        try {
+            for (const option of updatedUser.interestAreas) {
+                const createUserAreaDTO = {
+                    user_id: userId,
+                    area_id: option
+                };
+                await axios.post(`${apiUrl}/userAreas/create`, createUserAreaDTO);
+            }
+            console.log('Áreas de interesse salvas com sucesso.');
+        } catch (error) {
+            console.error('Erro ao salvar áreas de interesse:', error.message);
+        }
+
     };
+
+    const requestUserAreasInterest = async () => {
+        try {
+            const response = await axios.get(`${apiUrl}/userAreas/user/${userId}`);
+            setInterestAreas(response.data.data);
+        } catch (error) {
+            console.error('Erro ao buscar áreas de interesse:', error.message);
+        }
+    }
+
+    const requestAllInterestAreas = async () => {
+        try {
+            const response = await axios.get(`${apiUrl}/interestArea/all`);
+            setInterestAreasTipos(response.data.data);
+        } catch (error) {
+            console.error('Erro ao obter áreas de interesse:', error.message);
+        }
+    }
 
     return (
         <div className={style.pageStyle}>
@@ -180,25 +223,33 @@ const UserProfile = () => {
                                 <p dangerouslySetInnerHTML={{ __html: userData.sobre || 'Carregando...' }} />
                             </div>
                         </div>
+                        <div>
+                            <label htmlFor="interest_areas">Área de interesse</label>
+                            <div className={style.retanguloCinza}>
+                                <p>
+                                    {getUserInterestAreaNames().join(', ')}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <EditModal 
-                show={showEditModal} 
-                user={userData} 
-                onClose={handleCloseEditModal} 
-                onSave={handleSave} 
+            <EditModal
+                show={showEditModal}
+                user={userData}
+                onClose={handleCloseEditModal}
+                onSave={handleSave}
             />
-            <MyProjects 
-                show={showProjectsModal} 
-                userId={userId} 
-                onClose={handleCloseProjectsModal} 
+            <MyProjects
+                show={showProjectsModal}
+                userId={userId}
+                onClose={handleCloseProjectsModal}
                 isOwner={isOwner} // Passando a prop isOwner
             />
             <MySaved
-                show={showSavedModal} 
-                userId={userId} 
-                onClose={handleCloseSavedModal} 
+                show={showSavedModal}
+                userId={userId}
+                onClose={handleCloseSavedModal}
             />
         </div>
     );

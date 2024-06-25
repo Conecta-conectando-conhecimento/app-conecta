@@ -3,17 +3,16 @@ import axios from 'axios';
 import styles from './FileUploadButton.module.css';
 import { apiUrl }  from '../../../../../controllers/api';
 
+
 const FileUploadButton = ({ projectId, updatePage }) => {
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
-        setUploadStatus(''); // Reset upload status on file change
     };
 
     const handleUpload = async () => {
         if (!selectedFile) {
-            setUploadStatus('Nenhum arquivo selecionado.');
             return;
         }
 
@@ -31,7 +30,6 @@ const FileUploadButton = ({ projectId, updatePage }) => {
             await updatePage();
             setSelectedFile(null)
         } catch (error) {
-            setUploadStatus('Erro ao enviar o arquivo.');
             console.error('Error uploading file', error);
         }
     };
