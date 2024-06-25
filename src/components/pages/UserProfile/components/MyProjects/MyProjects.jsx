@@ -14,7 +14,7 @@ const MyProjects = ({ show, userId, onClose, isOwner }) => {
 
     const fetchProjectDetails = async (projectId) => {
         try {
-            const response = await axios.get(`http://localhost:8000/project/${projectId}`);
+            const response = await axios.get(`${apiUrl}/project/${projectId}`);
             return response.data.data;
         } catch (error) {
             console.error(`Erro ao obter detalhes do projeto ${projectId}:`, error.message);
@@ -24,10 +24,10 @@ const MyProjects = ({ show, userId, onClose, isOwner }) => {
 
     const fetchProjects = async () => {
         try {
-            const participantResponse = await axios.get(`http://localhost:8000/participant-view/user/${userId}`);
+            const participantResponse = await axios.get(`${apiUrl}/participant-view/user/${userId}`);
             const projectIds = participantResponse.data.data.map(project => project.project_id); // Obtem os IDs dos projetos participados
 
-            const favoriteResponse = await axios.get(`http://localhost:8000/favorite/user/${userId}`);
+            const favoriteResponse = await axios.get(`${apiUrl}/favorite/user/${userId}`);
             const savedProjectIds = favoriteResponse.data.data.map(project => project.project_id); // Obtem os IDs dos projetos salvos
 
             // Mesclar e remover duplicatas

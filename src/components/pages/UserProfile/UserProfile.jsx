@@ -5,12 +5,13 @@ import useAuth from "../../../hooks/useAuth.jsx";
 import Navbar from '../../navbar/Navbar';
 import EditModal from './components/EditModal/EditModal';
 import MyProjects from './components/MyProjects/MyProjects';
-import MySaved from './components/MySaved/MySaved'; // Importar o novo modal
+import MySaved  from './components/MySaved/Mysaved.jsx';
 import { BiLogoLinkedinSquare, BiLogoInstagram } from "react-icons/bi";
 import { CgMail } from "react-icons/cg";
 import { RiGraduationCapLine } from "react-icons/ri";
 import { MdOutlineEdit } from "react-icons/md";
 import style from "./UserProfile.module.css";
+import { apiUrl } from '../../../controllers/api.js';
 
 // Funções de formatação de data
 const formatDateToDDMMYYYY = (dateString) => {
@@ -65,7 +66,7 @@ const UserProfile = () => {
 
     const requestDataUser = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/user/${userId}`);
+            const response = await axios.get(`${apiUrl}/user/${userId}`);
             const userData = response.data.data;
             
             userData.birthday = formatDateToDDMMYYYY(userData.birthday);
@@ -106,7 +107,7 @@ const UserProfile = () => {
             updatedUser.birthday = formatDateToYYYYMMDD(updatedUser.birthday);
 
             console.log('Dados enviados:', updatedUser);
-            const response = await axios.put(`http://localhost:8000/user/update/${userId}`, updatedUser);
+            const response = await axios.put(`${apiUrl}/user/update/${userId}`, updatedUser);
             console.log('Resposta do servidor:', response.data);
             if (response.data.status) {
                 requestDataUser();

@@ -31,7 +31,7 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8800/edit?email=${emailteste}`);
+        const response = await axios.get(`${apiUrl}/edit?email=${emailteste}`);
         console.log("passou bitch");
 
         if (response.data) {
@@ -55,7 +55,7 @@ const EditProfile = () => {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:8800/${emailteste}`, {
+      await axios.put(`${apiUrl}/${emailteste}`, {
         nome_usuario: userData.userName,
         campus: userData.campus,
         sobre: userData.sobre,
