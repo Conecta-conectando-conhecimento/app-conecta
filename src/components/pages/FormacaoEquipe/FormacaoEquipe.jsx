@@ -125,7 +125,7 @@ const FormacaoEquipe = () => {
                         {Array.isArray(users) && users.length > 0 ? (
                             users.map((item) => (
                                 <CardUser
-                                    userName={item.user_name}
+                                    userName={item.name}
                                     campus={item.campus}
                                     userId={item.id}
                                     fotoUrl={item.user_image_path}
