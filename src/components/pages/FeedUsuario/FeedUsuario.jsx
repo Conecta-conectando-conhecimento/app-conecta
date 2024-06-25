@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./FeedUsuario.module.css";
 import Navbar from '../../navbar/Navbar';
 import CardUser from '../../CardUser/CardUser';
+import { apiUrl } from '../../../controllers/api';
 
 function FeedUsuario() {
     const { signout } = useAuth();
@@ -92,6 +93,7 @@ function FeedUsuario() {
                                             fotoUrl={user.user_image_path}
                                             textoAreaInteresse={user.textoAreaInteresse}
                                             textoSobre={user.sobre}
+                                            showAddToProjectButton={false}
                                         />
                                     ))
                                 ) : (
@@ -109,6 +111,7 @@ function FeedUsuario() {
                                             fotoUrl={user.user_image_path}
                                             textoAreaInteresse={user.textoAreaInteresse}
                                             textoSobre={user.sobre}
+                                            showAddToProjectButton={false}
                                         />
                                     ))
                                 ) : (

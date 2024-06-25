@@ -7,7 +7,8 @@
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4rem 8px 8px;
-    min-height: 14.5rem;
+    /*height: 14.5rem;*/
+    height: 25rem;
     max-width: 35rem;
     transition: 0.3s ease;
     width: 100%;
@@ -60,7 +61,7 @@
 
 .skill {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
 }
@@ -111,11 +112,24 @@
 
 .textoSubtitulo {
     font-size: small;
+    min-height: 5em;
+    max-height: fit-content;
+}
+
+.verMaisLink {
+    display: flex;
+    justify-content: end; 
 }
 
 @media (max-width: 600px) {
+    .card {
+        height:30em;
+    }
     .topo {
         flex-direction: column;
         align-items: center;
+    }
+    .textoSubtitulo {
+        min-height: fit-content;
     }
 }

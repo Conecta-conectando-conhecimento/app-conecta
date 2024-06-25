@@ -14,6 +14,7 @@ import CardArquivo from './components/CardArquivo/CardArquivo.jsx';
 import ModalArquivo from './components/CardArquivo/ModalArquivo.jsx';
 import FileUploadButton from './components/CardArquivo/FileUploadButton.jsx';
 import { BiLogOut } from "react-icons/bi";
+import { apiUrl } from '../../../controllers/api';
 
 const VisualizacaoProjeto = () => {
     const { projectId } = useParams();
