@@ -4,12 +4,19 @@ import style from "./CardUser.module.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 
-const CardUser = ({ userName, campus, userId, fotoUrl, textoAreaInteresse, textoSobre }) => {
+const CardUser = ({ userName, campus, userId, fotoUrl, textoAreaInteresse, textoSobre, onAddToProject }) => {
     // Garantir que textoSobre seja uma string
     const sobre = textoSobre || '';
     const maxChars = 300;
     const isLongText = sobre.length > maxChars;
     const displayedText = isLongText ? sobre.substring(0, maxChars) + '...' : sobre;
+
+    const handleAddToProject = () => {
+        const button = event.target; // obtém o botão que foi clicado
+        button.disabled = true; // desativa o botão
+        button.textContent = 'Adicionado'; // muda o texto do botão
+        onAddToProject(userId);
+    }
 
     return (
         <div className={style.card}>
@@ -24,7 +31,7 @@ const CardUser = ({ userName, campus, userId, fotoUrl, textoAreaInteresse, texto
                         </div>
                     </div>
                     <div className={style.button}>
-                        <button className={`${style.commonButton} ${style.enviarConvite}`}>Enviar convite</button>
+                        <button id="btnAddToProject" className={style.commonButton} onClick={() => handleAddToProject()}>Adicionar ao projeto</button>
                         <Link to={`/userprofile/${userId}`}>
                             <button id="verPerfil" className={`${style.commonButton} ${style.verPerfil}`}>Ver perfil</button>
                         </Link>
