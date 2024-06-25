@@ -3,9 +3,13 @@ import styles from './EditModal.module.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import InputMask from 'react-input-mask';
+import axios from 'axios';
+import { apiUrl } from '../../../../../controllers/api';
 
 // Função de formatação de data
 const formatDateToDDMMYYYY = (dateString) => {
+
+
     if (!dateString) return '';
 
     // Log para depuração
@@ -59,10 +63,35 @@ const EditModal = ({ show, user, onClose, onSave }) => {
         campus: '',
         linkedin: '',
         instagram: '',
-        email: ''
+        email: '',
+        interestAreas: [],
     });
 
+    const [interestAreas, setInterestAreas] = useState([]);
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [areaInteresse, setAreaInteresse] = useState('');
+
+    const handleSelectionChange = (e) => {
+        const selectedValue = e.target.value;
+        if (selectedValue && !selectedOptions.includes(selectedValue)) {
+            setSelectedOptions([...selectedOptions, selectedValue]);
+            setAreaInteresse('');
+        }
+    };
+
+
+
+    const requestInterestAreas = async () => {
+        try {
+            const response = await axios.get(`${apiUrl}/interestArea/all`);
+            setInterestAreas(response.data.data);
+        } catch (error) {
+            console.error('Erro ao obter áreas de interesse:', error.message);
+        }
+    }
+
     useEffect(() => {
+        requestInterestAreas();
         if (user) {
             console.log("User data received:", user); // Log para depuração
             // Formatar a data de nascimento para dd/mm/yyyy
@@ -84,6 +113,8 @@ const EditModal = ({ show, user, onClose, onSave }) => {
 
     const handleSaveClick = () => {
         onSave(userData);
+        console.log("dados", selectedOptions)
+        setSelectedOptions([]);
     };
 
     if (!show) return null;
@@ -188,6 +219,28 @@ const EditModal = ({ show, user, onClose, onSave }) => {
                                 value={userData.email}
                                 onChange={handleChange}
                             />
+                        </div>
+                        <div>
+                            <select
+                                id="areaInteresse"
+                                className={styles.select}
+                                value={areaInteresse}
+                                onChange={handleSelectionChange}
+                            >
+                                <option value="">Selecione</option>
+                                {Array.isArray(interestAreas) && interestAreas.length > 0 ? (
+                                    interestAreas.map((item) => (
+                                        <option key={item.id} value={item.id}>{item.name}</option>
+                                    ))
+                                ) : (
+                                    <option value="erro">nenhuma área de interesse encontrada.</option>
+                                )}
+                            </select>
+                        </div>
+                        <div>
+                            {selectedOptions.map((option, index) => (
+                                <p key={index}>{option}</p>
+                            ))}
                         </div>
                     </div>
                 </div>

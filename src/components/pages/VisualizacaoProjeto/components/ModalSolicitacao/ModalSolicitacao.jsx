@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import SearchUser from './SearchUser';
 import style from './ModalSolicitacao.module.css';
 import axios from 'axios';
+import { apiUrl } from '../../../../../controllers/api';
 
 Modal.setAppElement('#root');
 
