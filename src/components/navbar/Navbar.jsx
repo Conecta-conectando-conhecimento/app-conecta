@@ -21,6 +21,7 @@ import SugestionsModal from './SugestionsModal';
 import ConfigurationsModal from './ConfigurationsModal';
 import NotificationsModal from "./NotificationsModal";
 import axios from 'axios';
+import { apiUrl } from '../../controllers/api';
 
 const Navbar = () => {
     const navigate = useNavigate();

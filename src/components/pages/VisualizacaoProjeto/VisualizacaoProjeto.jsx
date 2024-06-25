@@ -16,6 +16,8 @@ import FileUploadButton from './components/CardArquivo/FileUploadButton.jsx';
 import { BiLogOut } from "react-icons/bi";
 import { apiUrl } from '../../../controllers/api.js';
 
+import { apiUrl } from '../../../controllers/api.js';
+
 const VisualizacaoProjeto = () => {
     const { projectId } = useParams();
     const [project, setProject] = useState(null);
