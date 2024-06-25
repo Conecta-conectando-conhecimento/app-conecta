@@ -79,8 +79,6 @@ const EditModal = ({ show, user, onClose, onSave }) => {
         }
     };
 
-
-
     const requestInterestAreas = async () => {
         try {
             const response = await axios.get(`${apiUrl}/interestArea/all`);
@@ -112,8 +110,13 @@ const EditModal = ({ show, user, onClose, onSave }) => {
     };
 
     const handleSaveClick = () => {
-        onSave(userData);
-        console.log("dados", selectedOptions)
+        const updatedUserData = {
+            ...userData,
+            interestAreas: selectedOptions
+        };
+
+        onSave(updatedUserData);
+        console.log("dados", selectedOptions);
         setSelectedOptions([]);
     };
 

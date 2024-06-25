@@ -39,7 +39,7 @@ const FormacaoEquipe = () => {
             // Fazendo uma nova requisição para cada usuário obtido na pesquisa anterior
             for (let user of users) {
                 try {
-                    const userResponse = await axios.get(`${apiUrl}/user/${user.user_id}`);
+                    const userResponse = await axios.get(`${apiUrl}/user/${user.user_id}`); 
                     chosenUsers.push(userResponse.data.data);
                 } catch (userError) {
                     console.error(`Erro ao obter dados do usuário ${user.userId}:`, userError);
