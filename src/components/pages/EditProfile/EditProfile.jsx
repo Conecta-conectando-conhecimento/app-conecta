@@ -15,6 +15,7 @@ import {
 } from "./EditProfileStyles";
 import { BsFillMortarboardFill } from "react-icons/bs";
 import axios from "axios";
+import { apiUrl } from '../../../controllers/api';
 
 const EditProfile = () => {
   const [userData, setUserData] = useState({
