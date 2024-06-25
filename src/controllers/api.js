@@ -1,1 +1,1 @@
-export const apiUrl = 'https://api-conecta-4gvnv3gh4-api-conecta.vercel.app';
+export const apiUrl =  process.env.REACT_APP_API_URL || 'http://localhost:8000';
