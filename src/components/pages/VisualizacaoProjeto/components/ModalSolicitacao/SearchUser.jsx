@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import style from './SearchUser.module.css';
 import axios from 'axios';
+import { apiUrl } from '../../../../../controllers/api';
 
 function SearchUser({ onUserSelect }) {
   const [searchTerm, setSearchTerm] = useState('');
