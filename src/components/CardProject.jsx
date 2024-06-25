@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BiBookmark, BiSolidBookmark } from 'react-icons/bi';
 import axios from 'axios';
 import style from "./pages/FeedProjetos/FeedProjetos.module.css";
+import { apiUrl } from '../controllers/api';
 
 const Card = ({ projetoNome, texto, projetoId, userId, isCreationCard }) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
@@ -17,7 +18,7 @@ const Card = ({ projetoNome, texto, projetoId, userId, isCreationCard }) => {
 
         const checkIfBookmarked = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/favorite/user/${userId}`);
+                const response = await axios.get(`${apiUrl}/favorite/user/${userId}`);
                 const savedProjects = response.data.data; // Acessa o array dentro da chave 'data'
                 if (Array.isArray(savedProjects)) {
                     const isSaved = savedProjects.some(project => project.project_id === projetoId);
@@ -44,13 +45,13 @@ const Card = ({ projetoNome, texto, projetoId, userId, isCreationCard }) => {
         try {
             if (isBookmarked) {
                 // Remover dos favoritos
-                await axios.delete(`http://localhost:8000/favorite/delete`, {
+                await axios.delete(`${apiUrl}/favorite/delete`, {
                     data: { user_id: userId, project_id: projetoId } // Passa o userId no corpo da requisição
                 });
                 setIsBookmarked(false);
             } else {
                 // Adicionar aos favoritos
-                await axios.post('http://localhost:8000/favorite/create', {
+                await axios.post(`${apiUrl}/favorite/create`, {
                     user_id: userId,
                     project_id: projetoId
                 });

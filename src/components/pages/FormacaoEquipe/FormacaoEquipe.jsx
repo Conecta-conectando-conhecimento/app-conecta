@@ -19,8 +19,8 @@ const FormacaoEquipe = () => {
 
     const requestInterestAreas = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/interestArea/all`);
-            setInterestAreas(response.data.data);
+            const response = await axios.get(`${apiUrl}/project/${projectId}`);
+            setProject(response.data.data);
         } catch (error) {
             console.error('Erro ao obter áreas de interesse:', error.message);
         }

@@ -19,6 +19,7 @@ import {
 import ReportProblemModal from "./ReportProblemModal";
 import SugestionsModal from './SugestionsModal';
 import ConfigurationsModal from './ConfigurationsModal';
+import NotificationsModal from "./NotificationsModal";
 import axios from 'axios';
 
 const Navbar = () => {
@@ -27,7 +28,9 @@ const Navbar = () => {
     const [showSugestionsModal, setShowSugestionsModal] = useState(false);
     const [isReportProblemModalOpen, setIsReportProblemModalOpen] = useState(false);
     const [isConfigurationsModalOpen, setIsConfigurationsModalOpen] = useState(false);
-    const [userConfigData, setUserConfigData] = useState(null); // Estado para os dados do usuário
+    const [isNotificationsModalOpen, setIsNotificationsModalOpen] = useState(false);
+    const [notifications, setNotifications] = useState([]); // Estado para as notificações
+    const [userConfigData, setUserConfigData] = useState(null);
     const menuRef = useRef(null);
     const buttonRef = useRef(null);
     const { user, signout } = useAuth();
@@ -39,6 +42,20 @@ const Navbar = () => {
     const toggleSugestionsModal = () => {
         setShowSugestionsModal(!showSugestionsModal);
         setMenuOpen(false);
+    };
+
+    const handleNotificationsModal = () => {
+        // Simulação de notificações
+        setNotifications([
+            { title: "Nova mensagem", about: "Você tem uma nova mensagem de João." },
+            { title: "Projeto atualizado", about: "O projeto 'HealthTech' foi atualizado." },
+            { title: "Solicitação de amizade", about: "Ana pediu para ser sua amiga." }
+        ]);
+        setIsNotificationsModalOpen(true);
+    };
+
+    const handleCloseNotificationsModal = () => {
+        setIsNotificationsModalOpen(false);
     };
 
     const handleNavigation = async (path) => {
@@ -67,7 +84,7 @@ const Navbar = () => {
 
     const handleConfigurations = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/user/${user.userId}`);
+            const response = await axios.get(`${apiUrl}/user/${user.userId}`);
             setUserConfigData(response.data.data);
             setIsConfigurationsModalOpen(true);
         } catch (error) {
@@ -122,7 +139,7 @@ const Navbar = () => {
                 </BarraPesquisa>
                 <IconesNavegacao>
                     <BotaoIconesNavegacao type="button" onClick={() => navigate("/feedUsuario")}><BiSolidUserDetail /></BotaoIconesNavegacao>
-                    {/*<BotaoIconesNavegacaoBell type="button"><BiSolidBell /></BotaoIconesNavegacaoBell>*/}
+                    <BotaoIconesNavegacaoBell type="button" onClick={handleNotificationsModal}><BiSolidBell /></BotaoIconesNavegacaoBell>
                     <BotaoIconesNavegacao type="button" onClick={toggleMenu} ref={buttonRef}><BiMenu /></BotaoIconesNavegacao>
                     {menuOpen && (
                         <DropdownMenu ref={menuRef}>
@@ -130,6 +147,7 @@ const Navbar = () => {
                             <DropdownItem onClick={handleReportProblem}>Reportar problema</DropdownItem>
                             <DropdownItem onClick={toggleSugestionsModal}>Sugestões</DropdownItem>
                             <DropdownItem onClick={handleConfigurations}>Configurações</DropdownItem>
+                            <DropdownItem onClick={() => handleNavigation("/resetPassword")}>Alterar senha</DropdownItem>
                             <DropdownItem onClick={() => handleNavigation("/")}>Sair</DropdownItem>
                         </DropdownMenu>
                     )}
@@ -161,6 +179,11 @@ const Navbar = () => {
                     console.log('Configurações salvas:', updatedData);
                     setIsConfigurationsModalOpen(false);
                 }}
+            />
+            <NotificationsModal
+                isOpen={isNotificationsModalOpen}
+                onRequestClose={handleCloseNotificationsModal}
+                notifications={notifications} // Passar as notificações para o modal
             />
         </Navegacao>
     );

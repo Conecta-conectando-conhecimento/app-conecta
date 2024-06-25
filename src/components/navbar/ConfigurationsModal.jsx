@@ -1,17 +1,14 @@
-// ConfigurationsModal.js
 import React, { useState, useEffect } from 'react';
 import styles from './ModalStyles.module.css';
 import axios from 'axios';
 import InputMask from 'react-input-mask';
+import { apiUrl } from '../../controllers/api';
 
 const ConfigurationsModal = ({ show, user, onClose, onSave }) => {
     const [configData, setConfigData] = useState({
         user_name: '',
         email: '',
-        cpf: '',
-        currentPassword: '',
-        newPassword: '',
-        confirmNewPassword: ''
+        cpf: ''
     });
 
     const [emailError, setEmailError] = useState('');
@@ -21,10 +18,7 @@ const ConfigurationsModal = ({ show, user, onClose, onSave }) => {
             setConfigData({
                 user_name: user.user_name || '',
                 email: user.email || '',
-                cpf: user.cpf || '',
-                currentPassword: '',
-                newPassword: '',
-                confirmNewPassword: ''
+                cpf: user.cpf || ''
             });
         }
     }, [user]);
@@ -53,19 +47,25 @@ const ConfigurationsModal = ({ show, user, onClose, onSave }) => {
         }
     };
 
-    const handleSaveClick = async () => {
-        if (configData.newPassword !== configData.confirmNewPassword) {
-            alert("A nova senha e a confirmação da nova senha não coincidem!");
-            return;
-        }
+    const removeCpfMask = (cpf) => {
+        // Remove todos os caracteres que não são números
+        return cpf.replace(/\D/g, '');
+    };
 
+    const handleSaveClick = async () => {
         if (emailError) {
             alert("Por favor, insira um e-mail válido.");
             return;
         }
 
+        // Cria uma cópia dos dados de configuração e remove a máscara do CPF
+        const dataToSend = {
+            ...configData,
+            cpf: removeCpfMask(configData.cpf) // Remove a máscara do CPF
+        };
+
         try {
-            const response = await axios.put(`http://localhost:8000/user/update/${user.id}`, configData);
+            const response = await axios.put(`${apiUrl}/user/update/${user.id}`, configData);
             console.log('Dados atualizados:', response.data);
             onSave(response.data);
         } catch (error) {
@@ -114,36 +114,6 @@ const ConfigurationsModal = ({ show, user, onClose, onSave }) => {
                             >
                                 {(inputProps) => <input {...inputProps} type="text" />}
                             </InputMask>
-                        </div>
-                        <div className={styles.field}>
-                            <label htmlFor="currentPassword">Senha Atual</label>
-                            <input
-                                id="currentPassword"
-                                name="currentPassword"
-                                type="password"
-                                value={configData.currentPassword}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={styles.field}>
-                            <label htmlFor="newPassword">Nova Senha</label>
-                            <input
-                                id="newPassword"
-                                name="newPassword"
-                                type="password"
-                                value={configData.newPassword}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className={styles.field}>
-                            <label htmlFor="confirmNewPassword">Confirmar Nova Senha</label>
-                            <input
-                                id="confirmNewPassword"
-                                name="confirmNewPassword"
-                                type="password"
-                                value={configData.confirmNewPassword}
-                                onChange={handleChange}
-                            />
                         </div>
                     </div>
                 </div>

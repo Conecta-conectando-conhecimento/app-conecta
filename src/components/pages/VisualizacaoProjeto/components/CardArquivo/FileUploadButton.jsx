@@ -22,7 +22,7 @@ const FileUploadButton = ({ projectId, updatePage }) => {
         formData.append('project_id', projectId);
 
         try {
-            const response = await axios.post('http://localhost:8000/projectfiles/create', formData, {
+            const response = await axios.post(`${apiUrl}/projectfiles/create`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
